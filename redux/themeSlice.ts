@@ -5,11 +5,13 @@ import { lightTheme, darkTheme } from '../styles/themes'
 // Define a type for the slice state
 interface themeState {
   isDark: boolean
+  theme: DefaultTheme
 }
 
 // Define the initial state using that type
 const initialState: themeState = {
   isDark: false,
+  theme: lightTheme,
 }
 
 export const themeSlice = createSlice({
@@ -17,13 +19,28 @@ export const themeSlice = createSlice({
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    toggle: (state) => {
-      state.isDark = state.isDark ? false : true
+    setIsDark: (state, action: PayloadAction<boolean>) => {
+      if (action.payload) {
+        state.isDark = true
+        state.theme = darkTheme
+      } else {
+        state.isDark = false
+        state.theme = lightTheme
+      }
+    },
+    toggleTheme: (state) => {
+      if (state.isDark) {
+        state.isDark = false
+        state.theme = lightTheme
+      } else {
+        state.isDark = true
+        state.theme = darkTheme
+      }
     },
   },
 })
 
-export const { toggle } = themeSlice.actions
+export const { toggleTheme, setIsDark } = themeSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.counter.value

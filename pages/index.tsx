@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styled from 'styled-components'
+import Header from '../components/ui/Header'
 
 const Home: React.FC = () => {
   return (
@@ -36,7 +37,7 @@ const Home: React.FC = () => {
         <meta property='og:url' content='https://dannysasse.netlify.app/' />
         <meta property='og:type' content='website' />
       </Head>
-
+      <Header />
       <main>
         Boooo
         <p>How are you</p>

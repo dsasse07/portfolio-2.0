@@ -3,13 +3,13 @@ import ThemeToggle from './ThemeToggle'
 import Signature from './Signature'
 import NavBar from './NavBar'
 
-function Header({ onToggleTheme }) {
+const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <TogglerContainer>
-        <ThemeToggle onToggleTheme={onToggleTheme} />
+        <ThemeToggle />
       </TogglerContainer>
-      <Signature name='Daniel Sassé' />
+      <Signature name='Daniel Sasse' />
       <NavBar />
     </HeaderContainer>
   )

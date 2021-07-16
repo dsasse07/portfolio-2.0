@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import { lightTheme } from './themes'
+// import AugustinaWoff from './fonts/Agustina.woff'
 
 /**
  * Use type inference on one of the theme objects
@@ -41,13 +42,7 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
-  @font-face {
-    font-family: 'Agustina Regular';
-    font-style: normal;
-    font-weight: normal;
-    src: url('./fonts/Agustina.woff') format('woff');
-    font-display: swap;
-  }
+
 `
 
 export default GlobalStyle

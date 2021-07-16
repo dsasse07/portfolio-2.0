@@ -1,10 +1,16 @@
 import styled from 'styled-components'
 import WbSunnyIcon from '@material-ui/icons/WbSunny'
 import NightsStayIcon from '@material-ui/icons/NightsStay'
+import { useAppDispatch } from '../../redux/hooks'
+import { toggleTheme } from '../../redux/themeSlice'
 
-function ThemeToggle({ onToggleTheme }) {
+const ThemeToggle: React.FC = () => {
+  const dispatch = useAppDispatch()
+  const handleToggleTheme = () => {
+    dispatch(toggleTheme())
+  }
   return (
-    <OuterContainer aria-label='Dark Mode Toggle' onClick={onToggleTheme}>
+    <OuterContainer aria-label='Dark Mode Toggle' onClick={handleToggleTheme}>
       <WbSunnyIcon />
       <NightsStayIcon />
       <Slider />
