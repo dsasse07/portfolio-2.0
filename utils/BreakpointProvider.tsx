@@ -20,7 +20,10 @@ export interface BreakpointResults {
 const defaultValue: BreakpointResults = {}
 const BreakpointContext = createContext<BreakpointResults>(defaultValue)
 
-const BreakpointProvider = ({ children, queries }: BreakpointProps) => {
+const BreakpointProvider: React.FC<BreakpointProps> = ({
+  children,
+  queries,
+}) => {
   const [queryMatch, setQueryMatch] = useState<BreakpointResults>({})
 
   // When mounted, create a new map for media query states, and add listeners for any change
