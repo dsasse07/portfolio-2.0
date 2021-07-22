@@ -3,8 +3,14 @@ import About from '../components/ui/Home/About'
 import Blogs from '../components/ui/Home/Blogs/Blogs'
 import Projects from '../components/ui/Home/Projects/Projects'
 import Contact from '../components/ui/Home/Contact'
+import { fetchMyArticles, ArticlesReponse } from '../data/networkRequests'
+import { ArticleModel } from '../models/Article'
 
-const Home: React.FC = () => {
+interface HomeProps {
+  articles: ArticleModel[]
+}
+
+const Home: React.FC<HomeProps> = ({ articles }) => {
   return (
     <div>
       <Head>
@@ -41,7 +47,7 @@ const Home: React.FC = () => {
       <main>
         <About />
         <Projects />
-        <Blogs />
+        <Blogs articles={articles} />
         <Contact />
       </main>
 
@@ -51,3 +57,27 @@ const Home: React.FC = () => {
 }
 
 export default Home
+
+export const getStaticProps = async () => {
+  const articlesData: ArticlesReponse = await fetchMyArticles()
+  console.log(articlesData)
+  const articles = articlesData.map((article) => {
+    return {
+      id: article.id.toString(),
+      title: article.title,
+      description: article.description,
+      date: article.published_timestamp,
+      url: article.url,
+      viewCount: article.page_views_count,
+      reactionCount: article.public_reactions_count,
+      image: article.cover_image,
+      tags: article.tag_list,
+    }
+  })
+  return {
+    props: {
+      articles: articles,
+    },
+    revalidate: 3600,
+  }
+}

@@ -1,10 +1,12 @@
 import styled from 'styled-components'
+import { ArticleModel } from '../../../../models/Article'
 import BlogCard from './BlogCard'
-import { articles } from '../../../../data/blogs'
 
-interface BlogProps {}
+interface BlogProps {
+  articles: ArticleModel[]
+}
 
-const Blogs: React.FC<BlogProps> = () => {
+const Blogs: React.FC<BlogProps> = ({ articles }) => {
   const blogCards = articles.map((article, index) => {
     return <BlogCard key={index} article={article} />
   })

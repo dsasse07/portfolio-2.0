@@ -3,10 +3,15 @@ import { useState } from 'react'
 import devIcon from '../../../../assets/devIcon.png'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import Image from 'next/image'
-import { ArticleModel } from '../../../../data/blogs'
 
 interface BlogCardProps {
-  article: ArticleModel
+  article: {
+    id: string
+    title: string
+    date: string
+    url: string
+    image: string
+  }
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ article }) => {
@@ -31,7 +36,9 @@ const BlogCard: React.FC<BlogCardProps> = ({ article }) => {
       onMouseLeave={handleHideLink}
     >
       <LinkButton className='link' href={url} target='_blank' rel='noreferrer'>
-        <Image src={devIcon} alt='Dev.to logo' />
+        <DevLogoContainer className='devIcon'>
+          <Image src={devIcon} alt='Dev.to logo' />
+        </DevLogoContainer>
         <IconContainer showLink={showLink}>
           <ArrowIcon />
         </IconContainer>
@@ -66,15 +73,17 @@ const Card = styled.article`
     width: 100px;
     height: 75px;
 
-    img {
+    .devIcon {
       right: 30px;
-      top: 20px;
+      top: 0px;
     }
     div {
       top: 21px;
     }
   }
 `
+const DevLogoContainer = styled.div``
+
 const Row = styled.div`
   display: flex;
   width: 100%;
@@ -123,9 +132,9 @@ const LinkButton = styled.a`
   transition: all 0.3s;
   cursor: pointer;
 
-  img {
+  .devIcon {
     position: absolute;
-    width: 40px;
+    width: 35px;
     top: 6px;
     right: 8px;
     transition: 0.2s;
