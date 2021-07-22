@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import WbSunnyIcon from '@material-ui/icons/WbSunny'
 import NightsStayIcon from '@material-ui/icons/NightsStay'
-import { useAppDispatch } from '../../redux/hooks'
-import { toggleTheme } from '../../redux/themeSlice'
+import { useAppDispatch } from '../../../redux/hooks'
+import { toggleTheme } from '../../../redux/themeSlice'
 
 const ThemeToggle: React.FC = () => {
   const dispatch = useAppDispatch()
@@ -25,7 +25,8 @@ const OuterContainer = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid ${(props) => props.theme.togglerColor};
+  /* border: 2px solid ${(props) => props.theme.togglerColor}; */
+  border: 2px solid blue;
   border-radius: 20px;
   background: none;
   padding: 2px;

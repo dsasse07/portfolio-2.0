@@ -4,7 +4,8 @@ import { ThemeProvider } from 'styled-components'
 import GlobalStyle from '../../styles/globalStyle'
 import { useAppSelector, useAppDispatch } from '../../redux/hooks'
 import { setIsDark } from '../../redux/themeSlice'
-import Banner from '../ui/Banner'
+import Banner from '../ui/Header/Banner'
+import Header from '../ui/Header/Header'
 
 interface ThemeApplicator {
   children: ReactNode
@@ -37,6 +38,7 @@ const ThemeApplicator: React.FC<ThemeApplicator> = ({ children }) => {
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         {showBanner && <Banner action={handleUpdateTheme} />}
+        <Header />
         {children}
       </ThemeProvider>
     </>

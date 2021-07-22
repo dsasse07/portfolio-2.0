@@ -22,7 +22,14 @@ const GlobalStyle = createGlobalStyle`
     --slate: #2f3538;
     --burntred: #2C0F0D;
     --burntyellow: #e09900;
-    --pink: #FC3795
+    --pink: #FC3795;
+    --dk_green: #797D62;
+    --lt_green: #9B9B7A;
+    --salmon: #D9AE94;
+    --banana: #F1DCA7;
+    --yellow_red: #FFCB69;
+    --red_orange: #D08C60;
+    --brown: #997B66;
   }
   body {
     background: ${(props) => props.theme.background};

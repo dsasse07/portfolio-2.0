@@ -19,7 +19,7 @@ export default LinkButton
 
 const Button = styled.a`
   background: ${(props) => props.theme.itemBackground};
-  border: 1px solid white;
+  border-bottom: 2px solid blue;
   color: ${(props) => props.theme.fontColor};
   display: block;
   font-size: 1.1rem;
@@ -28,7 +28,7 @@ const Button = styled.a`
   position: relative;
   text-decoration: none;
   transition: 0.2s;
-  box-shadow: ${(props) => props.theme.shadow};
+  /* box-shadow: ${(props) => props.theme.shadow}; */
 
   :hover {
     background: ${(props) => props.theme.hoverColor};
