@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from '../../redux/hooks'
 import { setIsDark } from '../../redux/themeSlice'
 import Banner from '../ui/Header/Banner'
 import Header from '../ui/Header/Header'
+import Footer from '../ui/Footer'
 
 interface ThemeApplicator {
   children: ReactNode
@@ -40,6 +41,7 @@ const ThemeApplicator: React.FC<ThemeApplicator> = ({ children }) => {
         {showBanner && <Banner action={handleUpdateTheme} />}
         <Header />
         {children}
+        <Footer />
       </ThemeProvider>
     </>
   )

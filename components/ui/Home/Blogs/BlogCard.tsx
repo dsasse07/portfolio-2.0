@@ -11,15 +11,15 @@ interface BlogCardProps {
 
 const BlogCard: React.FC<BlogCardProps> = ({ article }) => {
   const { title, date, url, image } = article
-  const [showLink, setShowLink] = useState(false)
+  const [showLink, setShowLink] = useState<boolean>(false)
   let timer: NodeJS.Timeout
 
-  function handleShowLink() {
+  const handleShowLink = () => {
     timer = setTimeout(() => {
       setShowLink(true)
     }, 200)
   }
-  function handleHideLink() {
+  const handleHideLink = () => {
     setShowLink(false)
     clearTimeout(timer)
   }

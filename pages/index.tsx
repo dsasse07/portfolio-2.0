@@ -2,6 +2,7 @@ import Head from 'next/head'
 import About from '../components/ui/Home/About'
 import Blogs from '../components/ui/Home/Blogs/Blogs'
 import Projects from '../components/ui/Home/Projects/Projects'
+import Contact from '../components/ui/Home/Contact'
 
 const Home: React.FC = () => {
   return (
@@ -41,6 +42,7 @@ const Home: React.FC = () => {
         <About />
         <Projects />
         <Blogs />
+        <Contact />
       </main>
 
       <footer></footer>
