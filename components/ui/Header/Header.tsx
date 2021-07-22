@@ -23,7 +23,9 @@ const HeaderContainer = styled.header`
   font-size: 1.5rem;
   justify-content: space-around;
   padding-bottom: 0;
-  position: fixed;
-  width: 100vw;
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 0;
+  /* width: 100vw; */
   z-index: 1;
 `
