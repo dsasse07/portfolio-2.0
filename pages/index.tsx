@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import About from '../components/ui/Home/About'
+import Blogs from '../components/ui/Home/Blogs/Blogs'
 import Projects from '../components/ui/Home/Projects/Projects'
 
 const Home: React.FC = () => {
@@ -39,6 +40,7 @@ const Home: React.FC = () => {
       <main>
         <About />
         <Projects />
+        <Blogs />
       </main>
 
       <footer></footer>

@@ -3,10 +3,9 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import devIcon from '../assets/devIcon.png'
-import mediumIcon from '../assets/mediumIcon.svg'
 import Image from 'next/image'
 
-interface SocialData {
+export interface SocialDataModel {
   ariaLabel: string
   background: string
   href: string
@@ -14,7 +13,7 @@ interface SocialData {
   labelText: string
 }
 
-export const socials: SocialData[] = [
+export const socials: SocialDataModel[] = [
   {
     ariaLabel: "Danny Sasse's Github",
     background: 'black',
