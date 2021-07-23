@@ -2,6 +2,7 @@ import { ProjectModel } from '../models/Project'
 
 export const projects: ProjectModel[] = [
   {
+    id: '1',
     title: 'Pycross',
     logo: 'https://i.imgur.com/k58W2eP.png',
     description:
@@ -13,6 +14,7 @@ export const projects: ProjectModel[] = [
     technologies: ['Python, OOP, Pygame'],
   },
   {
+    id: '2',
     title: 'Asian Americans Advancing Justice Hackathon',
     logo: 'https://i.imgur.com/XOD9l7T.png',
     description:
@@ -24,6 +26,7 @@ export const projects: ProjectModel[] = [
     technologies: ['ReactJS', 'i18n', 'Bootstrap'],
   },
   {
+    id: '3',
     title: 'Dronie',
     logo: 'https://i.imgur.com/s3wbqbY.png',
     description:
@@ -42,6 +45,7 @@ export const projects: ProjectModel[] = [
     ],
   },
   {
+    id: '4',
     title: 'Outdoors Guide',
     logo: 'https://i.imgur.com/rHRSUxY.png',
     description:
@@ -59,6 +63,7 @@ export const projects: ProjectModel[] = [
     ],
   },
   {
+    id: '5',
     title: 'Fludoku',
     logo: 'https://miro.medium.com/max/516/1*TStHCO5xf_9KQNvz0o8rmA.gif',
     description:
@@ -70,6 +75,7 @@ export const projects: ProjectModel[] = [
     technologies: ['vanillaJS', 'Backtracking', 'CSS GRID', 'Rails API'],
   },
   {
+    id: '6',
     title: 'Family Organizer',
     logo: 'https://i.imgur.com/PmCMSXC.png',
     description:
@@ -81,6 +87,7 @@ export const projects: ProjectModel[] = [
     technologies: ['Ruby', 'Ruby on Rails', 'PostgreSQL', 'ActiveStorage'],
   },
   {
+    id: '7',
     title: 'Subscription Tracker',
     logo: 'https://i.imgur.com/XgdJDPr.png',
     description:

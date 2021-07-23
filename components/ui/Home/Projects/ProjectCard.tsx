@@ -5,7 +5,7 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import YouTubeIcon from '@material-ui/icons/YouTube'
 import YoutubeEmbed from './YoutubeEmbed'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
-import { ProjectModel } from '../../../../data/projects'
+import { ProjectModel } from '../../../../models/Project'
 
 interface ProjectCardProps {
   project: ProjectModel

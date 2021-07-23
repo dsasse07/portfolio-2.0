@@ -8,11 +8,11 @@ import { ArticleModel } from '../models/Article'
 import { GetStaticProps } from 'next'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const articles: ArticleModel[] = await fetchMyArticles()
+  const articles = await fetchMyArticles()
 
   return {
     props: {
-      articles: articles,
+      articles,
     },
     revalidate: 3600,
   }

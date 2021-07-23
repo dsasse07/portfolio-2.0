@@ -3,10 +3,11 @@ import React from 'react'
 import { projects } from '../../data/projects'
 import { ProjectModel } from '../../models/Project'
 import { ParsedUrlQuery } from 'querystring'
+import { useRouter } from 'next/router'
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const ids = projects.map((_, index) => {
-    return { params: { projectId: index.toString() } }
+  const ids = projects.map((prj) => {
+    return { params: { projectId: prj.id } }
   })
   return {
     fallback: false,
@@ -20,11 +21,13 @@ interface StaticPropsParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { projectId } = context.params as StaticPropsParams
-  const projectData: ProjectModel = projects[+projectId]
+  const project: ProjectModel = projects.filter(
+    (prj) => prj.id === projectId
+  )[0]
 
   return {
     props: {
-      article: projectData,
+      project,
     },
     revalidate: 3600,
   }

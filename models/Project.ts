@@ -1,4 +1,5 @@
 export interface ProjectModel {
+  id: string
   title: string
   logo: string
   description: string

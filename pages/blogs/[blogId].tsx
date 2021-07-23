@@ -3,6 +3,8 @@ import React from 'react'
 import { fetchMyArticles, fetchOneArticle } from '../../data/networkRequests'
 import { ParsedUrlQuery } from 'querystring'
 import { ArticleModel } from '../../models/Article'
+import { useQuery } from 'react-query'
+import { useRouter } from 'next/router'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const articlesData: ArticleModel[] = await fetchMyArticles()
@@ -21,13 +23,12 @@ interface StaticPropsParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { blogId } = context.params as StaticPropsParams
-  const articleData: ArticleModel = await fetchOneArticle(blogId)
-
+  const article: ArticleModel = await fetchOneArticle(blogId)
   return {
     props: {
-      article: articleData,
+      article,
     },
-    revalidate: 10,
+    revalidate: 60,
   }
 }
 
@@ -36,7 +37,15 @@ interface BlogShowPageProps {
 }
 
 const BlogShowPage: React.FC<BlogShowPageProps> = ({ article }) => {
-  const { id, title, cover_image, url, description } = article
+  const router = useRouter()
+  if (router.isFallback) return <div>Loading...</div>
+
+  const { data } = useQuery(
+    ['blog', `${article.id}`],
+    () => fetchOneArticle(`${article.id}`),
+    { initialData: article }
+  )
+  const { id, title, cover_image, url, description } = data
   return (
     <div>
       <p>{id}</p>
