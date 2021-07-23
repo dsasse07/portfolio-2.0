@@ -27,13 +27,15 @@ const Projects: React.FC<ProjectsProps> = () => {
 export default Projects
 
 const Container = styled.div`
+  background: rgba(100, 100, 100, 0.22);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   /* gap: 2rem; */
   align-items: center;
   padding: 1rem;
-  min-height: 100vh;
+  min-height: 70vh;
+  margin: 10vh 0;
 
   .flex-item {
     margin: 1rem;

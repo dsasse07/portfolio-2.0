@@ -4,14 +4,7 @@ import TwitterIcon from '@material-ui/icons/Twitter'
 import InstagramIcon from '@material-ui/icons/Instagram'
 import devIcon from '../assets/devIcon.png'
 import Image from 'next/image'
-
-export interface SocialDataModel {
-  ariaLabel: string
-  background: string
-  href: string
-  icon: JSX.Element
-  labelText: string
-}
+import { SocialDataModel } from '../models/SocialData'
 
 export const socials: SocialDataModel[] = [
   {

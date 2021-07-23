@@ -3,19 +3,14 @@ import { useState } from 'react'
 import devIcon from '../../../../assets/devIcon.png'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import Image from 'next/image'
+import { ArticleModel } from '../../../../models/Article'
 
 interface BlogCardProps {
-  article: {
-    id: string
-    title: string
-    date: string
-    url: string
-    image: string
-  }
+  article: ArticleModel
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ article }) => {
-  const { title, date, url, image } = article
+  const { title, published_timestamp, url, cover_image } = article
   const [showLink, setShowLink] = useState<boolean>(false)
   let timer: NodeJS.Timeout
 
@@ -45,14 +40,14 @@ const BlogCard: React.FC<BlogCardProps> = ({ article }) => {
       </LinkButton>
       <Row>
         <LogoContainer>
-          <Logo src={image} alt={`${title}`} />
+          <Logo src={cover_image} alt={`${title}`} />
         </LogoContainer>
       </Row>
       <Row>
         <Title>{title}</Title>
       </Row>
       <Row>
-        <PubDate>{date}</PubDate>
+        <PubDate>{published_timestamp}</PubDate>
       </Row>
     </Card>
   )

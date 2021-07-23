@@ -8,8 +8,7 @@ const Footer: React.FC<FooterProps> = () => {
   return (
     <Container>
       <Text>Built with</Text>
-      <Text>Typescript + Next.JS + GraphQL</Text>
-      <Text>custom Styled Components</Text>
+      <Text>Typescript + Next.JS + GraphQL + custom Styled Components</Text>
       <Link href='https://github.com/dsasse07/portfolio' passHref>
         <EmailLink>View Source Code</EmailLink>
       </Link>
@@ -20,11 +19,14 @@ const Footer: React.FC<FooterProps> = () => {
 export default Footer
 
 const Container = styled.footer`
+  background: white;
+  border-top: 1px solid #cccccc;
+  box-shadow: -2px 0 10px 0 #cccccc;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 60px;
+  padding: 15px;
 `
 
 const Text = styled.p`

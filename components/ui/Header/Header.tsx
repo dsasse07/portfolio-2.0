@@ -26,6 +26,5 @@ const HeaderContainer = styled.header`
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
-  /* width: 100vw; */
   z-index: 1;
 `

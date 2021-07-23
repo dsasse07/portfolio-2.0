@@ -1,12 +1,12 @@
 export interface ArticleModel {
-  id: string
+  id: number
   title: string
   description: string
-  date: string
+  published_timestamp: string
   url: string
-  viewCount: string
-  reactionCount: string
-  image: string
-  tags: string
-  [key: string]: string
+  cover_image: string
+  tags: string[]
+  body_markdown: string
+  viewCount?: string
+  reactionCount?: string
 }

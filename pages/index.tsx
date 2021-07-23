@@ -3,8 +3,20 @@ import About from '../components/ui/Home/About'
 import Blogs from '../components/ui/Home/Blogs/Blogs'
 import Projects from '../components/ui/Home/Projects/Projects'
 import Contact from '../components/ui/Home/Contact'
-import { fetchMyArticles, ArticlesReponse } from '../data/networkRequests'
+import { fetchMyArticles } from '../data/networkRequests'
 import { ArticleModel } from '../models/Article'
+import { GetStaticProps } from 'next'
+
+export const getStaticProps: GetStaticProps = async () => {
+  const articles: ArticleModel[] = await fetchMyArticles()
+
+  return {
+    props: {
+      articles: articles,
+    },
+    revalidate: 3600,
+  }
+}
 
 interface HomeProps {
   articles: ArticleModel[]
@@ -12,7 +24,7 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ articles }) => {
   return (
-    <div>
+    <>
       <Head>
         <title>Danny Sassé | Software Engineer</title>
         <meta name='description' content='Software Engineering Portfolio' />
@@ -50,34 +62,8 @@ const Home: React.FC<HomeProps> = ({ articles }) => {
         <Blogs articles={articles} />
         <Contact />
       </main>
-
-      <footer></footer>
-    </div>
+    </>
   )
 }
 
 export default Home
-
-export const getStaticProps = async () => {
-  const articlesData: ArticlesReponse = await fetchMyArticles()
-  console.log(articlesData)
-  const articles = articlesData.map((article) => {
-    return {
-      id: article.id.toString(),
-      title: article.title,
-      description: article.description,
-      date: article.published_timestamp,
-      url: article.url,
-      viewCount: article.page_views_count,
-      reactionCount: article.public_reactions_count,
-      image: article.cover_image,
-      tags: article.tag_list,
-    }
-  })
-  return {
-    props: {
-      articles: articles,
-    },
-    revalidate: 3600,
-  }
-}
