@@ -3,16 +3,20 @@ import About from '../components/ui/Home/About'
 import Blogs from '../components/ui/Home/Blogs/Blogs'
 import Projects from '../components/ui/Home/Projects/Projects'
 import Contact from '../components/ui/Home/Contact'
-import { fetchMyArticles } from '../data/networkRequests'
+import { fetchGitHub, fetchMyArticles } from '../data/networkRequests'
 import { ArticleModel } from '../models/Article'
 import { GetStaticProps } from 'next'
+import GitHub from '../components/ui/Home/GitHub/GitHub'
+import { GitHubResponseModel } from '../models/GitHub'
 
 export const getStaticProps: GetStaticProps = async () => {
   const articles = await fetchMyArticles()
+  const { user } = await fetchGitHub()
 
   return {
     props: {
       articles,
+      profileInfo: user,
     },
     revalidate: 3600,
   }
@@ -20,9 +24,10 @@ export const getStaticProps: GetStaticProps = async () => {
 
 interface HomeProps {
   articles: ArticleModel[]
+  profileInfo: GitHubResponseModel
 }
 
-const Home: React.FC<HomeProps> = ({ articles }) => {
+const Home: React.FC<HomeProps> = ({ articles, profileInfo }) => {
   return (
     <>
       <Head>
@@ -58,6 +63,7 @@ const Home: React.FC<HomeProps> = ({ articles }) => {
       </Head>
       <main>
         <About />
+        <GitHub profileInfo={profileInfo} />
         <Projects />
         <Blogs articles={articles} />
         <Contact />
