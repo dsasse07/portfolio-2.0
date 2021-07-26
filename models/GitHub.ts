@@ -11,7 +11,7 @@ interface Day {
   weekday: number
 }
 
-interface Week {
+export interface Week {
   firstDay: string
   contributionDays: Day[]
 }

@@ -1,5 +1,5 @@
 import { useState, useEffect, ReactNode } from 'react'
-import { useBreakpoint } from '../../utils/BreakpointProvider'
+import { useBreakpoint } from '../../utils/useBreakpointProvider'
 import { ThemeProvider } from 'styled-components'
 import GlobalStyle from '../../styles/globalStyle'
 import { useAppSelector, useAppDispatch } from '../../redux/hooks'

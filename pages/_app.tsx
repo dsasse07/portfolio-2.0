@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import '../styles/fonts.css'
-import { BreakpointProvider } from '../utils/BreakpointProvider'
+import { BreakpointProvider } from '../utils/useBreakpointProvider'
 import ThemeApplicator from '../components/layout/ThemeApplicator'
 import { printConsoleWelcome } from '../utils/consoleMsg'
 import Head from 'next/head'
