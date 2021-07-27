@@ -46,7 +46,8 @@ const BlogShowPage: React.FC<BlogShowPageProps> = ({ article }) => {
     () => fetchOneArticle(`${article.id}`),
     { initialData: article }
   )
-  const { id, title, cover_image, url, description, body_markdown } = data
+  const { id, title, cover_image, url, description, body_markdown, body_html } =
+    data
 
   return (
     <div>
@@ -55,9 +56,9 @@ const BlogShowPage: React.FC<BlogShowPageProps> = ({ article }) => {
       <p>{cover_image}</p>
       <p>{url}</p>
       <p>{description}</p>
-      <div>
-        <MarkDown>{body_markdown}</MarkDown>
-      </div>
+      {/* <div dangerouslySetInnerHTML={{ __html: body_html }}> */}
+      <MarkDown>{body_markdown}</MarkDown>
+      {/* </div> */}
     </div>
   )
 }

@@ -6,6 +6,7 @@ export interface ArticleModel {
   url: string
   cover_image: string
   tags: string[]
+  body_html: string
   body_markdown: string
   viewCount?: string
   reactionCount?: string

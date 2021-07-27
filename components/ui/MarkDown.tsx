@@ -13,6 +13,9 @@ import {
 import React from 'react'
 import { useBreakpoint } from '../../utils/useBreakpointProvider'
 import styled from 'styled-components'
+import gfm from 'remark-gfm'
+//@ts-ignore
+import ReactEmbedGist from 'react-embed-gist'
 
 interface MarkdownProps {
   children: string
@@ -21,7 +24,7 @@ interface MarkdownProps {
 const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
   const breakpoint = useBreakpoint()
 
-  const CodeBlock: Partial<NormalComponents & SpecialComponents> = {
+  const Customcomponents: Partial<NormalComponents & SpecialComponents> = {
     code({ node, inline, className, children, ...props }) {
       const match = /language-(\w+)/.exec(className || '')
       return !inline && match ? (
@@ -38,10 +41,33 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         </code>
       )
     },
+    p({ node, inline, className, children, ...props }) {
+      if (
+        // @ts-ignore
+        typeof node.children[0].value === 'string' &&
+        !inline &&
+        // @ts-ignore
+        node.children[0].value.match(/gist/)
+      ) {
+        const gistAnchor = node.children[1]
+        // @ts-ignore
+        const gistUrl = gistAnchor.children[0].value
+        const gistId = gistUrl.match(/dsasse07\/\w*/)[0]
+        return <ReactEmbedGist gist={gistId} />
+      } else {
+        return (
+          <p className={className} {...props}>
+            {children}
+          </p>
+        )
+      }
+    },
   }
 
   return (
-    <MarkDownContainer components={CodeBlock}>{children}</MarkDownContainer>
+    <MarkDownContainer remarkPlugins={[gfm]} components={Customcomponents}>
+      {children}
+    </MarkDownContainer>
   )
 }
 
@@ -53,9 +79,9 @@ const MarkDownContainer = styled(ReactMarkdown)`
   flex-direction: column;
   max-width: 70vw;
 
-  pre {
+  /* pre {
     margin: 0 auto;
     max-width: 800px;
     width: 100%;
-  }
+  } */
 `
