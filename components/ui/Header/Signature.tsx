@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Link from 'next/link'
 
 interface SignatureProps {
   name: string
@@ -7,11 +8,13 @@ interface SignatureProps {
 
 const Signature: React.FC<SignatureProps> = ({ name }) => {
   return (
-    <SignatureContainer href='/' className='logo'>
-      <AngleBracket className='grey-color'> &lt;</AngleBracket>
-      <Name className='logo-name'>{name}</Name>
-      <AngleBracket className='grey-color'>/&gt;</AngleBracket>
-    </SignatureContainer>
+    <Link href='/' passHref>
+      <SignatureContainer>
+        <AngleBracket className='grey-color'> &lt;</AngleBracket>
+        <Name>{name}</Name>
+        <AngleBracket className='grey-color'>/&gt;</AngleBracket>
+      </SignatureContainer>
+    </Link>
   )
 }
 

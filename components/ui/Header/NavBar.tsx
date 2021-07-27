@@ -7,9 +7,10 @@ const NavBar: React.FC = () => {
   return (
     <NavContainer>
       <ThemeToggle />
-      <LinkButton href='#projects' buttonText='Projects' />
-      <LinkButton href='#blogs' buttonText='Blogs' />
-      <LinkButton href='#contact' buttonText='Contact' />
+      <LinkButton href='/' buttonText='Home' />
+      <LinkButton href='/projects' buttonText='Projects' />
+      <LinkButton href='/blogs' buttonText='Blogs' />
+      {/* <LinkButton href='#contact' buttonText='Contact' /> */}
     </NavContainer>
   )
 }
