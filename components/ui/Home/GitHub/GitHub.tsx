@@ -13,7 +13,7 @@ const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
   return (
     <div>
       <h2>GitHub Section</h2>
-      <GitHubGarden />
+      <GitHubGarden weeks={weeks} />
       <p>{weeks.length}</p>
     </div>
   )

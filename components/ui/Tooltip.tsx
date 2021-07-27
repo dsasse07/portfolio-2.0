@@ -52,7 +52,7 @@ const TooltipText = styled.span`
   padding: 6px;
   color: white;
   background: black;
-  font-size: 0.8rem;
+  font-size: 0.65rem;
   line-height: 1;
   z-index: 100;
   white-space: nowrap;

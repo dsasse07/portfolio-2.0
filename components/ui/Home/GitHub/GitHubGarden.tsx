@@ -1,13 +1,13 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Week } from '../../../../models/GitHub'
-import { weeks } from './weeks'
+// import { weeks } from './weeks'
 import Tooltip from '../../Tooltip'
+import { useBreakpoint } from '../../../../utils/useBreakpointProvider'
 
-// interface GitHubGardenProps {
-//   weeks: Week[]
-//   monthsToDisplay: number
-// }
+interface GitHubGardenProps {
+  weeks: Week[]
+}
 
 const findMonth = (dateString: string) => {
   return new Date(dateString).getMonth()
@@ -32,7 +32,7 @@ const buildWeek = (weeks: Week[], weekNumber: number) => {
       </Tooltip>
     )
   })
-  return <WeekColumn>{days}</WeekColumn>
+  return <WeekColumn key={weeks[weekNumber].firstDay}>{days}</WeekColumn>
 }
 
 const mapMonths = (weeks: Week[]) => {
@@ -42,16 +42,12 @@ const mapMonths = (weeks: Week[]) => {
       arr: [buildWeek(weeks, 0)],
     },
   ]
-  // Iterate through the weeks
   for (let i = 1; i < weeks.length; i++) {
-    // If current week is the same month as the last
-    // Add it to the array
     if (
       findMonth(weeks[i].contributionDays[0].date) ===
       months[months.length - 1].monthNum
     ) {
       months[months.length - 1].arr.push(buildWeek(weeks, i))
-      // If current week is a new month, make a new entry
     } else {
       months.push({
         monthNum: findMonth(weeks[i].contributionDays[0].date),
@@ -63,23 +59,43 @@ const mapMonths = (weeks: Week[]) => {
   return months
 }
 
-// const GitHubGarden: React.FC<GitHubGardenProps> = ({ weeks }) => {
-const GitHubGarden: React.FC = () => {
+export const monthStrings = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+]
+
+const GitHubGarden: React.FC<GitHubGardenProps> = ({ weeks }) => {
+  const breakpoint = useBreakpoint()
+  const [displayMonths, setMonthsToDisplay] = useState<number>(0)
   const monthArr = mapMonths(weeks)
-  const monthStrings = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec',
-  ]
+
+  useEffect(() => {
+    switch (true) {
+      case breakpoint.xs:
+        setMonthsToDisplay(2)
+        break
+      case breakpoint.sm:
+        setMonthsToDisplay(5)
+        break
+      case breakpoint.md:
+        setMonthsToDisplay(7)
+        break
+      case breakpoint.lg:
+        setMonthsToDisplay(12)
+        break
+    }
+  }, [breakpoint.xs, breakpoint.sm, breakpoint.md, breakpoint.lg])
+
   const monthComponents = monthArr.map((mon, i) => {
     return (
       <Month>
@@ -100,7 +116,7 @@ const GitHubGarden: React.FC = () => {
         <DayLabel>Fri</DayLabel>
         <DayLabel>Sat</DayLabel>
       </DayLabels>
-      {monthComponents}
+      {monthComponents.slice(12 - displayMonths)}
     </GardenPlot>
   )
 }

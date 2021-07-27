@@ -11,9 +11,10 @@ import { Hydrate } from 'react-query/hydration'
 import { useState } from 'react'
 
 const queries = {
-  xs: '(max-width: 320px)',
+  xs: '(max-width: 375px)',
   sm: '(max-width: 720px)',
   md: '(max-width: 1024px)',
+  lg: '(max-width: 1200px)',
   dark: '(prefers-color-scheme: dark)',
 }
 
