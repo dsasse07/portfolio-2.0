@@ -5,6 +5,7 @@ import { ParsedUrlQuery } from 'querystring'
 import { ArticleModel } from '../../models/Article'
 import { useQuery } from 'react-query'
 import { useRouter } from 'next/router'
+import MarkDown from '../../components/ui/MarkDown'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const articlesData: ArticleModel[] = await fetchMyArticles()
@@ -45,7 +46,8 @@ const BlogShowPage: React.FC<BlogShowPageProps> = ({ article }) => {
     () => fetchOneArticle(`${article.id}`),
     { initialData: article }
   )
-  const { id, title, cover_image, url, description } = data
+  const { id, title, cover_image, url, description, body_markdown } = data
+
   return (
     <div>
       <p>{id}</p>
@@ -53,6 +55,9 @@ const BlogShowPage: React.FC<BlogShowPageProps> = ({ article }) => {
       <p>{cover_image}</p>
       <p>{url}</p>
       <p>{description}</p>
+      <div>
+        <MarkDown>{body_markdown}</MarkDown>
+      </div>
     </div>
   )
 }
