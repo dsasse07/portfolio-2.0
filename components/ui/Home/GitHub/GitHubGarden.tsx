@@ -76,25 +76,34 @@ export const monthStrings = [
 
 const GitHubGarden: React.FC<GitHubGardenProps> = ({ weeks }) => {
   const breakpoint = useBreakpoint()
-  const [displayMonths, setMonthsToDisplay] = useState<number>(0)
   const monthArr = mapMonths(weeks)
 
-  useEffect(() => {
+  const findDisplaySize = () => {
     switch (true) {
       case breakpoint.xs:
-        setMonthsToDisplay(2)
-        break
+        return 2
       case breakpoint.sm:
-        setMonthsToDisplay(5)
-        break
+        return 5
       case breakpoint.md:
-        setMonthsToDisplay(7)
-        break
+        return 7
       case breakpoint.lg:
-        setMonthsToDisplay(12)
-        break
+        return 12
+      default:
+        return 12
     }
-  }, [breakpoint.xs, breakpoint.sm, breakpoint.md, breakpoint.lg])
+  }
+  const [displayMonths, setMonthsToDisplay] = useState<number>(
+    findDisplaySize()
+  )
+  useEffect(() => {
+    setMonthsToDisplay(findDisplaySize())
+  }, [
+    findDisplaySize,
+    breakpoint.xs,
+    breakpoint.sm,
+    breakpoint.md,
+    breakpoint.lg,
+  ])
 
   const monthComponents = monthArr.map((mon, i) => {
     return (
