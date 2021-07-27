@@ -106,6 +106,11 @@ export const fetchPortfolioProjects = async () => {
                 }
               }
             }
+            object(expression: "main:README.md") {
+              ... on Blob {
+                text
+              }
+            }
           }
         }
       }
@@ -117,7 +122,15 @@ export const fetchPortfolioProjects = async () => {
   const {
     search: { nodes },
   } = await client.request(query, variables)
-  return nodes
+  const updatedNodes = nodes.map((node: PortfolioProjectsResponseModel) => {
+    // @ts-ignore
+    const [logo, demoVideo, deployUrl = ''] = node.object.text.match(
+      // Matches urls after [... Logo], [... Video], [Deploy Url]
+      /(?<=Logo\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Video\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Url\]\()(https:\/\/[\w\.\/\?\=\-]+)/g
+    )
+    return { ...node, logo, demoVideo, deployUrl }
+  })
+  return updatedNodes
 }
 
 export const fetchProject = async (name: string) => {

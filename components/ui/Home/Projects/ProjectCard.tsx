@@ -5,50 +5,56 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import YouTubeIcon from '@material-ui/icons/YouTube'
 import YoutubeEmbed from './YoutubeEmbed'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
-import { ProjectModel } from '../../../../models/Project'
+import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests'
+// import { ProjectModel } from '../../../../models/Project'
 
 interface ProjectCardProps {
-  project: ProjectModel
+  project: PortfolioProjectsResponseModel
 }
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
-  const { title, logo, technologies, description, repoLink, url, demoVideo } =
-    project
   const [showVideo, setShowVideo] = useState(false)
 
   function toggleMode() {
     setShowVideo((showVideo) => !showVideo)
   }
 
-  const techTagComponents = technologies.map((tech, index) => {
-    return <TechTag key={index}>{tech}</TechTag>
-  })
+  const techTagComponents = project.repositoryTopics.nodes.map(
+    (node, index) => {
+      return <TechTag key={index}>{node.topic.name}</TechTag>
+    }
+  )
 
   return (
     <Card className='flex-item'>
-      <VideoButton className='link' showVideo={showVideo} onClick={toggleMode}>
-        {showVideo ? (
-          <InfoOutlinedIcon style={{ color: 'white' }} />
-        ) : (
-          <YouTubeIcon style={{ color: 'white' }} />
-        )}
-      </VideoButton>
-
-      {showVideo ? (
-        <YoutubeEmbed url={demoVideo} />
+      {project.demoVideo && (
+        <VideoButton
+          className='link'
+          showVideo={showVideo}
+          onClick={toggleMode}
+        >
+          {showVideo ? (
+            <InfoOutlinedIcon style={{ color: 'white' }} />
+          ) : (
+            <YouTubeIcon style={{ color: 'white' }} />
+          )}
+        </VideoButton>
+      )}
+      {showVideo && project.demoVideo ? (
+        <YoutubeEmbed url={project.demoVideo} />
       ) : (
         <>
           <Row>
             <LogoContainer>
-              <Logo src={logo} alt={`${title} logo`} />
+              <Logo src={project.logoUrl} alt={`${project.name} logo`} />
             </LogoContainer>
             <Column>
-              <Title>{title}</Title>
+              <Title>{project.name}</Title>
               <LinkRow>
-                {url && (
+                {project.deployUrl && (
                   <LinkButton
-                    aria-label={`${title} Website`}
-                    href={url}
+                    aria-label={`${project.name} Website`}
+                    href={project.deployUrl}
                     target='_blank'
                     rel='noreferrer'
                   >
@@ -56,8 +62,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
                   </LinkButton>
                 )}
                 <LinkButton
-                  aria-label={`${title} Github Repo`}
-                  href={repoLink}
+                  aria-label={`${project.name} Github Repo`}
+                  href={project.url}
                   target='_blank'
                   rel='noreferrer'
                 >
@@ -68,7 +74,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </Row>
           <TechnologyContainer>{techTagComponents}</TechnologyContainer>
           <Row>
-            <Description>{description}</Description>
+            <Description>{project.description}</Description>
           </Row>
         </>
       )}

@@ -1,10 +1,13 @@
 import styled from 'styled-components'
 import ProjectCard from './ProjectCard'
-import { projects } from '../../../../data/projects'
+// import { projects } from '../../../../data/projects'
+import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests'
 
-interface ProjectsProps {}
+interface ProjectsProps {
+  projects: PortfolioProjectsResponseModel[]
+}
 
-const Projects: React.FC<ProjectsProps> = () => {
+const Projects: React.FC<ProjectsProps> = ({ projects }) => {
   const projectCards = projects.map((project, index) => {
     return <ProjectCard key={index} project={project} />
   })
