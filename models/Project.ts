@@ -9,3 +9,23 @@ export interface ProjectModel {
   embedId: string
   technologies: string[]
 }
+
+export interface PortfolioProjectsResponseModel {
+  databaseId: number
+  name: string
+  url: string
+  description: string
+  repositoryTopics: {
+    nodes: {
+      topic: {
+        name: string
+      }
+    }[]
+  }
+  object: {
+    text: string
+  }
+  deployUrl?: string
+  logoUrl?: string
+  demoVideo?: string
+}

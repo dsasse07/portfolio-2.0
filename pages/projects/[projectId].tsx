@@ -1,16 +1,22 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import React from 'react'
 import { projects } from '../../data/projects'
-import { ProjectModel } from '../../models/Project'
 import { ParsedUrlQuery } from 'querystring'
-import { useRouter } from 'next/router'
+import {
+  fetchPortfolioProjects,
+  fetchProject,
+  PortfolioProjectsResponseModel,
+} from '../../data/networkRequests'
+import MarkDown from '../../components/ui/MarkDown'
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const ids = projects.map((prj) => {
-    return { params: { projectId: prj.id } }
+  const projectsData: PortfolioProjectsResponseModel[] =
+    await fetchPortfolioProjects()
+  const ids = projectsData.map((project) => {
+    return { params: { projectId: project.name } }
   })
   return {
-    fallback: false,
+    fallback: 'blocking',
     paths: ids,
   }
 }
@@ -21,44 +27,26 @@ interface StaticPropsParams extends ParsedUrlQuery {
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { projectId } = context.params as StaticPropsParams
-  const project: ProjectModel = projects.filter(
-    (prj) => prj.id === projectId
-  )[0]
-
+  const project = await fetchProject(projectId)
   return {
     props: {
       project,
     },
-    revalidate: 3600,
+    revalidate: 1800,
   }
 }
 
 interface ProjectShowPageProps {
-  project: ProjectModel
+  project: PortfolioProjectsResponseModel
 }
 
 const ProjectShowPage: React.FC<ProjectShowPageProps> = ({ project }) => {
-  const {
-    title,
-    logo,
-    description,
-    repoLink,
-    url,
-    demoVideo,
-    embedId,
-    technologies,
-  } = project
-
+  const component = <p>{project.name}</p>
   return (
     <div>
-      <p>{title}</p>
-      <p>{logo}</p>
-      <p>{description}</p>
-      <p>{repoLink}</p>
-      <p>{url}</p>
-      <p>{demoVideo}</p>
-      <p>{embedId}</p>
-      <p>{technologies}</p>
+      Stuff and things
+      {component}
+      <MarkDown>{project.object.text}</MarkDown>
     </div>
   )
 }

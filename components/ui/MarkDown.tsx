@@ -3,7 +3,6 @@ import {
   SpecialComponents,
 } from 'react-markdown/src/ast-to-react'
 import ReactMarkdown from 'react-markdown'
-
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import {
   darcula,
@@ -17,6 +16,8 @@ import gfm from 'remark-gfm'
 //@ts-ignore
 import ReactEmbedGist from 'react-embed-gist'
 import Image from 'next/image'
+import Link from 'next/link'
+import { resolveHref } from 'next/dist/next-server/lib/router/router'
 
 interface MarkdownProps {
   children: string
@@ -72,7 +73,11 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
   }
 
   return (
-    <MarkDownContainer remarkPlugins={[gfm]} components={Customcomponents}>
+    <MarkDownContainer
+      linkTarget='_blank'
+      remarkPlugins={[gfm]}
+      components={Customcomponents}
+    >
       {children}
     </MarkDownContainer>
   )
