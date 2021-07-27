@@ -16,6 +16,7 @@ import styled from 'styled-components'
 import gfm from 'remark-gfm'
 //@ts-ignore
 import ReactEmbedGist from 'react-embed-gist'
+import Image from 'next/image'
 
 interface MarkdownProps {
   children: string
@@ -61,6 +62,12 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
           </p>
         )
       }
+    },
+    image({ node, className, children, src, alt, ...props }) {
+      return (
+        // @ts-ignore
+        <Image src={src} alt={alt} className={className} {...props} unsized />
+      )
     },
   }
 
