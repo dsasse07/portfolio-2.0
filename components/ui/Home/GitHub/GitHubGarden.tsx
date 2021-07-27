@@ -15,8 +15,19 @@ const findMonth = (dateString: string) => {
 
 const buildWeek = (weeks: Week[], weekNumber: number) => {
   const days = weeks[weekNumber].contributionDays.map((day) => {
+    let commitText =
+      day.contributionCount === 0
+        ? 'No commits'
+        : `${day.contributionCount} commit`
+    commitText += day.contributionCount > 1 ? 's' : ''
+
     return (
-      <Tooltip content={`Hi friend`}>
+      <Tooltip
+        content={`${commitText} on ${new Date(day.date)
+          .toUTCString()
+          .match(/^.*202\d/)}`}
+        key={day.date}
+      >
         <DayRect color={day.color} />
       </Tooltip>
     )

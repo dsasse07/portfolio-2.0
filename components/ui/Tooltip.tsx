@@ -10,7 +10,7 @@ interface TooltipProps {
 
 const Tooltip: React.FC<TooltipProps> = ({
   content = '',
-  delay = 200,
+  delay = 100,
   children,
 }) => {
   const [isActive, setActive] = useState<boolean>(false)
@@ -46,14 +46,28 @@ const TooltipText = styled.span`
   background: rgba(0, 0, 0, 0.4);
   position: absolute;
   border-radius: 4px;
-  left: -50px;
-  transform: translateX(-300px);
-  transform: translateY(-40px);
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
   padding: 6px;
   color: white;
   background: black;
-  font-size: 1rem;
+  font-size: 0.8rem;
   line-height: 1;
   z-index: 100;
   white-space: nowrap;
+
+  ::before {
+    content: ' ';
+    left: 50%;
+    top: 100%;
+    border: solid transparent;
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-width: 6px;
+    margin-left: -6px;
+    border-top-color: black;
+  }
 `
