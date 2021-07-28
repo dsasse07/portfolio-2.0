@@ -63,6 +63,7 @@ export interface PortfolioProjectsResponseModel {
   databaseId: number
   name: string
   url: string
+  updatedAt: string
   description: string
   repositoryTopics: {
     nodes: {
@@ -75,7 +76,7 @@ export interface PortfolioProjectsResponseModel {
     text: string
   }
   deployUrl?: string
-  logoUrl?: string
+  logo?: string
   demoVideo?: string
 }
 
@@ -97,6 +98,7 @@ export const fetchPortfolioProjects = async () => {
           ... on Repository {
             databaseId
             name
+            updatedAt
             url
             description
             repositoryTopics(first: 100) {
@@ -122,15 +124,21 @@ export const fetchPortfolioProjects = async () => {
   const {
     search: { nodes },
   } = await client.request(query, variables)
+
   const updatedNodes = nodes.map((node: PortfolioProjectsResponseModel) => {
     // @ts-ignore
     const [logo, demoVideo, deployUrl = ''] = node.object.text.match(
       // Matches urls after [... Logo], [... Video], [Deploy Url]
-      /(?<=Logo\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Video\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Url\]\()(https:\/\/[\w\.\/\?\=\-]+)/g
+      /(?<=Logo\]\()(https:\/\/[\w\.\/\?\=\-\*]+)|(?<=Video\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Url\]\()(https:\/\/[\w\.\/\?\=\-]+)/g
     )
     return { ...node, logo, demoVideo, deployUrl }
   })
-  return updatedNodes
+  return updatedNodes.sort(
+    (a: PortfolioProjectsResponseModel, b: PortfolioProjectsResponseModel) => {
+      //@ts-ignore
+      return new Date(a.updatedAt) - new Date(b.updatedAt)
+    }
+  )
 }
 
 export const fetchProject = async (name: string) => {
@@ -146,6 +154,7 @@ export const fetchProject = async (name: string) => {
         databaseId
         name
         url
+        updatedAt
         description
         repositoryTopics(first: 100) {
           nodes {
@@ -169,7 +178,7 @@ export const fetchProject = async (name: string) => {
   const { repository } = await client.request(query, variables)
   const [logo, demoVideo, deployUrl] = repository.object.text.match(
     // Matches urls after [... Logo], [... Video], [Deploy Url]
-    /(?<=Logo\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Video\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Url\]\()(https:\/\/[\w\.\/\?\=\-]+)/g
+    /(?<=Logo\]\()(https:\/\/[\w\.\/\?\=\-\*]+)|(?<=Video\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Url\]\()(https:\/\/[\w\.\/\?\=\-]+)/g
   )
   return { ...repository, logo, demoVideo, deployUrl }
 }

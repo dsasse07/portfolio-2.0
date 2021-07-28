@@ -6,7 +6,6 @@ import YouTubeIcon from '@material-ui/icons/YouTube'
 import YoutubeEmbed from './YoutubeEmbed'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
 import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests'
-// import { ProjectModel } from '../../../../models/Project'
 
 interface ProjectCardProps {
   project: PortfolioProjectsResponseModel
@@ -14,7 +13,6 @@ interface ProjectCardProps {
 
 const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   const [showVideo, setShowVideo] = useState(false)
-
   function toggleMode() {
     setShowVideo((showVideo) => !showVideo)
   }
@@ -46,7 +44,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         <>
           <Row>
             <LogoContainer>
-              <Logo src={project.logoUrl} alt={`${project.name} logo`} />
+              <Logo src={project.logo} alt={`${project.name} logo`} />
             </LogoContainer>
             <Column>
               <Title>{project.name}</Title>
@@ -222,7 +220,7 @@ const VideoButton = styled.a<VideoButtonStyleProps>`
   transition: all 0.3s;
   cursor: pointer;
   opacity: ${({ showVideo }) => (showVideo ? '70%' : '100%')};
-  z-index: 2;
+  z-index: 1;
 
   svg {
     position: absolute;
