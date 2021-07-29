@@ -9,12 +9,23 @@ import {
 export interface MediaQueries {
   [key: string]: string
 }
+
 export interface BreakpointProps {
   children: ReactNode
   queries: MediaQueries
 }
+
 export interface BreakpointResults {
   [key: string]: boolean
+}
+
+// Media Queries we are going to create listeners for
+export const queries = {
+  xs: '(max-width: 375px)',
+  sm: '(max-width: 720px)',
+  md: '(max-width: 1024px)',
+  lg: '(max-width: 1200px)',
+  dark: '(prefers-color-scheme: dark)',
 }
 
 const defaultValue: BreakpointResults = {}

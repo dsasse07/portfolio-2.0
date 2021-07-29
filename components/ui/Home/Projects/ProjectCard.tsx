@@ -6,6 +6,8 @@ import YouTubeIcon from '@material-ui/icons/YouTube'
 import YoutubeEmbed from './YoutubeEmbed'
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined'
 import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests'
+import Image from 'next/image'
+import { createPlaceholder } from '../../../../utils/createPlaceholder'
 
 interface ProjectCardProps {
   project: PortfolioProjectsResponseModel
@@ -44,7 +46,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         <>
           <Row>
             <LogoContainer>
-              <Logo src={project.logo} alt={`${project.name} logo`} />
+              <Image
+                placeholder='blur'
+                blurDataURL={`data:image/svg+xml;base64,${createPlaceholder(
+                  150,
+                  150
+                )}`}
+                width={150}
+                height={150}
+                src={project.logo}
+                alt={`${project.name} logo`}
+              />
             </LogoContainer>
             <Column>
               <Title>{project.name}</Title>
@@ -130,12 +142,13 @@ const LogoContainer = styled.div`
   align-items: center;
   justify-content: center;
 `
-const Logo = styled.img`
-  width: 20vw;
-  height: 20vw;
-  max-width: 150px;
-  max-height: 150px;
-`
+// const Logo = styled(Image)`
+//   width: 20vw;
+//   height: 20vw;
+//   max-width: 150px;
+//   max-height: 150px;
+// `
+
 const Title = styled.header`
   font-size: 2rem;
   font-weight: bold;

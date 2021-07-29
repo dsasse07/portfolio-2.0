@@ -1,6 +1,6 @@
 import type { AppProps } from 'next/app'
 import '../styles/fonts.css'
-import { BreakpointProvider } from '../utils/useBreakpointProvider'
+import { BreakpointProvider, queries } from '../utils/useBreakpointProvider'
 import ThemeApplicator from '../components/layout/ThemeApplicator'
 import { printConsoleWelcome } from '../utils/consoleMsg'
 import Head from 'next/head'
@@ -9,14 +9,6 @@ import { Provider as ReduxProvider } from 'react-redux'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { Hydrate } from 'react-query/hydration'
 import { useState } from 'react'
-
-const queries = {
-  xs: '(max-width: 375px)',
-  sm: '(max-width: 720px)',
-  md: '(max-width: 1024px)',
-  lg: '(max-width: 1200px)',
-  dark: '(prefers-color-scheme: dark)',
-}
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   // printConsoleWelcome()

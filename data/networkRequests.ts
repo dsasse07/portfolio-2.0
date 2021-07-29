@@ -76,7 +76,7 @@ export interface PortfolioProjectsResponseModel {
     text: string
   }
   deployUrl?: string
-  logo?: string
+  logo: string
   demoVideo?: string
 }
 

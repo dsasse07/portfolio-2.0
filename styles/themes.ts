@@ -1,4 +1,8 @@
+import sunset from '../assets/banners/Sunset.png'
+import sunrise from '../assets/banners/Sunrise.png'
+
 export const lightTheme = {
+  banner: sunrise,
   background: 'rgb(191,254,212)',
   // gradient: "linear-gradient(0deg, rgba(191,254,212,1) 4%, rgba(148,187,233,1) 100%)",
   gradient:
@@ -19,6 +23,7 @@ export const lightTheme = {
 }
 
 export const darkTheme = {
+  banner: sunset,
   background: 'rgb(119,19,13)',
   gradient:
     'linear-gradient(0deg, rgba(119,19,13,1) 4%, rgba(15,12,11,1) 100%)',

@@ -1,15 +1,30 @@
 import styled from 'styled-components'
-import profilePhoto from '../../../assets/formalProfile400.jpg'
+import profilePhoto from '../../../assets/headshots/formalProfile400.jpg'
 import Image from 'next/image'
 import SocialLinks from '../SocialLinks/SocialLinks'
-
+import { useAppSelector } from '../../../redux/hooks'
+import sunset from '../../../assets/banners/Sunset.png'
+import sunrise from '../../../assets/banners/Sunrise.png'
 interface AboutProps {}
 
 const About: React.FC<AboutProps> = () => {
+  const isDark = useAppSelector(({ theme }) => theme.isDark)
+
   return (
     <Container id='about'>
+      {isDark ? (
+        <Image placeholder='blur' src={sunset} alt='Sunset Photo' />
+      ) : (
+        <Image placeholder='blur' src={sunrise} alt='Sunset Photo' />
+      )}
       <PhotoContainer className='flex-item'>
-        <Image src={profilePhoto} alt='Danny Sasse' />
+        <Image
+          placeholder='blur'
+          height={400}
+          width={400}
+          src={profilePhoto}
+          alt='Danny Sasse'
+        />
       </PhotoContainer>
       <TextContainer className='flex-item'>
         <Greeting>Hello!</Greeting>
@@ -48,9 +63,9 @@ const Container = styled.section`
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
-  padding: 1rem;
+  /* padding: 1rem; */
   min-height: 70vh;
-  margin: 10vh 0;
+  /* margin: 10vh 0; */
 
   .flex-item {
     margin: 1rem;
@@ -61,7 +76,7 @@ const PhotoContainer = styled.div`
   height: 40vw;
   max-width: 400px;
   max-height: 400px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   overflow: hidden;
   border: 2px solid white;
 
