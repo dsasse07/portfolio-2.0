@@ -127,7 +127,7 @@ export const fetchPortfolioProjects = async () => {
 
   const updatedNodes = nodes.map((node: PortfolioProjectsResponseModel) => {
     // @ts-ignore
-    const [logo, demoVideo, deployUrl = ''] = node.object.text.match(
+    const [logo = '', demoVideo = '', deployUrl = ''] = node.object.text.match(
       // Matches urls after [... Logo], [... Video], [Deploy Url]
       /(?<=Logo\]\()(https:\/\/[\w\.\/\?\=\-\*]+)|(?<=Video\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Url\]\()(https:\/\/[\w\.\/\?\=\-]+)/g
     )
@@ -176,9 +176,10 @@ export const fetchProject = async (name: string) => {
     owner: 'dsasse07',
   }
   const { repository } = await client.request(query, variables)
-  const [logo, demoVideo, deployUrl] = repository.object.text.match(
-    // Matches urls after [... Logo], [... Video], [Deploy Url]
-    /(?<=Logo\]\()(https:\/\/[\w\.\/\?\=\-\*]+)|(?<=Video\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Url\]\()(https:\/\/[\w\.\/\?\=\-]+)/g
-  )
+  const [logo = '', demoVideo = '', deployUrl = ''] =
+    repository.object.text.match(
+      // Matches urls after [... Logo], [... Video], [Deploy Url]
+      /(?<=Logo\]\()(https:\/\/[\w\.\/\?\=\-\*]+)|(?<=Video\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Url\]\()(https:\/\/[\w\.\/\?\=\-]+)/g
+    )
   return { ...repository, logo, demoVideo, deployUrl }
 }

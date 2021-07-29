@@ -16,8 +16,6 @@ import gfm from 'remark-gfm'
 //@ts-ignore
 import ReactEmbedGist from 'react-embed-gist'
 import Image from 'next/image'
-import Link from 'next/link'
-import { resolveHref } from 'next/dist/next-server/lib/router/router'
 
 interface MarkdownProps {
   children: string
@@ -26,7 +24,7 @@ interface MarkdownProps {
 const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
   const breakpoint = useBreakpoint()
 
-  const Customcomponents: Partial<NormalComponents & SpecialComponents> = {
+  const CustomComponents: Partial<NormalComponents & SpecialComponents> = {
     code({ node, inline, className, children, ...props }) {
       const match = /language-(\w+)/.exec(className || '')
       return !inline && match ? (
@@ -49,7 +47,7 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         typeof node.children[0].value === 'string' &&
         !inline &&
         // @ts-ignore
-        node.children[0].value.match(/gist/)
+        node.children[0].value.match(/^{% gist/)
       ) {
         const gistAnchor = node.children[1]
         // @ts-ignore
@@ -67,7 +65,7 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
     image({ node, className, children, src, alt, ...props }) {
       return (
         // @ts-ignore
-        <Image src={src} alt={alt} className={className} {...props} unsized />
+        <Image src={src} alt={alt} className={className} {...props} />
       )
     },
   }
@@ -76,7 +74,7 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
     <MarkDownContainer
       linkTarget='_blank'
       remarkPlugins={[gfm]}
-      components={Customcomponents}
+      components={CustomComponents}
     >
       {children}
     </MarkDownContainer>

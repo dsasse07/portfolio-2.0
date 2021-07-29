@@ -1,3 +1,9 @@
+// import sunsetXs from '../assets/banners/Sunset-Pano400.png'
+// import sunsetMd from '../assets/banners/Sunset-Pano1024.png'
+// import sunsetLg from '../assets/banners/Sunset-Pano1600.png'
+// import sunriseXs from '../assets/banners/Sunrise-Pano400.png'
+// import sunriseMd from '../assets/banners/Sunrise-Pano1024.png'
+// import sunriseLg from '../assets/banners/Sunrise-Pano1600.png'
 import sunset from '../assets/banners/Sunset.png'
 import sunrise from '../assets/banners/Sunrise.png'
 

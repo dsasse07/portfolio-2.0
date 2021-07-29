@@ -4,6 +4,7 @@ import devIcon from '../../../../assets/devIcon.png'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import Image from 'next/image'
 import { ArticleModel } from '../../../../models/Article'
+import { createPlaceholder } from '../../../../utils/createPlaceholder'
 
 interface BlogCardProps {
   article: ArticleModel
@@ -40,7 +41,17 @@ const BlogCard: React.FC<BlogCardProps> = ({ article }) => {
       </LinkButton>
       <Row>
         <LogoContainer>
-          <Logo src={cover_image} alt={`${title}`} />
+          <Logo
+            placeholder='blur'
+            blurDataURL={`data:image/svg+xml;base64,${createPlaceholder(
+              500,
+              200
+            )}`}
+            width={500}
+            height={200}
+            src={cover_image}
+            alt={`${title}`}
+          />
         </LogoContainer>
       </Row>
       <Row>
@@ -91,7 +102,7 @@ const LogoContainer = styled.div`
   justify-content: center;
   width: 100%;
 `
-const Logo = styled.img`
+const Logo = styled(Image)`
   width: 100%;
   object-fit: contain;
   border: 1px solid black;
@@ -126,6 +137,7 @@ const LinkButton = styled.a`
   border-bottom: 1px solid white;
   transition: all 0.3s;
   cursor: pointer;
+  z-index: 1;
 
   .devIcon {
     position: absolute;

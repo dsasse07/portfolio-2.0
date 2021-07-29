@@ -1,6 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import React from 'react'
-import { projects } from '../../data/projects'
 import { ParsedUrlQuery } from 'querystring'
 import {
   fetchPortfolioProjects,

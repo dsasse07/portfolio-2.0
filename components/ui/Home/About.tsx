@@ -3,28 +3,17 @@ import profilePhoto from '../../../assets/headshots/formalProfile400.jpg'
 import Image from 'next/image'
 import SocialLinks from '../SocialLinks/SocialLinks'
 import { useAppSelector } from '../../../redux/hooks'
-import sunset from '../../../assets/banners/Sunset.png'
-import sunrise from '../../../assets/banners/Sunrise.png'
+
 interface AboutProps {}
 
 const About: React.FC<AboutProps> = () => {
-  const isDark = useAppSelector(({ theme }) => theme.isDark)
+  const theme = useAppSelector(({ theme }) => theme.theme)
 
   return (
     <Container id='about'>
-      {isDark ? (
-        <Image placeholder='blur' src={sunset} alt='Sunset Photo' />
-      ) : (
-        <Image placeholder='blur' src={sunrise} alt='Sunset Photo' />
-      )}
+      <Image placeholder='blur' src={theme.banner} alt='Sunset Photo' />
       <PhotoContainer className='flex-item'>
-        <Image
-          placeholder='blur'
-          height={400}
-          width={400}
-          src={profilePhoto}
-          alt='Danny Sasse'
-        />
+        <Image placeholder='blur' src={profilePhoto} alt='Danny Sasse' />
       </PhotoContainer>
       <TextContainer className='flex-item'>
         <Greeting>Hello!</Greeting>
