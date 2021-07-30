@@ -13,6 +13,7 @@ import { ArticleModel } from '../models/Article'
 import { GetStaticProps } from 'next'
 import GitHub from '../components/ui/Home/GitHub/GitHub'
 import { GitHubResponseModel } from '../models/GitHub'
+import styled from 'styled-components'
 
 export const getStaticProps: GetStaticProps = async () => {
   const articles = await fetchMyArticles()
@@ -82,3 +83,7 @@ const Home: React.FC<HomeProps> = ({ articles, profileInfo, projects }) => {
 }
 
 export default Home
+
+const Main = styled.main`
+  position: relative;
+`

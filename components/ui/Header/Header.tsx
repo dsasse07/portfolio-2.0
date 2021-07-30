@@ -55,14 +55,13 @@ const HeaderContainer = styled.header<HeaderContainerStyleProps>`
   box-shadow: 2px 0 10px 0 ${({ boxShadow }) => boxShadow};
   display: flex;
   flex-wrap: wrap;
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   justify-content: space-around;
   padding-bottom: 0;
   position: -webkit-sticky; /* Safari */
   position: sticky;
-  /* position: absolute; */
   width: 100%;
-  margin-bottom: -100px;
+  height: 60px;
   top: 0;
-  z-index: 3;
+  z-index: 5;
 `

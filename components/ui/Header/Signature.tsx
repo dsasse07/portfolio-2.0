@@ -24,7 +24,7 @@ const SignatureContainer = styled.a`
   display: block;
   flex: none;
   float: left;
-  font-size: 1.5em;
+  font-size: 1.3em;
   text-decoration: none;
   margin-top: 10px;
   line-height: normal;
