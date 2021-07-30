@@ -1,42 +1,40 @@
 import styled from 'styled-components'
 import Signature from './Signature'
 import NavBar from './NavBar'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
+import { adjustHeaderOpacity } from '../../../redux/themeSlice'
+import { convertToRGB } from '../../../utils/convertToRGB'
 
 const Header: React.FC = () => {
-  const [isScrolled, setIsScrolled] = useState<boolean>(false)
+  const theme = useAppSelector(({ theme }) => theme)
+  const dispatch = useAppDispatch()
+  const baseBorder = convertToRGB('#cccccc').join(',')
+  const baseBoxShadow = convertToRGB('#cccccc').join(',')
 
-  // const [red, green, blue] = [69, 111, 225]
-  // const section1 = document.querySelector('.section1')
-
-  // window.addEventListener('scroll', () => {
-  //   let y = 1 + (window.scrollY || window.pageYOffset) / 150
-  //   y = y < 1 ? 1 : y // ensure y is always >= 1 (due to Safari's elastic scroll)
-  //   const [r, g, b] = [red / y, green / y, blue / y].map(Math.round)
-  //   setAtTop(`rgb(${r}, ${g}, ${b})`)
-  // })
-
-  function handleTopScroll() {
-    if (window.scrollY > 200 && !isScrolled) {
-      setIsScrolled(true)
-      return
-    }
-    if (window.scrollY <= 200 && !isScrolled) {
-      setIsScrolled(false)
-      return
-    }
+  const handleScroll = (_: Event) => {
+    let y = 0 + (window.scrollY || window.pageYOffset) / 200
+    // ensure y is always >= 1 (due to Safari's elastic scroll)
+    y = y < 0 ? 0 : y
+    y = y > 1 ? 1 : y
+    dispatch(adjustHeaderOpacity(y.toString()))
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', handleTopScroll)
+    window.addEventListener('scroll', handleScroll)
     return () => {
-      console.log('removing listener')
-      window.removeEventListener('scroll', handleTopScroll)
+      window.removeEventListener('scroll', handleScroll)
     }
   }, [])
 
   return (
-    <HeaderContainer isScrolled={isScrolled}>
+    <HeaderContainer
+      bgColor={`rgba(${convertToRGB(theme.theme.background).join(',')}, ${
+        theme.theme.headerOpacity
+      })`}
+      boxShadow={`rgba(${baseBoxShadow}, ${theme.theme.headerOpacity})`}
+      borderColor={`rgba(${baseBorder}, ${theme.theme.headerOpacity})`}
+    >
       <Signature name='Daniel Sasse' />
       <NavBar />
     </HeaderContainer>
@@ -46,15 +44,15 @@ const Header: React.FC = () => {
 export default Header
 
 interface HeaderContainerStyleProps {
-  isScrolled: boolean
+  bgColor: string
+  borderColor: string
+  boxShadow: string
 }
 const HeaderContainer = styled.header<HeaderContainerStyleProps>`
   align-items: center;
-  /* background: ${({ isScrolled, theme }) =>
-    isScrolled ? theme.background : 'transparent'};
-  transition: all 0.5s; */
-  border-bottom: 1px solid #cccccc;
-  box-shadow: 2px 0 10px 0 #cccccc;
+  background: ${({ bgColor }) => bgColor};
+  border-bottom: 1px solid ${({ borderColor }) => borderColor};
+  box-shadow: 2px 0 10px 0 ${({ boxShadow }) => boxShadow};
   display: flex;
   flex-wrap: wrap;
   font-size: 1.5rem;

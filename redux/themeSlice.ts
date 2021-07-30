@@ -22,25 +22,33 @@ export const themeSlice = createSlice({
     setIsDark: (state, action: PayloadAction<boolean>) => {
       if (action.payload) {
         state.isDark = true
-        state.theme = darkTheme
+        let currentOpacity = state.theme.headerOpacity
+        state.theme = { ...darkTheme, headerOpacity: currentOpacity }
       } else {
         state.isDark = false
-        state.theme = lightTheme
+        let currentOpacity = state.theme.headerOpacity
+        state.theme = { ...lightTheme, headerOpacity: currentOpacity }
       }
     },
     toggleTheme: (state) => {
       if (state.isDark) {
         state.isDark = false
-        state.theme = lightTheme
+        let currentOpacity = state.theme.headerOpacity
+        state.theme = { ...lightTheme, headerOpacity: currentOpacity }
       } else {
         state.isDark = true
-        state.theme = darkTheme
+        let currentOpacity = state.theme.headerOpacity
+        state.theme = { ...darkTheme, headerOpacity: currentOpacity }
       }
+    },
+    adjustHeaderOpacity: (state, action: PayloadAction<string>) => {
+      state.theme.headerOpacity = action.payload
     },
   },
 })
 
-export const { toggleTheme, setIsDark } = themeSlice.actions
+export const { toggleTheme, setIsDark, adjustHeaderOpacity } =
+  themeSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.counter.value

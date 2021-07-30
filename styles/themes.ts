@@ -9,7 +9,8 @@ import sunrise from '../assets/banners/Sunrise.png'
 
 export const lightTheme = {
   banner: sunrise,
-  background: 'rgb(191,254,212)',
+  background: '#bffed4',
+  headerOpacity: '0',
   // gradient: "linear-gradient(0deg, rgba(191,254,212,1) 4%, rgba(148,187,233,1) 100%)",
   gradient:
     'linear-gradient(0deg, rgba(191,254,212,1) 0%, rgba(163,227,255,1) 100%)',
@@ -30,7 +31,8 @@ export const lightTheme = {
 
 export const darkTheme = {
   banner: sunset,
-  background: 'rgb(119,19,13)',
+  background: '#77130d',
+  headerOpacity: '0',
   gradient:
     'linear-gradient(0deg, rgba(119,19,13,1) 4%, rgba(15,12,11,1) 100%)',
   fontColor: 'var(--white)',
