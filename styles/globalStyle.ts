@@ -15,10 +15,12 @@ const GlobalStyle = createGlobalStyle`
   :root{
     --white: #fcfcfc;
     --lt_green: #40c115;
-    
+    --lt_gray: #2D2D2D;
+    --dk_gray: #1e1d1e;
+    --gray: #c0c0c0;
+
     --palegreen:#A8EFDD;
     --darkblue:#1E357D;
-    --gray: #686a6b;
     --yellow: #ffde3d;
     --twitterBlue: #1CA3F1;
     --slate: #2f3538;
@@ -49,6 +51,13 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
   }
 
+  /* .glass {
+    background: rgba( 255, 255, 255, 0.15 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 11.0px );
+    -webkit-backdrop-filter: blur( 11.0px );
+    border-radius: 10px;
+  } */
 
 `
 

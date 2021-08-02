@@ -21,7 +21,6 @@ const NavContainer = styled.nav`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  width: 20vw;
   align-items: center;
 
   a {

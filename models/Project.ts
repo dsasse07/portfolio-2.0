@@ -14,6 +14,7 @@ export interface PortfolioProjectsResponseModel {
   databaseId: number
   name: string
   url: string
+  updatedAt: string
   description: string
   repositoryTopics: {
     nodes: {
@@ -26,6 +27,6 @@ export interface PortfolioProjectsResponseModel {
     text: string
   }
   deployUrl?: string
-  logoUrl?: string
+  logo: string
   demoVideo?: string
 }

@@ -4,59 +4,10 @@ import { Week } from '../../../../models/GitHub'
 // import { weeks } from './weeks'
 import Tooltip from '../../Tooltip'
 import { useBreakpoint } from '../../../../utils/useBreakpointProvider'
+import { useAppSelector } from '../../../../redux/hooks'
 
 interface GitHubGardenProps {
   weeks: Week[]
-}
-
-const findMonth = (dateString: string) => {
-  return new Date(dateString).getMonth()
-}
-
-const buildWeek = (weeks: Week[], weekNumber: number) => {
-  const days = weeks[weekNumber].contributionDays.map((day) => {
-    let commitText =
-      day.contributionCount === 0
-        ? 'No commits'
-        : `${day.contributionCount} commit`
-    commitText += day.contributionCount > 1 ? 's' : ''
-
-    return (
-      <Tooltip
-        content={`${commitText} on ${new Date(day.date)
-          .toUTCString()
-          .match(/^.*202\d/)}`}
-        key={day.date}
-      >
-        <DayRect color={day.color} />
-      </Tooltip>
-    )
-  })
-  return <WeekColumn key={weeks[weekNumber].firstDay}>{days}</WeekColumn>
-}
-
-const mapMonths = (weeks: Week[]) => {
-  let months: { monthNum: number; arr: JSX.Element[] }[] = [
-    {
-      monthNum: findMonth(weeks[0].contributionDays[0].date),
-      arr: [buildWeek(weeks, 0)],
-    },
-  ]
-  for (let i = 1; i < weeks.length; i++) {
-    if (
-      findMonth(weeks[i].contributionDays[0].date) ===
-      months[months.length - 1].monthNum
-    ) {
-      months[months.length - 1].arr.push(buildWeek(weeks, i))
-    } else {
-      months.push({
-        monthNum: findMonth(weeks[i].contributionDays[0].date),
-        arr: [],
-      })
-      months[months.length - 1].arr.push(buildWeek(weeks, i))
-    }
-  }
-  return months
 }
 
 export const monthStrings = [
@@ -76,6 +27,58 @@ export const monthStrings = [
 
 const GitHubGarden: React.FC<GitHubGardenProps> = ({ weeks }) => {
   const breakpoint = useBreakpoint()
+  const theme = useAppSelector(({ theme }) => theme.theme)
+
+  const findMonth = (dateString: string) => {
+    return new Date(dateString).getMonth()
+  }
+
+  const buildWeek = (weeks: Week[], weekNumber: number) => {
+    const days = weeks[weekNumber].contributionDays.map((day) => {
+      let commitText =
+        day.contributionCount === 0
+          ? 'No commits'
+          : `${day.contributionCount} commit`
+      commitText += day.contributionCount > 1 ? 's' : ''
+
+      return (
+        <Tooltip
+          content={`${commitText} on ${new Date(day.date)
+            .toUTCString()
+            .match(/^.*202\d/)}`}
+          key={day.date}
+        >
+          <DayRect color={theme.gitHubColors[day.contributionLevel]} />
+        </Tooltip>
+      )
+    })
+    return <WeekColumn key={weeks[weekNumber].firstDay}>{days}</WeekColumn>
+  }
+
+  const mapMonths = (weeks: Week[]) => {
+    let months: { monthNum: number; arr: JSX.Element[] }[] = [
+      {
+        monthNum: findMonth(weeks[0].contributionDays[0].date),
+        arr: [buildWeek(weeks, 0)],
+      },
+    ]
+    for (let i = 1; i < weeks.length; i++) {
+      if (
+        findMonth(weeks[i].contributionDays[0].date) ===
+        months[months.length - 1].monthNum
+      ) {
+        months[months.length - 1].arr.push(buildWeek(weeks, i))
+      } else {
+        months.push({
+          monthNum: findMonth(weeks[i].contributionDays[0].date),
+          arr: [],
+        })
+        months[months.length - 1].arr.push(buildWeek(weeks, i))
+      }
+    }
+    return months
+  }
+
   const monthArr = mapMonths(weeks)
 
   const findDisplaySize = () => {
@@ -115,29 +118,37 @@ const GitHubGarden: React.FC<GitHubGardenProps> = ({ weeks }) => {
   })
 
   return (
-    <GardenPlot>
-      <DayLabels>
-        <DayLabel>Sun</DayLabel>
-        <DayLabel>Mon</DayLabel>
-        <DayLabel>Tues</DayLabel>
-        <DayLabel>Wed</DayLabel>
-        <DayLabel>Thu</DayLabel>
-        <DayLabel>Fri</DayLabel>
-        <DayLabel>Sat</DayLabel>
-      </DayLabels>
-      {monthComponents.slice(12 - displayMonths)}
-    </GardenPlot>
+    <div>
+      <GardenPlot>
+        <DayLabels>
+          <DayLabel>Sun</DayLabel>
+          <DayLabel>Mon</DayLabel>
+          <DayLabel>Tues</DayLabel>
+          <DayLabel>Wed</DayLabel>
+          <DayLabel>Thu</DayLabel>
+          <DayLabel>Fri</DayLabel>
+          <DayLabel>Sat</DayLabel>
+        </DayLabels>
+        {monthComponents.slice(12 - displayMonths)}
+      </GardenPlot>
+      <Key>
+        <KeyLabel>Less</KeyLabel>
+        <DayRect color={theme.gitHubColors.NONE} />
+        <DayRect color={theme.gitHubColors.FIRST_QUARTILE} />
+        <DayRect color={theme.gitHubColors.SECOND_QUARTILE} />
+        <DayRect color={theme.gitHubColors.THIRD_QUARTILE} />
+        <DayRect color={theme.gitHubColors.FOURTH_QUARTILE} />
+        <KeyLabel>More</KeyLabel>
+      </Key>
+    </div>
   )
 }
 
 export default GitHubGarden
 
 const GardenPlot = styled.div`
-  align-items: flex-end;
-  background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
-  padding-bottom: 1rem;
 `
 
 const Month = styled.div`
@@ -186,4 +197,16 @@ const DayRect = styled.div<DayRectStyleProps>`
   margin: 2px;
   background: ${({ color }) => color};
   border-radius: 2px;
+`
+
+const Key = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+`
+
+const KeyLabel = styled.p`
+  font-size: 0.9rem;
+  margin: 5px 8px;
 `

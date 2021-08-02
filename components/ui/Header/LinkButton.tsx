@@ -18,7 +18,6 @@ const LinkButton: React.FC<LinkButtonProps> = ({ href, buttonText }) => {
 export default LinkButton
 
 const Button = styled.a`
-  /* background: ${(props) => props.theme.itemBackground}; */
   border-bottom: 3px solid transparent;
   color: ${(props) => props.theme.sigColor};
   display: block;
@@ -28,7 +27,6 @@ const Button = styled.a`
   position: relative;
   text-decoration: none;
   transition: 0.2s;
-  /* box-shadow: ${(props) => props.theme.shadow}; */
 
   :hover {
     border-bottom: 3px solid ${(props) => props.theme.sigAngles};

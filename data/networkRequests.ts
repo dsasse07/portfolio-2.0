@@ -125,6 +125,7 @@ export const fetchPortfolioProjects = async () => {
     search: { nodes },
   } = await client.request(query, variables)
 
+  // Format Repo Name and Match Portfolio Data from Readme.md file
   const updatedNodes = nodes.map((node: PortfolioProjectsResponseModel) => {
     // @ts-ignore
     const [logo = '', demoVideo = '', deployUrl = ''] = node.object.text.match(
@@ -133,6 +134,7 @@ export const fetchPortfolioProjects = async () => {
     )
     return { ...node, logo, demoVideo, deployUrl }
   })
+
   return updatedNodes.sort(
     (a: PortfolioProjectsResponseModel, b: PortfolioProjectsResponseModel) => {
       //@ts-ignore

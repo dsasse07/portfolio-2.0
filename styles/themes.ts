@@ -11,13 +11,16 @@ import tree from '../assets/banners/pexels-tobi.jpg'
 export const lightTheme = {
   banner: tree,
   background: '#1e1d1e',
+  sectionBackground: 'var(--lt_gray)',
   headerOpacity: '0',
   sigColor: 'var(--white)',
   fontColor: 'var(--white)',
+  darkFontColor: 'var(--dk_gray)',
+  subtextColor: 'var(--gray)',
   sigAngles: 'var(--lt_green)',
   logoName: '#1E357D', // var(--dark-blue)
   itemBackground: 'var(--white)',
-  shadow: '0px 0px 6px 1px var(--slate)',
+  shadow: '0px 0px 6px 1px var(--lt_green)',
   hoverColor: 'var(--palegreen)',
   resumeButton: 'var(--palegreen)',
   resumeBorder: 'white',
@@ -25,16 +28,25 @@ export const lightTheme = {
   gitBackground: 'black',
   sliderLeft: '3px',
   togglerColor: 'var(--white)',
+  gitHubColors: {
+    NONE: '#0F1218',
+    FIRST_QUARTILE: '#14541c',
+    SECOND_QUARTILE: '#248c34',
+    THIRD_QUARTILE: '#2ead43',
+    FOURTH_QUARTILE: '#39D353',
+  },
 }
 
 export const darkTheme = {
   banner: sunset,
   // background: '#77130d',
   background: '#1c1c1c',
+  sectionBackground: 'var(--lt_gray)',
   headerOpacity: '0',
   sigStart: '#ffde3d',
   sigEnd: '#ffde3d',
   fontColor: 'var(--white)',
+  darkFontColor: 'var(dk_gray)',
   logoAngles: 'var(--twitterBlue)',
   logoName: 'var(--yellow)',
   itemBackground: 'var(--slate)',
@@ -46,4 +58,5 @@ export const darkTheme = {
   gitBackground: 'white',
   sliderLeft: '31px',
   togglerColor: 'var(--yellow)',
+  subtextColor: 'var(--gray)',
 }
