@@ -14,6 +14,8 @@ declare module 'styled-components' {
 const GlobalStyle = createGlobalStyle`
   :root{
     --white: #fcfcfc;
+    --lt_green: #40c115;
+    
     --palegreen:#A8EFDD;
     --darkblue:#1E357D;
     --gray: #686a6b;
@@ -24,7 +26,6 @@ const GlobalStyle = createGlobalStyle`
     --burntyellow: #e09900;
     --pink: #FC3795;
     --dk_green: #797D62;
-    --lt_green: #9B9B7A;
     --salmon: #D9AE94;
     --banana: #F1DCA7;
     --yellow_red: #FFCB69;
@@ -33,7 +34,6 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     background: ${(props) => props.theme.background};
-    background: ${(props) => props.theme.gradient};
     color: ${(props) => props.theme.fontColor};
     
     font-family: 'Comfortaa', cursive;

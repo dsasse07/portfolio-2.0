@@ -1,18 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
-
+import { useAppSelector } from '../../../redux/hooks'
+import { useEffect } from 'react'
 interface SignatureProps {
   name: string
 }
 
 const Signature: React.FC<SignatureProps> = ({ name }) => {
+  const theme = useAppSelector(({ theme }) => theme)
+
   return (
     <Link href='/' passHref>
       <SignatureContainer>
-        <AngleBracket className='grey-color'> &lt;</AngleBracket>
+        <AngleBracket> &lt;</AngleBracket>
         <Name>{name}</Name>
-        <AngleBracket className='grey-color'>/&gt;</AngleBracket>
+        <AngleBracket>/&gt;</AngleBracket>
       </SignatureContainer>
     </Link>
   )
@@ -31,7 +34,7 @@ const SignatureContainer = styled.a`
 `
 
 const AngleBracket = styled.span`
-  color: ${(props) => props.theme.logoAngles};
+  color: ${({ theme }) => theme.sigAngles};
 `
 const Name = styled.span`
   font-family: 'Agustina Regular';
@@ -39,5 +42,5 @@ const Name = styled.span`
   font-variant-ligatures: no-common-ligatures;
   -webkit-font-variant-ligatures: no-common-ligatures;
   padding: 0 10px;
-  color: ${(props) => props.theme.logoName};
+  color: ${({ theme }) => theme.sigColor};
 `

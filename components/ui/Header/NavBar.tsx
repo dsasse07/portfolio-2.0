@@ -6,7 +6,7 @@ import ThemeToggle from './ThemeToggle'
 const NavBar: React.FC = () => {
   return (
     <NavContainer>
-      <ThemeToggle />
+      {/* <ThemeToggle /> */}
       <LinkButton href='/' buttonText='Home' />
       <LinkButton href='/projects' buttonText='Projects' />
       <LinkButton href='/blogs' buttonText='Blogs' />
@@ -20,9 +20,12 @@ export default NavBar
 const NavContainer = styled.nav`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
+  width: 20vw;
   align-items: center;
+
   a {
     margin: 0.5rem;
+    font-size: 1.3rem;
   }
 `

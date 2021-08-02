@@ -18,9 +18,9 @@ const LinkButton: React.FC<LinkButtonProps> = ({ href, buttonText }) => {
 export default LinkButton
 
 const Button = styled.a`
-  background: ${(props) => props.theme.itemBackground};
-  border-bottom: 2px solid blue;
-  color: ${(props) => props.theme.fontColor};
+  /* background: ${(props) => props.theme.itemBackground}; */
+  border-bottom: 3px solid transparent;
+  color: ${(props) => props.theme.sigColor};
   display: block;
   font-size: 1.1rem;
   overflow: hidden;
@@ -31,6 +31,6 @@ const Button = styled.a`
   /* box-shadow: ${(props) => props.theme.shadow}; */
 
   :hover {
-    background: ${(props) => props.theme.hoverColor};
+    border-bottom: 3px solid ${(props) => props.theme.sigAngles};
   }
 `
