@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { useState } from 'react'
-import devIcon from '../../../../assets/devIcon.png'
+import devIcon from '../../../../assets/dev.png'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import Image from 'next/image'
 import { ArticleModel } from '../../../../models/Article'
