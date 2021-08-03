@@ -1,16 +1,19 @@
 import styled from 'styled-components'
 import { useState } from 'react'
-import devIcon from '../../../../assets/dev.png'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import Image from 'next/image'
 import { ArticleModel } from '../../../../models/Article'
 import { createPlaceholder } from '../../../../utils/createPlaceholder'
+import { icons } from '../../../../assets/icons/icons'
 
 interface BlogCardProps {
   article: ArticleModel
 }
 
 const BlogCard: React.FC<BlogCardProps> = ({ article }) => {
+  const {
+    dev: { icon },
+  } = icons
   const { title, published_timestamp, url, cover_image } = article
   const [showLink, setShowLink] = useState<boolean>(false)
   let timer: NodeJS.Timeout
@@ -32,8 +35,8 @@ const BlogCard: React.FC<BlogCardProps> = ({ article }) => {
       onMouseLeave={handleHideLink}
     >
       <LinkButton className='link' href={url} target='_blank' rel='noreferrer'>
-        <DevLogoContainer className='devIcon'>
-          <Image src={devIcon} alt='Dev.to logo' />
+        <DevLogoContainer className='dev: {icon'>
+          <Image src={icon} alt='Dev.to logo' />
         </DevLogoContainer>
         <IconContainer showLink={showLink}>
           <ArrowIcon />

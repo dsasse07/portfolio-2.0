@@ -2,7 +2,7 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import LinkedInIcon from '@material-ui/icons/LinkedIn'
 import TwitterIcon from '@material-ui/icons/Twitter'
 import InstagramIcon from '@material-ui/icons/Instagram'
-import devIcon from '../assets/devIcon.png'
+import dev from '../assets/icons/dev.png'
 import Image from 'next/image'
 import { SocialDataModel } from '../models/SocialData'
 
@@ -39,7 +39,7 @@ export const socials: SocialDataModel[] = [
     ariaLabel: "Danny Sasse's Dev.to Blog",
     background: 'black',
     href: 'https://dev.to/dsasse07',
-    icon: <Image src={devIcon} alt='Dev.to' />,
+    icon: <Image src={dev} alt='Dev.to' />,
     labelText: 'Dev Blog',
   },
 ]

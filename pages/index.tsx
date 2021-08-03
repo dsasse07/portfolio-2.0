@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import About from '../components/ui/Home/About'
 import Blogs from '../components/ui/Home/Blogs/Blogs'
-import Projects from '../components/ui/Home/Projects/Projects'
 import Contact from '../components/ui/Home/Contact'
 import {
   fetchGitHub,
@@ -14,6 +13,9 @@ import { GetStaticProps } from 'next'
 import GitHub from '../components/ui/Home/GitHub/GitHub'
 import { GitHubResponseModel } from '../models/GitHub'
 import styled from 'styled-components'
+import { useAppDispatch } from '../redux/hooks'
+import { setProjects } from '../redux/projectsSlice'
+import { useEffect } from 'react'
 
 export const getStaticProps: GetStaticProps = async () => {
   const articles = await fetchMyArticles()
@@ -38,6 +40,12 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ articles, profileInfo, projects }) => {
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    dispatch(setProjects(projects))
+  }, [projects])
+
   return (
     <>
       <Head>
@@ -73,7 +81,7 @@ const Home: React.FC<HomeProps> = ({ articles, profileInfo, projects }) => {
       </Head>
       <main>
         <About />
-        <GitHub profileInfo={profileInfo} projects={projects} />
+        <GitHub profileInfo={profileInfo} />
         {/* <Projects projects={projects} /> */}
         <Blogs articles={articles} />
         <Contact />

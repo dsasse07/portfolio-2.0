@@ -4,61 +4,66 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import Image from 'next/image'
 import { createPlaceholder } from '../../../../utils/createPlaceholder'
 import { PortfolioProjectsResponseModel } from '../../../../models/Project'
+import { forwardRef } from 'react'
 
 interface ProjectCardProps {
   project: PortfolioProjectsResponseModel
+  href?: string
+  onClick?: () => void
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
-  const techTagComponents = project.repositoryTopics.nodes.map(
-    (node, index) => {
-      return <TechTag key={index}>{node.topic.name}</TechTag>
-    }
-  )
-
-  return (
-    <Card className='flex-item'>
-      <LogoContainer>
-        <Image
-          placeholder='blur'
-          blurDataURL={`data:image/svg+xml;base64,${createPlaceholder(
-            100,
-            100
-          )}`}
-          width={100}
-          height={100}
-          src={project.logo}
-          alt={`${project.name} logo`}
-        />
-      </LogoContainer>
-      <Col>
-        <Title>{project.name}</Title>
-        <Description>{project.description}</Description>
-      </Col>
-      <LinkCol>
-        <LinkButton
-          aria-label={`${project.name} Github Repo`}
-          href={project.url}
-          target='_blank'
-          rel='noreferrer'
-        >
-          <GitHubIcon />
-        </LinkButton>
-        {project.deployUrl && (
+const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(
+  ({ project, onClick, href }, ref) => {
+    const techTagComponents = project.repositoryTopics.nodes.map(
+      (node, index) => {
+        return <TechTag key={index}>{node.topic.name}</TechTag>
+      }
+    )
+    return (
+      //@ts-ignore
+      <Card href={href} ref={ref} onClick={onClick}>
+        <LogoContainer>
+          <Image
+            placeholder='blur'
+            blurDataURL={`data:image/svg+xml;base64,${createPlaceholder(
+              100,
+              100
+            )}`}
+            width={100}
+            height={100}
+            src={project.logo}
+            alt={`${project.name} logo`}
+          />
+        </LogoContainer>
+        <Col>
+          <Title>{project.name}</Title>
+          <Description>{project.description}</Description>
+        </Col>
+        <LinkCol>
           <LinkButton
-            aria-label={`${project.name} Website`}
-            href={project.deployUrl}
+            aria-label={`${project.name} Github Repo`}
+            href={project.url}
             target='_blank'
             rel='noreferrer'
           >
-            <OpenInNewIcon />
+            <GitHubIcon />
           </LinkButton>
-        )}
-      </LinkCol>
-      {/* <TechnologyContainer>{techTagComponents}</TechnologyContainer> */}
-    </Card>
-  )
-}
+          {project.deployUrl && (
+            <LinkButton
+              aria-label={`${project.name} Website`}
+              href={project.deployUrl}
+              target='_blank'
+              rel='noreferrer'
+            >
+              <OpenInNewIcon />
+            </LinkButton>
+          )}
+        </LinkCol>
+        {/* <TechnologyContainer>{techTagComponents}</TechnologyContainer> */}
+      </Card>
+    )
+  }
+)
 
 export default ProjectCard
 
@@ -71,10 +76,16 @@ const Card = styled.article`
   justify-content: center;
   color: ${({ theme }) => theme.fontColor};
   border: 1px solid ${({ theme }) => theme.fontColor};
-  box-shadow: ${({ theme }) => theme.shadow};
+  box-shadow: ${({ theme }) => theme.whiteShadow};
   padding: 10px 0;
   padding-left: 10px;
   margin-bottom: 30px;
+  cursor: pointer;
+  :hover,
+  :focus {
+    box-shadow: ${({ theme }) => theme.shadow};
+    border: 1px solid ${({ theme }) => theme.sigAngles};
+  }
 `
 
 const Col = styled.div`

@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from './store'
 import { DefaultTheme } from 'styled-components'
 import { lightTheme, darkTheme } from '../styles/themes'
-import { convertToRGB } from '../utils/convertToRGB'
 // Define a type for the slice state
 interface themeState {
   isDark: boolean

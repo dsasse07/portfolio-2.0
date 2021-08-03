@@ -11,8 +11,9 @@ import MarkDown from '../../components/ui/MarkDown'
 export const getStaticPaths: GetStaticPaths = async () => {
   const projectsData: PortfolioProjectsResponseModel[] =
     await fetchPortfolioProjects()
+
   const ids = projectsData.map((project) => {
-    return { params: { projectId: project.name } }
+    return { params: { projectId: project.route } }
   })
   return {
     fallback: 'blocking',

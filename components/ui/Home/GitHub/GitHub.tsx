@@ -1,29 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { PortfolioProjectsResponseModel } from '../../../../models/Project'
 import { GitHubResponseModel } from '../../../../models/GitHub'
 import GitHubGarden from './GitHubGarden'
 import ProjectCard from './ProjectCard2'
 import Link from 'next/link'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'
-import themeSlice from '../../../../redux/themeSlice'
+import SkillIcons from './SkillIcons'
+import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests'
+import { useAppSelector } from '../../../../redux/hooks'
 
 interface GitHubProps {
   profileInfo: GitHubResponseModel
-  projects: PortfolioProjectsResponseModel[]
+  // projects: PortfolioProjectsResponseModel[]
 }
 
-const GitHub: React.FC<GitHubProps> = ({ profileInfo, projects }) => {
+const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
   const { weeks } = profileInfo.contributionsCollection.contributionCalendar
-  const projectComponents = projects.map((prj) => {
-    let href = prj.name
-    prj.name = prj.name
-      .replace(/-/g, ' ')
-      .split(' ')
-      .map((word) => word[0].toUpperCase() + word.slice(1))
-      .join(' ')
+  const { projects } = useAppSelector(({ projects }) => projects)
+  const [activeFilters, setActiveFilters] = useState<string[]>([])
+
+  const selectedProjects = projects.filter((prj) => {
+    let flag = true
+    const topics = prj.repositoryTopics.nodes.map((topic) => topic.topic.name)
+    for (const filter of activeFilters) {
+      flag = topics.includes(filter)
+      if (!flag) return false
+    }
+    return true
+  })
+
+  const projectComponents = selectedProjects.map((prj) => {
     return (
-      <Link href={`/${href}`} key={prj.databaseId}>
+      <Link href={`/projects/${prj.route}`} key={prj.databaseId}>
         <ProjectCard project={prj} />
       </Link>
     )
@@ -39,6 +47,10 @@ const GitHub: React.FC<GitHubProps> = ({ profileInfo, projects }) => {
         <SectionHeader>
           <SectionTitle>Skills</SectionTitle>
         </SectionHeader>
+        <SectionSubtitle>
+          Click on the skills below to filter projects
+        </SectionSubtitle>
+        <SkillIcons />
       </SubSectionContainer>
       <SubSectionContainer>
         <SectionHeader>
@@ -86,6 +98,13 @@ const SectionTitle = styled.h3`
   justify-content: center;
   flex: 1 0 0;
 `
+const SectionSubtitle = styled.p`
+  font-size: 1.1rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: ${({ theme }) => theme.subtextColor};
+`
 
 const ProjectTitle = styled(SectionTitle)`
   margin-left: 100px;
@@ -99,6 +118,9 @@ const LinkText = styled.a`
   justify-content: center;
   align-items: center;
   flex: initial;
+  :hover {
+    color: ${({ theme }) => theme.sigAngles};
+  }
   svg {
     padding-left: 6px;
     font-size: 1rem;

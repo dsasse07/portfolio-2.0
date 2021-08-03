@@ -63,6 +63,7 @@ export interface PortfolioProjectsResponseModel {
   databaseId: number
   name: string
   url: string
+  route: string
   updatedAt: string
   description: string
   repositoryTopics: {
@@ -124,15 +125,21 @@ export const fetchPortfolioProjects = async () => {
   const {
     search: { nodes },
   } = await client.request(query, variables)
-
   // Format Repo Name and Match Portfolio Data from Readme.md file
   const updatedNodes = nodes.map((node: PortfolioProjectsResponseModel) => {
+    const route = node.name
+    node.name = node.name
+      .replace(/-/g, ' ')
+      .split(' ')
+      .map((word) => word[0].toUpperCase() + word.slice(1))
+      .join(' ')
+
     // @ts-ignore
     const [logo = '', demoVideo = '', deployUrl = ''] = node.object.text.match(
       // Matches urls after [... Logo], [... Video], [Deploy Url]
       /(?<=Logo\]\()(https:\/\/[\w\.\/\?\=\-\*]+)|(?<=Video\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Url\]\()(https:\/\/[\w\.\/\?\=\-]+)/g
     )
-    return { ...node, logo, demoVideo, deployUrl }
+    return { ...node, route, logo, demoVideo, deployUrl }
   })
 
   return updatedNodes.sort(
@@ -178,10 +185,16 @@ export const fetchProject = async (name: string) => {
     owner: 'dsasse07',
   }
   const { repository } = await client.request(query, variables)
+  const route = repository.name
+  repository.name = repository.name
+    .replace(/-/g, ' ')
+    .split(' ')
+    .map((word: string) => word[0].toUpperCase() + word.slice(1))
+    .join(' ')
   const [logo = '', demoVideo = '', deployUrl = ''] =
     repository.object.text.match(
       // Matches urls after [... Logo], [... Video], [Deploy Url]
       /(?<=Logo\]\()(https:\/\/[\w\.\/\?\=\-\*]+)|(?<=Video\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Url\]\()(https:\/\/[\w\.\/\?\=\-]+)/g
     )
-  return { ...repository, logo, demoVideo, deployUrl }
+  return { ...repository, route, logo, demoVideo, deployUrl }
 }

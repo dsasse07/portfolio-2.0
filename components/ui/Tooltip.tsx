@@ -4,14 +4,16 @@ import { ReactNode } from 'react'
 
 interface TooltipProps {
   content: string
-  delay?: number
   children: ReactNode
+  delay?: number
+  fontSize?: string
 }
 
 const Tooltip: React.FC<TooltipProps> = ({
   content = '',
   delay = 100,
   children,
+  fontSize = '0.65rem',
 }) => {
   const [isActive, setActive] = useState<boolean>(false)
   let timeout: NodeJS.Timeout
@@ -30,7 +32,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   return (
     <TooltipContainer onMouseEnter={showTip} onMouseLeave={hideTip}>
       {children}
-      {isActive && <TooltipText>{content}</TooltipText>}
+      {isActive && <TooltipText fontSize={fontSize}>{content}</TooltipText>}
     </TooltipContainer>
   )
 }
@@ -42,7 +44,10 @@ const TooltipContainer = styled.div`
   position: relative;
 `
 
-const TooltipText = styled.span`
+interface TooltipTextStyleProps {
+  fontSize: string
+}
+const TooltipText = styled.span<TooltipTextStyleProps>`
   background: rgba(0, 0, 0, 0.4);
   position: absolute;
   border-radius: 4px;
@@ -52,7 +57,7 @@ const TooltipText = styled.span`
   padding: 6px;
   color: white;
   background: black;
-  font-size: 0.65rem;
+  font-size: ${({ fontSize }) => fontSize};
   line-height: 1;
   z-index: 100;
   white-space: nowrap;
