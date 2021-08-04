@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import { ArticleModel } from '../../../../models/Article'
 import BlogCard from './BlogCard'
+import Link from 'next/link'
+import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 
 interface BlogProps {
   articles: ArticleModel[]
@@ -13,22 +15,24 @@ const Blogs: React.FC<BlogProps> = ({ articles }) => {
 
   return (
     <Container id='blogs'>
-      <Heading>
-        <SectionHeading>Tech Writing</SectionHeading>
-        <Description>
-          With a love of developing, comes a love for sharing what I've learned
-          with others.
-        </Description>
-      </Heading>
-      {blogCards}
+      <SectionHeader>
+        <SectionTitle>Tech Writing</SectionTitle>
+        <Link href='/projects' passHref>
+          <LinkText>
+            See More
+            <OpenInNewIcon />
+          </LinkText>
+        </Link>
+      </SectionHeader>
+      <SubSectionContainer>{blogCards}</SubSectionContainer>
     </Container>
   )
 }
 
 export default Blogs
 
-const Container = styled.div`
-  background: rgba(100, 100, 100, 0.22);
+const Container = styled.section`
+  /* background: rgba(100, 100, 100, 0.22); */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -41,31 +45,50 @@ const Container = styled.div`
     margin: 1rem;
   }
 `
-
-const Heading = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+const SectionHeader = styled.header`
+  position: relative;
   width: 100%;
-  padding: 20px;
-
-  h2,
-  h4 {
-    margin: 0.5rem;
-  }
+  display: flex;
 `
 
-const SectionHeading = styled.h2`
-  font-size: 2.5rem;
-  margin-top: 0;
-  margin-bottom: 0;
-`
-
-const Description = styled.h3`
+const SectionTitle = styled.h2`
+  font-size: 4rem;
   text-align: center;
-  margin-top: 0;
-  margin-bottom: 0;
-  font-size: 1.25rem;
-  font-weight: normal;
+  width: 100%;
+  margin: 0;
+`
+
+const SubSectionContainer = styled.section`
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 10px;
+`
+
+const SubSectionHeader = styled(SectionHeader)`
+  width: 90%;
+`
+
+const SubSectionTitle = styled.h3`
+  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  flex: 1 0 0;
+  margin: 20px 0;
+`
+
+const LinkText = styled.a`
+  cursor: pointer;
+  font-size: 1rem;
+  color: ${({ theme }) => theme.sigAngles};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  :hover {
+    color: ${({ theme }) => theme.hoverHighlightColor};
+  }
+  svg {
+    font-size: 1rem;
+  }
 `

@@ -6,8 +6,7 @@ import ProjectCard from './ProjectCard2'
 import Link from 'next/link'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 import SkillIcons from './SkillIcons'
-import { useAppDispatch, useAppSelector } from '../../../../redux/hooks'
-import { clearSkillFilters } from '../../../../redux/projectsSlice'
+import { useAppSelector } from '../../../../redux/hooks'
 import ActiveFilters from './ActiveFilters'
 
 interface GitHubProps {
@@ -99,6 +98,17 @@ const Row = styled.div`
   flex: 1;
 `
 
+const SectionHeader = styled.header`
+  position: relative;
+  width: 100%;
+  display: flex;
+`
+const SectionTitle = styled.h2`
+  font-size: 4rem;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+`
 const SubSectionContainer = styled.section`
   display: flex;
   flex-direction: column;
@@ -107,19 +117,9 @@ const SubSectionContainer = styled.section`
   margin: 10px;
   min-height: 550px;
 `
-const SectionHeader = styled.header`
-  position: relative;
-  width: 100%;
-  display: flex;
-`
+
 const SubSectionHeader = styled(SectionHeader)`
   width: 90%;
-`
-const SectionTitle = styled.h2`
-  font-size: 4rem;
-  text-align: center;
-  width: 100%;
-  margin: 0;
 `
 
 const SubSectionTitle = styled.h3`
@@ -155,7 +155,7 @@ const LinkText = styled.a`
   align-items: center;
   flex: initial;
   :hover {
-    color: ${({ theme }) => theme.sigAngles};
+    color: ${({ theme }) => theme.hoverHighlightColor};
   }
   svg {
     font-size: 1rem;
