@@ -1,4 +1,4 @@
-![Portfolio Logo](./assets/headshots/formalProfile400.jpg)
+![Portfolio Logo](https://i.imgur.com/kaB97MW.jpg)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
