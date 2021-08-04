@@ -38,7 +38,7 @@ const ThemeApplicator: React.FC<ThemeApplicator> = ({ children }) => {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        {showBanner && <Banner action={handleUpdateTheme} />}
+        {/* {showBanner && <Banner action={handleUpdateTheme} />} */}
         <Header />
         {children}
         <Footer />

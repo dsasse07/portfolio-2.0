@@ -4,12 +4,15 @@ import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests
 import { icons } from '../../../../assets/icons/icons'
 import Tooltip from '../../Tooltip'
 import Image from 'next/image'
+import { useAppSelector } from '../../../../redux/hooks'
 
 interface SkillIconsProps {
   projects: PortfolioProjectsResponseModel[]
 }
 // const SkillIcons: React.FC<SkillIconsProps> = ({ projects }) => {
 const SkillIcons = () => {
+  const { skills } = useAppSelector(({ projects }) => projects)
+  console.log(skills)
   const skillIcons = Object.values(icons).map((skill) => {
     return (
       <Tooltip content={skill.text} fontSize={'1rem'} key={skill.text}>
