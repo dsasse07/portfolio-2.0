@@ -3,8 +3,12 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import Image from 'next/image'
 import { createPlaceholder } from '../../../../utils/createPlaceholder'
-import { PortfolioProjectsResponseModel } from '../../../../models/Project'
 import { forwardRef } from 'react'
+import { icons } from '../../../../assets/icons/icons'
+import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests'
+import Tooltip from '../../Tooltip'
+import { useState } from 'react'
+import { useBreakpoint } from '../../../../utils/useBreakpointProvider'
 
 interface ProjectCardProps {
   project: PortfolioProjectsResponseModel
@@ -14,11 +18,6 @@ interface ProjectCardProps {
 
 const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(
   ({ project, onClick, href }, ref) => {
-    const techTagComponents = project.repositoryTopics.nodes.map(
-      (node, index) => {
-        return <TechTag key={index}>{node.topic.name}</TechTag>
-      }
-    )
     return (
       //@ts-ignore
       <Card href={href} ref={ref} onClick={onClick}>
@@ -59,7 +58,6 @@ const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(
             </LinkButton>
           )}
         </LinkCol>
-        {/* <TechnologyContainer>{techTagComponents}</TechnologyContainer> */}
       </Card>
     )
   }
@@ -72,18 +70,21 @@ const Card = styled.article`
   width: 90%;
   box-shadow: ${(props) => props.theme.shadow};
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   color: ${({ theme }) => theme.fontColor};
   border: 1px solid ${({ theme }) => theme.fontColor};
-  box-shadow: ${({ theme }) => theme.whiteShadow};
+  box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.fontColor};
   padding: 10px 0;
   padding-left: 10px;
   margin-bottom: 30px;
   cursor: pointer;
+  max-height: 90px;
+  overflow: hidden;
+
   :hover,
   :focus {
-    box-shadow: ${({ theme }) => theme.shadow};
+    box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.sigAngles};
     border: 1px solid ${({ theme }) => theme.sigAngles};
   }
 `
@@ -99,8 +100,8 @@ const Col = styled.div`
 `
 
 const LogoContainer = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,15 +112,15 @@ const Title = styled.header`
   width: 100%;
   text-align: center;
   margin: 0;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   padding: 0;
-  font-size: 1.7rem;
+  font-size: 1.5rem;
 `
 
 const LinkCol = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 90px;
   border-left: 1px solid ${({ theme }) => theme.fontColor};
 `
 
@@ -151,31 +152,13 @@ const LinkButton = styled.a`
   }
 `
 
-const TechnologyContainer = styled.section`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 0.5rem;
-
-  span {
-    margin: 0.1rem;
-  }
-`
-const TechTag = styled.span`
-  border: 1px solid ${(props) => props.theme.logoName};
-  border-radius: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: ${(props) => props.theme.hoverColor};
-  padding: 0.2rem;
-  font-size: 0.8rem;
-`
-
 const Description = styled.summary`
-  transition: 0.5s;
-  overflow: scroll;
   text-align: center;
   color: ${({ theme }) => theme.subtextColor};
   font-size: 0.9rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-bottom: 5px;
 `

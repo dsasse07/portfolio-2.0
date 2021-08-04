@@ -11,25 +11,15 @@ import tree from '../assets/banners/pexels-tobi.jpg'
 export const lightTheme = {
   banner: tree,
   background: '#1e1d1e',
-  sectionBackground: 'var(--lt_gray)',
   headerOpacity: '0',
   sigColor: 'var(--white)',
   fontColor: 'var(--white)',
   darkFontColor: 'var(--dk_gray)',
   subtextColor: 'var(--gray)',
+  dangerTextColor: 'var(--danger)',
+  hoverHighlightColor: 'var(--golden)',
   sigAngles: 'var(--lt_green)',
-  logoName: '#1E357D', // var(--dark-blue)
-  itemBackground: 'var(--white)',
-  shadow: '0px 0px 6px 1px var(--lt_green)',
-  whiteShadow: '0px 0px 6px 1px var(--white)',
-  yellowShadow: '0px 0px 6px 1px var(--golden)',
-  hoverColor: 'var(--palegreen)',
-  resumeButton: 'var(--palegreen)',
-  resumeBorder: 'white',
-  resumeColor: 'black',
-  gitBackground: 'black',
-  sliderLeft: '3px',
-  togglerColor: 'var(--white)',
+  shadow: '0px 0px 6px 1px',
   gitHubColors: {
     NONE: '#0F1218',
     FIRST_QUARTILE: '#14541c',
@@ -37,6 +27,18 @@ export const lightTheme = {
     THIRD_QUARTILE: '#2ead43',
     FOURTH_QUARTILE: '#39D353',
   },
+  //
+  sectionBackground: 'var(--lt_gray)',
+  //
+  logoName: '#1E357D', // var(--dark-blue)
+  itemBackground: 'var(--white)',
+  hoverColor: 'var(--palegreen)',
+  resumeButton: 'var(--palegreen)',
+  resumeBorder: 'white',
+  resumeColor: 'black',
+  gitBackground: 'black',
+  sliderLeft: '3px',
+  togglerColor: 'var(--white)',
 }
 
 export const darkTheme = {
@@ -50,13 +52,13 @@ export const darkTheme = {
   sigEnd: '#ffde3d',
   sigAngles: 'var(--lt_green)',
   fontColor: 'var(--white)',
+  dangerTextColor: 'var(--danger)',
+  hoverHighlightColor: 'var(--golden)',
   darkFontColor: 'var(dk_gray)',
   logoAngles: 'var(--twitterBlue)',
   logoName: 'var(--yellow)',
   itemBackground: 'var(--slate)',
-  shadow: '0px 0px 6px 1px var(--yellow)',
-  whiteShadow: '0px 0px 6px 1px var(--white)',
-  yellowShadow: '0px 0px 6px 1px var(--golden)',
+  shadow: '0px 0px 6px 1px',
   gitHubColors: {
     NONE: '#0F1218',
     FIRST_QUARTILE: '#14541c',

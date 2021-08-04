@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { GitHubResponseModel } from '../../../../models/GitHub'
 import GitHubGarden from './GitHubGarden'
@@ -8,20 +8,20 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 import SkillIcons from './SkillIcons'
 import { useAppDispatch, useAppSelector } from '../../../../redux/hooks'
 import { clearSkillFilters } from '../../../../redux/projectsSlice'
+import ActiveFilters from './ActiveFilters'
 
 interface GitHubProps {
   profileInfo: GitHubResponseModel
-  // projects: PortfolioProjectsResponseModel[]
 }
 
 const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
   const { weeks } = profileInfo.contributionsCollection.contributionCalendar
   const { projects, filters } = useAppSelector(({ projects }) => projects)
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
 
-  const clearActiveSkillFilters = () => {
-    dispatch(clearSkillFilters(true))
-  }
+  // const clearActiveSkillFilters = () => {
+  //   dispatch(clearSkillFilters(true))
+  // }
 
   const selectedProjects = projects.filter((prj) => {
     const topics = new Set(
@@ -43,36 +43,38 @@ const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
 
   return (
     <Container>
-      <SubSectionContainer>
-        <SectionHeader>
-          <SectionTitle>GitHub Section</SectionTitle>
-        </SectionHeader>
-        <GitHubGarden weeks={weeks} />
-        <SectionHeader>
-          <SectionTitle>Skills</SectionTitle>
-        </SectionHeader>
-        <SectionSubtitle>
-          Click on the skills below to filter projects
-        </SectionSubtitle>
-        {Object.values(filters)?.includes(true) && (
-          <button type='button' onClick={clearActiveSkillFilters}>
-            Clear
-          </button>
-        )}
-        <SkillIcons />
-      </SubSectionContainer>
-      <SubSectionContainer>
-        <SectionHeader>
-          <ProjectTitle>Selected Projects</ProjectTitle>
-          <Link href='/projects' passHref>
-            <LinkText>
-              See All
-              <OpenInNewIcon />
-            </LinkText>
-          </Link>
-        </SectionHeader>
-        {projectComponents.slice(0, 4)}
-      </SubSectionContainer>
+      <SectionHeader>
+        <SectionTitle>My Work</SectionTitle>
+      </SectionHeader>
+      <Row>
+        <SubSectionContainer>
+          <SubSectionHeader>
+            <SubSectionTitle>GitHub</SubSectionTitle>
+          </SubSectionHeader>
+          <GitHubGarden weeks={weeks} />
+          <SubSectionHeader>
+            <SkillsTitle>Skills</SkillsTitle>
+          </SubSectionHeader>
+          <SectionSubtitle>
+            Click on the skills below to filter projects
+          </SectionSubtitle>
+          <ActiveFilters />
+          <SkillIcons />
+        </SubSectionContainer>
+        <SubSectionContainer>
+          <SubSectionHeader>
+            <ProjectsTitle>Selected Projects</ProjectsTitle>
+            <Link href='/projects' passHref>
+              <LinkText>
+                See More
+                <OpenInNewIcon />
+              </LinkText>
+            </Link>
+          </SubSectionHeader>
+          <SectionSubtitle>Click a project to read more</SectionSubtitle>
+          {projectComponents.slice(0, 4)}
+        </SubSectionContainer>
+      </Row>
     </Container>
   )
 }
@@ -82,8 +84,19 @@ export default GitHub
 const Container = styled.section`
   /* background: ${({ theme }) => theme.sectionBackground}; */
   display: flex;
+  align-items: flex-start;
   flex-wrap: wrap;
   padding: 10px;
+  min-height: 90vh;
+`
+
+const Row = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  flex: 1;
 `
 
 const SubSectionContainer = styled.section`
@@ -92,31 +105,45 @@ const SubSectionContainer = styled.section`
   align-items: center;
   flex: 1;
   margin: 10px;
+  min-height: 550px;
 `
-
 const SectionHeader = styled.header`
   position: relative;
-  padding-left: 10px;
-  width: 90%;
+  width: 100%;
   display: flex;
 `
+const SubSectionHeader = styled(SectionHeader)`
+  width: 90%;
+`
+const SectionTitle = styled.h2`
+  font-size: 4rem;
+  text-align: center;
+  width: 100%;
+  margin: 0;
+`
 
-const SectionTitle = styled.h3`
+const SubSectionTitle = styled.h3`
   font-size: 2rem;
   display: flex;
   justify-content: center;
   flex: 1 0 0;
+  margin: 20px 0;
 `
+
+const SkillsTitle = styled(SubSectionTitle)`
+  margin-top: 70px;
+`
+
+const ProjectsTitle = styled(SubSectionTitle)`
+  margin-left: 100px;
+`
+
 const SectionSubtitle = styled.p`
   font-size: 1.1rem;
   display: flex;
   justify-content: center;
-  margin-bottom: 20px;
+  margin-top: -10px;
   color: ${({ theme }) => theme.subtextColor};
-`
-
-const ProjectTitle = styled(SectionTitle)`
-  margin-left: 100px;
 `
 
 const LinkText = styled.a`
@@ -131,7 +158,6 @@ const LinkText = styled.a`
     color: ${({ theme }) => theme.sigAngles};
   }
   svg {
-    padding-left: 6px;
     font-size: 1rem;
   }
 `

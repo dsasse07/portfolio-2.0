@@ -19,13 +19,21 @@ import rest from './rest.png'
 import graphql from './graphql.png'
 // frontend, backend, fullstack
 
-export const icons = {
+export interface SkillIcons {
+  [key: string]: {
+    icon: StaticImageData
+    text: string
+    matchText: string
+  }
+}
+
+export const icons: SkillIcons = {
   graphql: {
     icon: graphql,
     text: 'GraphQL',
     matchText: 'graphql',
   },
-  rest: {
+  'rest-api': {
     icon: rest,
     text: 'REST API',
     matchText: 'rest-api',
@@ -100,7 +108,7 @@ export const icons = {
     text: 'Ruby',
     matchText: 'ruby',
   },
-  styledComponents: {
+  'styled-components': {
     icon: styledComponents,
     text: 'Styled Components',
     matchText: 'styled-components',

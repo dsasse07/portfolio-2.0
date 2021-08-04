@@ -21,11 +21,12 @@ const SkillIcons: React.FC<SkillIconsProps> = () => {
     .map((skill) => {
       return (
         <Tooltip content={skill.text} fontSize={'1rem'} key={skill.text}>
-          <IconShell onClick={() => handleToggleSkill(skill.matchText)}>
-            <IconContainer selected={filters[skill.matchText]}>
-              <Image src={skill.icon} alt={skill.text} placeholder='blur' />
-            </IconContainer>
-          </IconShell>
+          <IconContainer
+            selected={filters[skill.matchText]}
+            onClick={() => handleToggleSkill(skill.matchText)}
+          >
+            <Image src={skill.icon} alt={skill.text} placeholder='blur' />
+          </IconContainer>
         </Tooltip>
       )
     })
@@ -42,10 +43,6 @@ const Container = styled.div`
   width: 90%;
 `
 
-const IconShell = styled.div`
-  width: 6vw;
-  height: 6vw;
-`
 interface IconContainerStyleProps {
   selected: boolean
 }
@@ -53,19 +50,29 @@ const IconContainer = styled.div<IconContainerStyleProps>`
   display: flex;
   justify-content: center;
   align-content: center;
-  margin: 10px;
-  width: 3vw;
+  margin: 5px;
+  width: 2.5vw;
+  min-width: 20px;
   max-width: 100px;
-  height: 3vw;
+  height: 2.5vw;
+  min-height: 20px;
   max-height: 100px;
   padding: 10px;
-  border: 1px solid white;
+  border: 1px solid
+    ${({ selected, theme }) => (selected ? theme.sigAngles : theme.fontColor)};
   border-radius: 50%;
   background: #403130;
   cursor: pointer;
-  box-shadow: ${({ selected, theme }) => selected && theme.shadow};
+  box-shadow: ${({ selected, theme }) =>
+    selected && theme.shadow + ' ' + theme.sigAngles};
 
   :hover {
-    box-shadow: ${({ theme }) => theme.yellowShadow};
+    box-shadow: ${({ selected, theme }) =>
+      selected
+        ? theme.shadow + ' ' + theme.dangerTextColor
+        : theme.shadow + ' ' + theme.hoverHighlightColor};
+    border: 1px solid
+      ${({ selected, theme }) =>
+        selected ? '#e81e1e' : theme.hoverHighlightColor};
   }
 `

@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
     --dk_gray: #1e1d1e;
     --gray: #c0c0c0;
     --golden: #ffec1c;
+    --danger: #e81e1e;
 
     --palegreen:#A8EFDD;
     --darkblue:#1E357D;
