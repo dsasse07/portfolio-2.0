@@ -1,29 +1,34 @@
 import React from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests'
 import { icons } from '../../../../assets/icons/icons'
 import Tooltip from '../../Tooltip'
 import Image from 'next/image'
-import { useAppSelector } from '../../../../redux/hooks'
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks'
+import { toggleSkillFilter } from '../../../../redux/projectsSlice'
 
-interface SkillIconsProps {
-  projects: PortfolioProjectsResponseModel[]
-}
-// const SkillIcons: React.FC<SkillIconsProps> = ({ projects }) => {
-const SkillIcons = () => {
-  const { skills } = useAppSelector(({ projects }) => projects)
-  console.log(skills)
-  const skillIcons = Object.values(icons).map((skill) => {
-    return (
-      <Tooltip content={skill.text} fontSize={'1rem'} key={skill.text}>
-        <IconShell>
-          <IconContainer>
-            <Image src={skill.icon} alt={skill.text} placeholder='blur' />
-          </IconContainer>
-        </IconShell>
-      </Tooltip>
-    )
-  })
+interface SkillIconsProps {}
+const SkillIcons: React.FC<SkillIconsProps> = () => {
+  const { skills, filters } = useAppSelector(({ projects }) => projects)
+  const dispatch = useAppDispatch()
+
+  const handleToggleSkill = (skill: string) => {
+    dispatch(toggleSkillFilter(skill))
+  }
+
+  const skillIcons = Object.values(icons)
+    .filter((skill) => skills.includes(skill.matchText))
+    .map((skill) => {
+      return (
+        <Tooltip content={skill.text} fontSize={'1rem'} key={skill.text}>
+          <IconShell onClick={() => handleToggleSkill(skill.matchText)}>
+            <IconContainer selected={filters[skill.matchText]}>
+              <Image src={skill.icon} alt={skill.text} placeholder='blur' />
+            </IconContainer>
+          </IconShell>
+        </Tooltip>
+      )
+    })
   return <Container>{skillIcons}</Container>
 }
 
@@ -41,8 +46,10 @@ const IconShell = styled.div`
   width: 6vw;
   height: 6vw;
 `
-
-const IconContainer = styled.div`
+interface IconContainerStyleProps {
+  selected: boolean
+}
+const IconContainer = styled.div<IconContainerStyleProps>`
   display: flex;
   justify-content: center;
   align-content: center;
@@ -56,6 +63,8 @@ const IconContainer = styled.div`
   border-radius: 50%;
   background: #403130;
   cursor: pointer;
+  box-shadow: ${({ selected, theme }) => selected && theme.shadow};
+
   :hover {
     box-shadow: ${({ theme }) => theme.yellowShadow};
   }

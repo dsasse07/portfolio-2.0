@@ -5,12 +5,16 @@ import { PortfolioProjectsResponseModel } from '../data/networkRequests'
 interface projectsState {
   projects: PortfolioProjectsResponseModel[]
   skills: string[]
+  filters: {
+    [key: string]: boolean
+  }
 }
 
 // Define the initial state using that type
 const initialState: projectsState = {
   projects: [],
   skills: [],
+  filters: {},
 }
 
 export const projectsSlice = createSlice({
@@ -32,10 +36,24 @@ export const projectsSlice = createSlice({
       state.projects = action.payload
       state.skills = Array.from(skills)
     },
+    toggleSkillFilter: (state, action: PayloadAction<string>) => {
+      if (state.filters[action.payload]) {
+        delete state.filters[action.payload]
+      } else {
+        state.filters[action.payload] = true
+      }
+    },
+
+    clearSkillFilters: (state, _: PayloadAction<boolean>) => {
+      for (const key in state.filters) {
+        delete state.filters[key]
+      }
+    },
   },
 })
 
-export const { setProjects } = projectsSlice.actions
+export const { setProjects, toggleSkillFilter, clearSkillFilters } =
+  projectsSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.counter.value

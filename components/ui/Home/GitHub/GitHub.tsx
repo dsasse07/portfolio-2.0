@@ -6,8 +6,8 @@ import ProjectCard from './ProjectCard2'
 import Link from 'next/link'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 import SkillIcons from './SkillIcons'
-import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests'
-import { useAppSelector } from '../../../../redux/hooks'
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks'
+import { clearSkillFilters } from '../../../../redux/projectsSlice'
 
 interface GitHubProps {
   profileInfo: GitHubResponseModel
@@ -16,15 +16,19 @@ interface GitHubProps {
 
 const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
   const { weeks } = profileInfo.contributionsCollection.contributionCalendar
-  const { projects } = useAppSelector(({ projects }) => projects)
-  const [activeFilters, setActiveFilters] = useState<string[]>([])
+  const { projects, filters } = useAppSelector(({ projects }) => projects)
+  const dispatch = useAppDispatch()
+
+  const clearActiveSkillFilters = () => {
+    dispatch(clearSkillFilters(true))
+  }
 
   const selectedProjects = projects.filter((prj) => {
-    let flag = true
-    const topics = prj.repositoryTopics.nodes.map((topic) => topic.topic.name)
-    for (const filter of activeFilters) {
-      flag = topics.includes(filter)
-      if (!flag) return false
+    const topics = new Set(
+      prj.repositoryTopics.nodes.map((topic) => topic.topic.name)
+    )
+    for (const filter of Object.keys(filters)) {
+      if (!topics.has(filter)) return false
     }
     return true
   })
@@ -50,6 +54,11 @@ const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
         <SectionSubtitle>
           Click on the skills below to filter projects
         </SectionSubtitle>
+        {Object.values(filters)?.includes(true) && (
+          <button type='button' onClick={clearActiveSkillFilters}>
+            Clear
+          </button>
+        )}
         <SkillIcons />
       </SubSectionContainer>
       <SubSectionContainer>
