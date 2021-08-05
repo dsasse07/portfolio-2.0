@@ -63,15 +63,17 @@ const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
         <SubSectionContainer>
           <SubSectionHeader>
             <ProjectsTitle>Selected Projects</ProjectsTitle>
-            <Link href='/projects' passHref>
-              <LinkText>
-                See More
-                <OpenInNewIcon />
-              </LinkText>
-            </Link>
           </SubSectionHeader>
           <SectionSubtitle>Click a project to read more</SectionSubtitle>
           {projectComponents.slice(0, 4)}
+          {projectComponents.length === 0 && (
+            <NoMatchesText>
+              No projects match the selected filters.
+            </NoMatchesText>
+          )}
+          <Link href='/projects' passHref>
+            <LinkText>See All</LinkText>
+          </Link>
         </SubSectionContainer>
       </Row>
     </Container>
@@ -81,12 +83,15 @@ const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
 export default GitHub
 
 const Container = styled.section`
-  /* background: ${({ theme }) => theme.sectionBackground}; */
+  background: ${({ theme }) => theme.background};
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
   padding: 10px;
   min-height: 90vh;
+  margin: 20vh 0;
+  padding: 20vh 0;
+  padding-bottom: 20vh 0;
 `
 
 const Row = styled.div`
@@ -115,7 +120,7 @@ const SubSectionContainer = styled.section`
   align-items: center;
   flex: 1;
   margin: 10px;
-  min-height: 550px;
+  min-height: 700px;
 `
 
 const SubSectionHeader = styled(SectionHeader)`
@@ -135,7 +140,7 @@ const SkillsTitle = styled(SubSectionTitle)`
 `
 
 const ProjectsTitle = styled(SubSectionTitle)`
-  margin-left: 100px;
+  /* margin-left: 100px; */
 `
 
 const SectionSubtitle = styled.p`
@@ -157,7 +162,8 @@ const LinkText = styled.a`
   :hover {
     color: ${({ theme }) => theme.hoverHighlightColor};
   }
-  svg {
-    font-size: 1rem;
-  }
+`
+
+const NoMatchesText = styled.p`
+  color: ${({ theme }) => theme.dangerTextColor};
 `

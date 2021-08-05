@@ -17,22 +17,22 @@ const ThemeApplicator: React.FC<ThemeApplicator> = ({ children }) => {
   const dispatch = useAppDispatch()
   const theme = useAppSelector(({ theme }) => theme.theme)
   const isDark = useAppSelector(({ theme }) => theme.isDark)
-  const [firstLoad, setFirstLoad] = useState<boolean>(true)
-  const [showBanner, setShowBanner] = useState<boolean>(false)
+  // const [firstLoad, setFirstLoad] = useState<boolean>(true)
+  // const [showBanner, setShowBanner] = useState<boolean>(false)
 
-  useEffect(() => {
-    if (firstLoad) {
-      dispatch(setIsDark(breakpoints.dark))
-      setFirstLoad(false)
-    } else if (isDark !== breakpoints.dark) {
-      setShowBanner(true)
-    }
-  }, [breakpoints.dark])
+  // useEffect(() => {
+  //   if (firstLoad) {
+  //     dispatch(setIsDark(breakpoints.dark))
+  //     setFirstLoad(false)
+  //   } else if (isDark !== breakpoints.dark) {
+  //     setShowBanner(true)
+  //   }
+  // }, [breakpoints.dark])
 
-  const handleUpdateTheme = () => {
-    dispatch(setIsDark(breakpoints.dark))
-    setShowBanner(false)
-  }
+  // const handleUpdateTheme = () => {
+  //   dispatch(setIsDark(breakpoints.dark))
+  //   setShowBanner(false)
+  // }
 
   return (
     <>

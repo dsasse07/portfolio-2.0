@@ -63,15 +63,15 @@ const Container = styled.section`
 `
 
 const BannerContainer = styled.div`
-  position: absolute;
+  position: fixed;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
-  top: -60px;
+  top: 0;
   margin: 0;
   padding: 0;
   left: 0;
-  z-index: -1;
+  z-index: -3;
 `
 const BannerOverlay = styled.div`
   position: absolute;

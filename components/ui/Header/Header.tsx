@@ -13,7 +13,8 @@ const Header: React.FC = () => {
   const baseBoxShadow = convertToRGB('#cccccc').join(',')
 
   const handleScroll = (_: Event) => {
-    let y = 0 + (window.scrollY || window.pageYOffset) / window.innerHeight
+    let y =
+      0 + ((window.scrollY || window.pageYOffset) / window.innerHeight) * 1.5
     // ensure y is always >= 1 (due to Safari's elastic scroll)
     y = y < 0 ? 0 : y
     y = y > 1 ? 1 : y

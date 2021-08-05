@@ -4,11 +4,7 @@ import GitHubIcon from '@material-ui/icons/GitHub'
 import Image from 'next/image'
 import { createPlaceholder } from '../../../../utils/createPlaceholder'
 import { forwardRef } from 'react'
-import { icons } from '../../../../assets/icons/icons'
 import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests'
-import Tooltip from '../../Tooltip'
-import { useState } from 'react'
-import { useBreakpoint } from '../../../../utils/useBreakpointProvider'
 
 interface ProjectCardProps {
   project: PortfolioProjectsResponseModel

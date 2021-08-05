@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { ArticleModel } from '../../../../models/Article'
-import BlogCard from './BlogCard'
+import BlogCard from './BlogCard2'
 import Link from 'next/link'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 
@@ -10,21 +10,31 @@ interface BlogProps {
 
 const Blogs: React.FC<BlogProps> = ({ articles }) => {
   const blogCards = articles.map((article, index) => {
-    return <BlogCard key={index} article={article} />
+    return (
+      <Link href={`/blogs/${article.id}`} passHref key={article.id}>
+        <BlogCard article={article} />
+      </Link>
+    )
   })
 
   return (
     <Container id='blogs'>
       <SectionHeader>
         <SectionTitle>Tech Writing</SectionTitle>
-        <Link href='/projects' passHref>
+        <SectionSubtitle>
+          A selection of my most recent technical blog posts. Click to read or
+          scroll for more
+        </SectionSubtitle>
+      </SectionHeader>
+      <SubSectionContainer>{blogCards.slice(0, 5)}</SubSectionContainer>
+      <SectionFooter>
+        <Link href='/blogs' passHref>
           <LinkText>
-            See More
+            See All
             <OpenInNewIcon />
           </LinkText>
         </Link>
-      </SectionHeader>
-      <SubSectionContainer>{blogCards}</SubSectionContainer>
+      </SectionFooter>
     </Container>
   )
 }
@@ -32,14 +42,15 @@ const Blogs: React.FC<BlogProps> = ({ articles }) => {
 export default Blogs
 
 const Container = styled.section`
-  /* background: rgba(100, 100, 100, 0.22); */
+  background: ${({ theme }) => theme.background};
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   padding: 1rem;
   min-height: 70vh;
-  margin: 10vh 0;
+  margin: 20vh 0;
+  padding: 20vh 0;
 
   .flex-item {
     margin: 1rem;
@@ -47,34 +58,36 @@ const Container = styled.section`
 `
 const SectionHeader = styled.header`
   position: relative;
-  width: 100%;
   display: flex;
+  flex-direction: column;
 `
+
+const SectionFooter = styled(SectionHeader)``
 
 const SectionTitle = styled.h2`
   font-size: 4rem;
-  text-align: center;
   width: 100%;
   margin: 0;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const SubSectionContainer = styled.section`
   display: flex;
   align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   margin: 10px;
 `
 
-const SubSectionHeader = styled(SectionHeader)`
-  width: 90%;
-`
-
-const SubSectionTitle = styled.h3`
-  font-size: 2rem;
+const SectionSubtitle = styled.p`
+  font-size: 1.1rem;
   display: flex;
   justify-content: center;
-  flex: 1 0 0;
-  margin: 20px 0;
+  margin-top: -10px;
+  color: ${({ theme }) => theme.subtextColor};
 `
 
 const LinkText = styled.a`
@@ -84,7 +97,7 @@ const LinkText = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;
-
+  flex: initial;
   :hover {
     color: ${({ theme }) => theme.hoverHighlightColor};
   }
