@@ -5,9 +5,11 @@ import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { adjustHeaderOpacity } from '../../../redux/themeSlice'
 import { convertToRGB } from '../../../utils/convertToRGB'
+import { useBreakpoint } from '../../../utils/useBreakpointProvider'
 
 const Header: React.FC = () => {
   const theme = useAppSelector(({ theme }) => theme)
+  const breakpoint = useBreakpoint()
   const dispatch = useAppDispatch()
   const baseBorder = convertToRGB('#cccccc').join(',')
   const baseBoxShadow = convertToRGB('#cccccc').join(',')
@@ -33,9 +35,9 @@ const Header: React.FC = () => {
       bgColor={`rgba(${convertToRGB(theme.theme.background).join(',')}, ${
         theme.theme.headerOpacity
       })`}
-      // bgColor={'rgba(33, 29, 30,0.8)'}
       boxShadow={`rgba(${baseBoxShadow}, ${theme.theme.headerOpacity})`}
       borderColor={`rgba(${baseBorder}, ${theme.theme.headerOpacity})`}
+      collapsed={breakpoint.md}
     >
       <Signature name='Daniel Sasse' />
       <NavBar />
@@ -50,6 +52,10 @@ interface HeaderContainerStyleProps {
   borderColor: string
   boxShadow: string
 }
+
+interface HeaderContainerStyleProps {
+  collapsed: boolean
+}
 const HeaderContainer = styled.header<HeaderContainerStyleProps>`
   align-items: center;
   background: ${({ bgColor }) => bgColor};
@@ -58,7 +64,8 @@ const HeaderContainer = styled.header<HeaderContainerStyleProps>`
   display: flex;
   flex-wrap: wrap;
   font-size: 1.3rem;
-  justify-content: space-around;
+  justify-content: ${({ collapsed }) =>
+    collapsed ? 'center' : 'space-around'};
   padding-bottom: 0;
   position: -webkit-sticky; /* Safari */
   position: sticky;
