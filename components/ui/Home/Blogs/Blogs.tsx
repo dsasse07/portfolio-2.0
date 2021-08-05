@@ -9,12 +9,8 @@ interface BlogProps {
 }
 
 const Blogs: React.FC<BlogProps> = ({ articles }) => {
-  const blogCards = articles.map((article, index) => {
-    return (
-      <Link href={`/blogs/${article.id}`} passHref key={article.id}>
-        <BlogCard article={article} />
-      </Link>
-    )
+  const blogCards = articles.map((article) => {
+    return <BlogCard article={article} key={article.id} />
   })
 
   return (
@@ -39,8 +35,6 @@ export default Blogs
 const Container = styled.section`
   /* background: ${({ theme }) => theme.background}; */
   background: rgba(30, 29, 30, 0.9);
-  clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 85%);
-
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -48,7 +42,7 @@ const Container = styled.section`
   padding: 1rem;
   min-height: 70vh;
   margin: 20vh 0;
-  padding: 20vh 0;
+  padding: 80px 0;
 
   .flex-item {
     margin: 1rem;

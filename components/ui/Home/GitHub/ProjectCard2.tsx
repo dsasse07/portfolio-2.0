@@ -5,59 +5,64 @@ import Image from 'next/image'
 import { createPlaceholder } from '../../../../utils/createPlaceholder'
 import { forwardRef } from 'react'
 import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests'
+import Link from 'next/link'
 
 interface ProjectCardProps {
   project: PortfolioProjectsResponseModel
-  href?: string
-  onClick?: () => void
 }
 
-const ProjectCard = forwardRef<HTMLElement, ProjectCardProps>(
-  ({ project, onClick, href }, ref) => {
-    return (
-      //@ts-ignore
-      <Card href={href} ref={ref} onClick={onClick}>
-        <LogoContainer>
-          <Image
-            placeholder='blur'
-            blurDataURL={`data:image/svg+xml;base64,${createPlaceholder(
-              100,
-              100
-            )}`}
-            width={100}
-            height={100}
-            src={project.logo}
-            alt={`${project.name} logo`}
-          />
-        </LogoContainer>
-        <Col>
-          <Title>{project.name}</Title>
-          <Description>{project.description}</Description>
-        </Col>
-        <LinkCol>
-          <LinkButton
-            aria-label={`${project.name} Github Repo`}
-            href={project.url}
+const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  return (
+    //@ts-ignore
+    <Card className='shell'>
+      <Link
+        href={`/projects/${project.route}`}
+        key={project.databaseId}
+        passHref
+      >
+        <ProjectDetails>
+          <LogoContainer>
+            <Image
+              placeholder='blur'
+              blurDataURL={`data:image/svg+xml;base64,${createPlaceholder(
+                100,
+                100
+              )}`}
+              width={100}
+              height={100}
+              src={project.logo}
+              alt={`${project.name} logo`}
+            />
+          </LogoContainer>
+          <Col>
+            <Title>{project.name}</Title>
+            <Description>{project.description}</Description>
+          </Col>
+        </ProjectDetails>
+      </Link>
+      <LinkCol>
+        <LinkTab
+          aria-label={`${project.name} Github Repo`}
+          href={project.url}
+          target='_blank'
+          rel='noreferrer'
+        >
+          <GitHubIcon />
+        </LinkTab>
+        {project.deployUrl && (
+          <LinkTab
+            aria-label={`${project.name} Website`}
+            href={project.deployUrl}
             target='_blank'
             rel='noreferrer'
           >
-            <GitHubIcon />
-          </LinkButton>
-          {project.deployUrl && (
-            <LinkButton
-              aria-label={`${project.name} Website`}
-              href={project.deployUrl}
-              target='_blank'
-              rel='noreferrer'
-            >
-              <OpenInNewIcon />
-            </LinkButton>
-          )}
-        </LinkCol>
-      </Card>
-    )
-  }
-)
+            <OpenInNewIcon />
+          </LinkTab>
+        )}
+      </LinkCol>
+    </Card>
+  )
+}
 
 export default ProjectCard
 
@@ -79,10 +84,24 @@ const Card = styled.article`
   overflow: hidden;
 
   :hover,
-  :focus {
+  :focus-within {
     box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.sigAngles};
     border: 1px solid ${({ theme }) => theme.sigAngles};
   }
+`
+
+const ProjectDetails = styled.a`
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  max-height: 90px;
+  overflow: hidden;
+  color: ${({ theme }) => theme.fontColor};
+  text-decoration: none;
+  outline: none;
 `
 
 const Col = styled.div`
@@ -120,7 +139,7 @@ const LinkCol = styled.div`
   border-left: 1px solid ${({ theme }) => theme.fontColor};
 `
 
-const LinkButton = styled.a`
+const LinkTab = styled.a`
   display: flex;
   justify-content: center;
   align-items: center;

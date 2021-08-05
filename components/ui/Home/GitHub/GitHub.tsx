@@ -28,11 +28,7 @@ const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
   })
 
   const projectComponents = selectedProjects.map((prj) => {
-    return (
-      <Link href={`/projects/${prj.route}`} key={prj.databaseId}>
-        <ProjectCard project={prj} />
-      </Link>
-    )
+    return <ProjectCard project={prj} />
   })
 
   return (
@@ -80,15 +76,13 @@ const Container = styled.section`
   /* background: ${({ theme }) => theme.background}; */
   position: relative;
   background: rgba(30, 29, 30, 0.9);
-  clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 85%);
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
   padding: 10px;
   min-height: 90vh;
-  margin: 20vh 0;
-  padding: 20vh 0;
-  padding-bottom: 20vh 0;
+  margin: 30vh 0;
+  padding: 80px 0;
 `
 
 const Row = styled.div`
@@ -109,6 +103,7 @@ const SectionTitle = styled.h2`
   font-size: 4rem;
   text-align: center;
   width: 100%;
+  margin: 10px;
 `
 const SubSectionContainer = styled.section`
   display: flex;

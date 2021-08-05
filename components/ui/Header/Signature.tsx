@@ -12,7 +12,7 @@ const Signature: React.FC<SignatureProps> = ({ name }) => {
 
   return (
     <Link href='/' passHref>
-      <SignatureContainer tabIndex={1}>
+      <SignatureContainer tabIndex={0}>
         <AngleBracket> &lt;</AngleBracket>
         <Name>{name}</Name>
         <AngleBracket>/&gt;</AngleBracket>
@@ -25,12 +25,40 @@ export default Signature
 
 const SignatureContainer = styled.a`
   display: block;
-  flex: none;
-  float: left;
+  position: relative;
+  /* flex: none; */
+  /* float: left; */
   font-size: 1.3em;
   text-decoration: none;
-  margin-top: 10px;
+  margin-top: 6px;
   line-height: normal;
+  outline: none;
+  overflow: hidden;
+
+  ::after {
+    content: '';
+    display: block;
+    position: absolute;
+    transition: 0.3s;
+    transition-delay: height 0.2s;
+    width: 140px;
+    height: 10px;
+    opacity: 0;
+    top: 38px;
+    left: 60px;
+    border-top: 2px solid ${({ theme }) => theme.hoverHighlightColor};
+  }
+
+  :hover,
+  :focus {
+    ::after {
+      width: 140px;
+      height: 10px;
+      opacity: 1;
+      border-top: 2px solid ${({ theme }) => theme.hoverHighlightColor};
+      /* border-radius: 50%; */
+    }
+  }
 `
 
 const AngleBracket = styled.span`

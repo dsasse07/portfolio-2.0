@@ -33,8 +33,10 @@ const Button = styled.a<ButtonStyleProps>`
   position: relative;
   text-decoration: none;
   transition: 0.3s;
+  outline: none;
 
-  :hover {
+  :hover,
+  :focus {
     border-bottom: 3px solid ${({ theme }) => theme.hoverHighlightColor};
   }
 `

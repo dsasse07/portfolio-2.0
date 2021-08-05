@@ -3,20 +3,19 @@ import { forwardRef } from 'react'
 import Image from 'next/image'
 import { ArticleModel } from '../../../../models/Article'
 import { createPlaceholder } from '../../../../utils/createPlaceholder'
+import Link from 'next/link'
 
 interface BlogCardProps {
   article: ArticleModel
-  href?: string
-  onClick?: () => void
 }
 
-const BlogCard = forwardRef<HTMLElement, BlogCardProps>(
-  ({ article, onClick, href }, ref) => {
-    const { title, published_timestamp, cover_image } = article
+const BlogCard: React.FC<BlogCardProps> = ({ article }) => {
+  const { title, published_timestamp, id, cover_image } = article
 
-    return (
-      //@ts-ignore
-      <Card href={href} ref={ref} onClick={onClick} className='flex-item'>
+  return (
+    //@ts-ignore
+    <Link href={`/blogs/${id}`} passHref>
+      <Card className='flex-item' tabIndex={0}>
         <LogoContainer>
           <Image
             placeholder='blur'
@@ -30,36 +29,45 @@ const BlogCard = forwardRef<HTMLElement, BlogCardProps>(
             alt={`${title}`}
           />
         </LogoContainer>
-        <TextLayer>
+        <TextLayer id='textLayer'>
           <Title>{title}</Title>
           <PubDate>
             {new Date(published_timestamp).toLocaleDateString()}
           </PubDate>
         </TextLayer>
       </Card>
-    )
-  }
-)
+    </Link>
+  )
+}
 
 export default BlogCard
 
-const Card = styled.article`
+const Card = styled.a`
   position: relative;
-  display: flex;
   height: 150px;
   width: 100%;
   max-width: 500px;
-  box-shadow: ${({ theme }) => theme.shadow};
+  box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.fontColor};
   border: 1px solid ${({ theme }) => theme.fontColor};
   overflow: hidden;
   cursor: pointer;
-  :hover {
+  text-decoration: none;
+
+  :hover,
+  :focus {
+    outline: none;
     box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.sigAngles};
     border: 1px solid ${({ theme }) => theme.sigAngles};
+
+    #textLayer {
+      background: ${({ theme }) =>
+        'radial-gradient(circle, rgba(32,96,11,0.9) 0%, rgba(32,96,11, 0.7) 100% )'};
+    }
   }
 `
 
 const TextLayer = styled.header`
+  position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;

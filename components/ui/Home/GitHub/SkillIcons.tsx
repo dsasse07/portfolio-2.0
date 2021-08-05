@@ -46,16 +46,16 @@ const Container = styled.div`
 interface IconContainerStyleProps {
   selected: boolean
 }
-const IconContainer = styled.div<IconContainerStyleProps>`
+const IconContainer = styled.button<IconContainerStyleProps>`
   display: flex;
   justify-content: center;
   align-content: center;
   margin: 5px;
-  width: 2.5vw;
-  min-width: 20px;
+  width: 4vw;
+  min-width: 50px;
   max-width: 100px;
-  height: 2.5vw;
-  min-height: 20px;
+  height: 4vw;
+  min-height: 50px;
   max-height: 100px;
   padding: 10px;
   border: 1px solid
@@ -65,8 +65,10 @@ const IconContainer = styled.div<IconContainerStyleProps>`
   cursor: pointer;
   box-shadow: ${({ selected, theme }) =>
     selected && theme.shadow + ' ' + theme.sigAngles};
+  outline: none;
 
-  :hover {
+  :hover,
+  :focus {
     box-shadow: ${({ selected, theme }) =>
       selected
         ? theme.shadow + ' ' + theme.dangerTextColor
