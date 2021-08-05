@@ -4,10 +4,10 @@ import { GitHubResponseModel } from '../../../../models/GitHub'
 import GitHubGarden from './GitHubGarden'
 import ProjectCard from './ProjectCard2'
 import Link from 'next/link'
-import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 import SkillIcons from './SkillIcons'
 import { useAppSelector } from '../../../../redux/hooks'
 import ActiveFilters from './ActiveFilters'
+import LinkButton from '../../LinkButton'
 
 interface GitHubProps {
   profileInfo: GitHubResponseModel
@@ -16,11 +16,6 @@ interface GitHubProps {
 const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
   const { weeks } = profileInfo.contributionsCollection.contributionCalendar
   const { projects, filters } = useAppSelector(({ projects }) => projects)
-  // const dispatch = useAppDispatch()
-
-  // const clearActiveSkillFilters = () => {
-  //   dispatch(clearSkillFilters(true))
-  // }
 
   const selectedProjects = projects.filter((prj) => {
     const topics = new Set(
@@ -60,6 +55,7 @@ const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
           <ActiveFilters />
           <SkillIcons />
         </SubSectionContainer>
+
         <SubSectionContainer>
           <SubSectionHeader>
             <ProjectsTitle>Selected Projects</ProjectsTitle>
@@ -71,9 +67,7 @@ const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
               No projects match the selected filters.
             </NoMatchesText>
           )}
-          <Link href='/projects' passHref>
-            <LinkText>See All</LinkText>
-          </Link>
+          <LinkButton href='/projects' text='See More!' />
         </SubSectionContainer>
       </Row>
     </Container>
@@ -83,7 +77,10 @@ const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
 export default GitHub
 
 const Container = styled.section`
-  background: ${({ theme }) => theme.background};
+  /* background: ${({ theme }) => theme.background}; */
+  position: relative;
+  background: rgba(30, 29, 30, 0.9);
+  clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 85%);
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
@@ -112,7 +109,6 @@ const SectionTitle = styled.h2`
   font-size: 4rem;
   text-align: center;
   width: 100%;
-  margin: 0;
 `
 const SubSectionContainer = styled.section`
   display: flex;
@@ -139,9 +135,7 @@ const SkillsTitle = styled(SubSectionTitle)`
   margin-top: 70px;
 `
 
-const ProjectsTitle = styled(SubSectionTitle)`
-  /* margin-left: 100px; */
-`
+const ProjectsTitle = styled(SubSectionTitle)``
 
 const SectionSubtitle = styled.p`
   font-size: 1.1rem;
@@ -149,19 +143,6 @@ const SectionSubtitle = styled.p`
   justify-content: center;
   margin-top: -10px;
   color: ${({ theme }) => theme.subtextColor};
-`
-
-const LinkText = styled.a`
-  cursor: pointer;
-  font-size: 1rem;
-  color: ${({ theme }) => theme.sigAngles};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: initial;
-  :hover {
-    color: ${({ theme }) => theme.hoverHighlightColor};
-  }
 `
 
 const NoMatchesText = styled.p`

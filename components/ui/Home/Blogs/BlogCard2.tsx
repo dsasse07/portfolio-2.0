@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import { forwardRef, useState } from 'react'
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
+import { forwardRef } from 'react'
 import Image from 'next/image'
 import { ArticleModel } from '../../../../models/Article'
 import { createPlaceholder } from '../../../../utils/createPlaceholder'
@@ -67,14 +66,17 @@ const TextLayer = styled.header`
   height: 100%;
   justify-content: space-evenly;
   align-items: center;
+  transition: 0.4s;
+  color: ${({ theme }) => theme.fontColor};
+
   background: ${({ theme }) =>
     'radial-gradient(circle, rgba(30,29,30,0.8) 0%, rgba(30,29,30, 0.5) 100% )'};
   z-index: 0;
 
   :hover {
     background: ${({ theme }) =>
-      'radial-gradient(circle, rgba(64,193,21,0.9) 0%, rgba(64,193,21, 0.7) 100% )'};
-    color: ${({ theme }) => theme.darkFontColor};
+      'radial-gradient(circle, rgba(32,96,11,0.9) 0%, rgba(32,96,11, 0.7) 100% )'};
+    /* color: ${({ theme }) => theme.darkFontColor}; */
   }
 `
 

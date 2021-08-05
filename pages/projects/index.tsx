@@ -23,7 +23,9 @@ interface ProjectsIndexProps {
 }
 
 const ProjectsIndex: React.FC<ProjectsIndexProps> = ({ projects }) => {
-  const components = projects.map((prj) => <p>{prj.databaseId}</p>)
+  const components = projects.map((prj) => (
+    <p key={prj.databaseId}>{prj.databaseId}</p>
+  ))
   return (
     <div>
       All Projects Here

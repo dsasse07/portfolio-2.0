@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { ArticleModel } from '../../../../models/Article'
 import BlogCard from './BlogCard2'
 import Link from 'next/link'
-import OpenInNewIcon from '@material-ui/icons/OpenInNew'
+import LinkButton from '../../LinkButton'
 
 interface BlogProps {
   articles: ArticleModel[]
@@ -28,12 +28,7 @@ const Blogs: React.FC<BlogProps> = ({ articles }) => {
       </SectionHeader>
       <SubSectionContainer>{blogCards.slice(0, 5)}</SubSectionContainer>
       <SectionFooter>
-        <Link href='/blogs' passHref>
-          <LinkText>
-            See All
-            <OpenInNewIcon />
-          </LinkText>
-        </Link>
+        <LinkButton href='/blogs' text='See More!' />
       </SectionFooter>
     </Container>
   )
@@ -42,7 +37,10 @@ const Blogs: React.FC<BlogProps> = ({ articles }) => {
 export default Blogs
 
 const Container = styled.section`
-  background: ${({ theme }) => theme.background};
+  /* background: ${({ theme }) => theme.background}; */
+  background: rgba(30, 29, 30, 0.9);
+  clip-path: polygon(0 0, 100% 15%, 100% 100%, 0 85%);
+
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -88,20 +86,4 @@ const SectionSubtitle = styled.p`
   justify-content: center;
   margin-top: -10px;
   color: ${({ theme }) => theme.subtextColor};
-`
-
-const LinkText = styled.a`
-  cursor: pointer;
-  font-size: 1rem;
-  color: ${({ theme }) => theme.sigAngles};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: initial;
-  :hover {
-    color: ${({ theme }) => theme.hoverHighlightColor};
-  }
-  svg {
-    font-size: 1rem;
-  }
 `

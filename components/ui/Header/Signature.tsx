@@ -12,7 +12,7 @@ const Signature: React.FC<SignatureProps> = ({ name }) => {
 
   return (
     <Link href='/' passHref>
-      <SignatureContainer>
+      <SignatureContainer tabIndex={1}>
         <AngleBracket> &lt;</AngleBracket>
         <Name>{name}</Name>
         <AngleBracket>/&gt;</AngleBracket>
