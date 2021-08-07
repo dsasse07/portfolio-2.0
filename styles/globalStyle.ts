@@ -39,7 +39,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     background: ${(props) => props.theme.background};
     color: ${(props) => props.theme.fontColor};
-    
     font-family: 'Comfortaa', cursive;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

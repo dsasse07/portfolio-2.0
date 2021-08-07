@@ -22,7 +22,7 @@ const Contact: React.FC<ContactProps> = () => {
 export default Contact
 
 const Container = styled.div`
-  background: rgba(100, 100, 100, 0.22);
+  background: rgba(30, 29, 30, 0.75);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

@@ -28,7 +28,7 @@ const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
   })
 
   const projectComponents = selectedProjects.map((prj) => {
-    return <ProjectCard project={prj} />
+    return <ProjectCard project={prj} key={prj.databaseId} />
   })
 
   return (
@@ -75,7 +75,7 @@ export default GitHub
 const Container = styled.section`
   /* background: ${({ theme }) => theme.background}; */
   position: relative;
-  background: rgba(30, 29, 30, 0.9);
+  background: rgba(30, 29, 30, 0.75);
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;

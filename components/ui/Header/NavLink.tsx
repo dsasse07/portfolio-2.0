@@ -51,7 +51,7 @@ const NavButton = styled(Button)`
 `
 
 const MenuButton = styled(Button)`
-  width: 250px;
+  width: 35vw;
 
   ::before {
     content: '';
@@ -59,9 +59,10 @@ const MenuButton = styled(Button)`
     display: ${({ selected }) => (selected ? 'block' : 'none')};
     background: ${({ theme, selected }) =>
       selected ? theme.sigAngles : theme.hoverHighlightColor};
+    top: 12px;
     left: 10px;
-    width: 17px;
-    height: 17px;
+    width: 14px;
+    height: 14px;
     clip-path: polygon(0 0, 0% 100%, 100% 50%);
   }
   :hover,
@@ -74,9 +75,9 @@ const MenuButton = styled(Button)`
   ::after {
     content: ' ';
     position: absolute;
-    bottom: -2px;
+    bottom: -9px;
     height: 1px;
-    width: 250px;
+    width: 45vw;
     background: ${({ theme }) => theme.subtextColor};
   }
   :last-of-type {

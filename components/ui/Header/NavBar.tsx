@@ -1,10 +1,11 @@
 import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 import { useBreakpoint } from '../../../utils/useBreakpointProvider'
 import NavLink from './NavLink'
 import CloseIcon from '@material-ui/icons/Close'
 import MenuIcon from '@material-ui/icons/Menu'
+import OverlayMenu from '../OverlayMenu'
 
 type Directory = 'home' | 'projects' | 'blogs'
 
@@ -57,31 +58,24 @@ const NavBar: React.FC = () => {
   })
 
   return (
-    <NavContainer>
-      {breakpoint.md ? (
-        <MenuButton
-          type='button'
-          onClick={() => setMenuOpen((menuOpen) => !menuOpen)}
-          tabIndex={0}
-        >
-          <MenuIcon />
-        </MenuButton>
-      ) : (
-        navLinkComponents
-      )}
-      {menuOpen && (
-        <Menu aria-expanded={menuOpen}>
-          <CloseButton
+    <>
+      <NavContainer>
+        {breakpoint.md ? (
+          <MenuButton
             type='button'
             onClick={() => setMenuOpen((menuOpen) => !menuOpen)}
             tabIndex={0}
           >
-            <CloseIcon />
-          </CloseButton>
-          {navLinkComponents}
-        </Menu>
+            <MenuIcon />
+          </MenuButton>
+        ) : (
+          navLinkComponents
+        )}
+      </NavContainer>
+      {menuOpen && (
+        <OverlayMenu isOpen={menuOpen}>{navLinkComponents}</OverlayMenu>
       )}
-    </NavContainer>
+    </>
   )
 }
 
@@ -112,6 +106,7 @@ const MenuButton = styled.button`
   background: transparent;
   color: ${({ theme }) => theme.fontColor};
   border: none;
+  z-index: 100;
 
   :hover,
   :focus {
@@ -146,31 +141,4 @@ const CloseButton = styled(MenuButton)`
       theme.shadow + ' ' + theme.hoverHighlightColor};
     color: ${({ theme }) => theme.hoverHighlightColor};
   }
-`
-
-const unroll = keyframes`
-  0% {height:20px; width: 1vw }
-  /* 25% {height:20px;  width: 80vw} */
-  50% {height:100px; width: 150px }
-  100% {height: 200px; width: 300px}
-}
-`
-
-const Menu = styled.nav`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  top: 10px;
-  right: 10px;
-  background: ${({ theme }) => theme.background};
-  border: 1px solid ${({ theme }) => theme.fontColor};
-  box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.fontColor};
-  width: 300px;
-  height: 200px;
-  padding-top: 40px;
-  overflow: hidden;
-  animation-name: ${unroll};
-  animation-duration: 200ms;
-  animation-timing-function: linear;
 `

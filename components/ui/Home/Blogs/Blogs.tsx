@@ -34,7 +34,7 @@ export default Blogs
 
 const Container = styled.section`
   /* background: ${({ theme }) => theme.background}; */
-  background: rgba(30, 29, 30, 0.9);
+  background: rgba(30, 29, 30, 0.75);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

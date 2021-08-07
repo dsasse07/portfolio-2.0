@@ -79,13 +79,14 @@ const Home: React.FC<HomeProps> = ({ articles, profileInfo, projects }) => {
         <meta property='og:url' content='https://dannysasse.netlify.app/' />
         <meta property='og:type' content='website' />
       </Head>
-      <main>
+
+      <Main>
         <About />
         <GitHub profileInfo={profileInfo} />
         {/* <Projects projects={projects} /> */}
         <Blogs articles={articles} />
         <Contact />
-      </main>
+      </Main>
     </>
   )
 }
@@ -93,5 +94,7 @@ const Home: React.FC<HomeProps> = ({ articles, profileInfo, projects }) => {
 export default Home
 
 const Main = styled.main`
-  position: relative;
+  /* position: relative; */
+  overflow-x: hidden;
+  width: 100vw;
 `
