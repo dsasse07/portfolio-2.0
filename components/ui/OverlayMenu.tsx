@@ -51,11 +51,6 @@ const slideLeft = keyframes`
   100%{transform: translateX(0);}
 `
 
-const fadeIn = keyframes`
-  0%{opacity: 0}
-  100%{opacity: 1}
-`
-
 const Menu = styled.nav<MenuStyleProps>`
   position: absolute;
   display: flex;
@@ -66,6 +61,7 @@ const Menu = styled.nav<MenuStyleProps>`
   background: ${({ theme }) => theme.background};
   border-left: 1px solid ${({ theme }) => theme.fontColor};
   width: 60vw;
+  max-width: 500px;
   height: 100vh;
   padding-top: 15vh;
   z-index: 1;

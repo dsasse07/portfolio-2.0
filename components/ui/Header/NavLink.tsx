@@ -33,7 +33,7 @@ const Button = styled.a<ButtonStyleProps>`
   display: flex;
   justify-content: center;
   font-size: 1.1rem;
-  padding: 0.5rem;
+  padding: 16px;
   position: relative;
   text-decoration: none;
   transition: 0.3s;
@@ -59,8 +59,8 @@ const MenuButton = styled(Button)`
     display: ${({ selected }) => (selected ? 'block' : 'none')};
     background: ${({ theme, selected }) =>
       selected ? theme.sigAngles : theme.hoverHighlightColor};
-    top: 12px;
-    left: 10px;
+    top: 15px;
+    left: 20%;
     width: 14px;
     height: 14px;
     clip-path: polygon(0 0, 0% 100%, 100% 50%);
@@ -75,9 +75,10 @@ const MenuButton = styled(Button)`
   ::after {
     content: ' ';
     position: absolute;
-    bottom: -9px;
+    bottom: 0;
     height: 1px;
     width: 45vw;
+    max-width: 300px;
     background: ${({ theme }) => theme.subtextColor};
   }
   :last-of-type {
