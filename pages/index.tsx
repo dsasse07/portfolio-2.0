@@ -83,7 +83,6 @@ const Home: React.FC<HomeProps> = ({ articles, profileInfo, projects }) => {
       <Main>
         <About />
         <TechWork profileInfo={profileInfo} />
-        {/* <Projects projects={projects} /> */}
         <Blogs articles={articles} />
         <Contact />
       </Main>

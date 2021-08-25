@@ -19,7 +19,7 @@ const Footer: React.FC<FooterProps> = () => {
 export default Footer
 
 const Container = styled.footer`
-  background: ${({ theme }) => theme.darkFontColor};
+  background: ${({ theme }) => theme.background};
   border-top: 1px solid ${({ theme }) => theme.fontColor};
   box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.fontColor};
   display: flex;

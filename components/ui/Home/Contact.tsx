@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import LinkButton from '../LinkButton'
 import SocialLinks from '../SocialLinks/SocialLinks'
 
 interface ContactProps {}
@@ -14,6 +15,12 @@ const Contact: React.FC<ContactProps> = () => {
         <DescriptionText>My Inbox is open:</DescriptionText>
         <LinkText href='mailto:dsasse07@gmail.com'>dsasse07@gmail.com</LinkText>
         <SocialLinks />
+        <LinkButton
+          href='https://docs.google.com/document/d/1GNOVe6IyuEkw07ej1BxIF6iFBkWTXv-9sNRw-P-2pUI/edit?usp=sharing'
+          text='SEE MY RESUME'
+        >
+          SEE MY RESUME
+        </LinkButton>
       </Col>
     </Container>
   )
