@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu'
 import CloseIcon from '@material-ui/icons/Close'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
-import { toggleMobileMenu } from '../../redux/themeSlice'
+import { showMobileMenu } from '../../redux/themeSlice'
 
 interface OverlayMenuProps {
   children: ReactNode
@@ -18,8 +18,15 @@ const OverlayMenu: React.FC<OverlayMenuProps> = ({ children }) => {
   */
   const [renderOverlay, setRenderOverlay] = useState<boolean>(false)
 
+  // Reset mobile menu status on unexpedted unmount (ex: resize)
+  useEffect(() => {
+    return () => {
+      dispatch(showMobileMenu(false))
+    }
+  }, [])
+
   const openMenu = () => {
-    dispatch(toggleMobileMenu())
+    dispatch(showMobileMenu(true))
     setTimeout(() => {
       setRenderOverlay(true)
     }, 0)
@@ -28,12 +35,12 @@ const OverlayMenu: React.FC<OverlayMenuProps> = ({ children }) => {
   const closeMenu = () => {
     setRenderOverlay(false)
     setTimeout(() => {
-      dispatch(toggleMobileMenu())
+      dispatch(showMobileMenu(false))
     }, 300)
   }
 
   return (
-    <Container>
+    <Container isOpen={menuOpen}>
       <MenuButton
         type='button'
         onClick={menuOpen ? closeMenu : openMenu}
@@ -55,12 +62,15 @@ const OverlayMenu: React.FC<OverlayMenuProps> = ({ children }) => {
 
 export default OverlayMenu
 
-const Container = styled.div`
+interface ContainerStyleProps {
+  isOpen: boolean
+}
+const Container = styled.div<ContainerStyleProps>`
   position: absolute;
   top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100vw;
+  right: 0;
+  height: ${({ isOpen }) => (isOpen ? '100vh' : '60px')};
+  width: ${({ isOpen }) => (isOpen ? '100vw' : '60px')};
   overflow: hidden;
 `
 

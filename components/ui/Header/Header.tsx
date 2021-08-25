@@ -72,7 +72,5 @@ const HeaderContainer = styled.header<HeaderContainerStyleProps>`
   height: 60px;
   top: 0;
   z-index: 5;
-  /* overflow-x: hidden; */
   overflow-y: visible;
-  /* overflow-x: hidden; */
 `

@@ -41,7 +41,7 @@ const Container = styled.section`
   align-items: center;
   padding: 1rem;
   min-height: 70vh;
-  margin: 20vh 0;
+  margin: 15vh 0;
   padding: 80px 0;
 
   .flex-item {

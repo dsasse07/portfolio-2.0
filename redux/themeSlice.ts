@@ -45,19 +45,14 @@ export const themeSlice = createSlice({
     adjustHeaderOpacity: (state, action: PayloadAction<string>) => {
       state.theme.headerOpacity = action.payload
     },
-    toggleMobileMenu: (state) => {
-      if (state.showMobileMenu) {
-        state.showMobileMenu = false
-        state.theme.scrollY = 'auto'
-      } else {
-        state.showMobileMenu = true
-        state.theme.scrollY = 'hidden'
-      }
+    showMobileMenu: (state, action: PayloadAction<boolean>) => {
+      state.showMobileMenu = action.payload
+      state.theme.scrollY = action.payload ? 'hidden' : 'auto'
     },
   },
 })
 
-export const { toggleTheme, setIsDark, adjustHeaderOpacity, toggleMobileMenu } =
+export const { toggleTheme, setIsDark, adjustHeaderOpacity, showMobileMenu } =
   themeSlice.actions
 
 // Other code such as selectors can use the imported `RootState` type

@@ -34,7 +34,6 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  /* gap: 2rem; */
   align-items: center;
   padding: 1rem;
   min-height: 70vh;

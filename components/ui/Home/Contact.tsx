@@ -5,7 +5,7 @@ interface ContactProps {}
 
 const Contact: React.FC<ContactProps> = () => {
   return (
-    <Container id='contact'>
+    <Container>
       <Heading>
         <SectionHeading>Contact Me:</SectionHeading>
       </Heading>
@@ -28,8 +28,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  min-height: 70vh;
-  margin: 10vh 0;
+  min-height: 40vh;
+  margin: 15vh 0;
 `
 
 const Col = styled.div`
@@ -62,7 +62,7 @@ const DescriptionText = styled.p`
 const LinkText = styled.a`
   text-decoration: none;
   font-size: 1.5rem;
-  color: ${(props) => props.theme.logoName};
+  color: ${(props) => props.theme.sigAngles};
   margin: 10px 0;
 
   :hover {

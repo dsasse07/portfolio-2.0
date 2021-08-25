@@ -33,7 +33,7 @@ const Button = styled.a<ButtonStyleProps>`
   display: flex;
   justify-content: center;
   font-size: 1.1rem;
-  padding: 16px;
+  padding: 10px;
   position: relative;
   text-decoration: none;
   transition: 0.3s;
@@ -75,7 +75,7 @@ const MenuButton = styled(Button)`
   ::after {
     content: ' ';
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
     height: 1px;
     width: 45vw;
     max-width: 300px;
