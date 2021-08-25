@@ -1,7 +1,6 @@
 import { GetStaticProps } from 'next'
 import React, { useEffect } from 'react'
 import GitHubGarden from '../../components/ui/Home/TechWork/GitHubGarden'
-import TechWork from '../../components/ui/Home/TechWork/TechWork'
 import {
   fetchGitHub,
   fetchPortfolioProjects,
@@ -13,8 +12,7 @@ import { setProjects } from '../../redux/projectsSlice'
 import styled from 'styled-components'
 import ActiveFilters from '../../components/ui/Home/TechWork/ActiveFilters'
 import SkillIcons from '../../components/ui/Home/TechWork/SkillIcons'
-import ProjectCard from '../../components/ui/Home/TechWork/ProjectCard'
-import LinkButton from '../../components/ui/LinkButton'
+import SqProjectCard from '../../components/ui/Home/TechWork/SqProjectCard'
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { user } = await fetchGitHub()
@@ -40,7 +38,7 @@ const ProjectsIndex: React.FC<ProjectsIndexProps> = ({
   projectsData,
 }) => {
   const dispatch = useAppDispatch()
-  console.log(projectsData)
+
   useEffect(() => {
     dispatch(setProjects(projectsData))
   }, [projectsData])
@@ -58,7 +56,7 @@ const ProjectsIndex: React.FC<ProjectsIndexProps> = ({
   })
 
   const projectComponents = selectedProjects.map((prj) => {
-    return <ProjectCard project={prj} key={prj.databaseId} />
+    return <SqProjectCard key={prj.databaseId} project={prj} />
   })
 
   const { weeks } = profileInfo.contributionsCollection.contributionCalendar
@@ -87,11 +85,11 @@ const ProjectsIndex: React.FC<ProjectsIndexProps> = ({
           <ProjectsTitle>Selected Projects</ProjectsTitle>
         </SubSectionHeader>
         <SectionSubtitle>Click a project to read more</SectionSubtitle>
-        {projectComponents}
-        {projectComponents.length === 0 && (
+        {projectComponents.length ? (
+          <ProjectsSubSection>{projectComponents}</ProjectsSubSection>
+        ) : (
           <NoMatchesText>No projects match the selected filters.</NoMatchesText>
         )}
-        <LinkButton href='/projects' text='See More!' />
       </SubSectionContainer>
     </Container>
   )
@@ -131,7 +129,12 @@ const SubSectionContainer = styled.section`
   align-items: center;
   flex: 1;
   margin: 10px;
-  min-height: 700px;
+`
+
+const ProjectsSubSection = styled(SubSectionContainer)`
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 `
 
 const SubSectionHeader = styled(SectionHeader)`

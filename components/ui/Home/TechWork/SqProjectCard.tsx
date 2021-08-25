@@ -3,7 +3,6 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import Image from 'next/image'
 import { createPlaceholder } from '../../../../utils/createPlaceholder'
-import { forwardRef } from 'react'
 import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests'
 import Link from 'next/link'
 
@@ -11,7 +10,7 @@ interface ProjectCardProps {
   project: PortfolioProjectsResponseModel
 }
 
-const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+const SqProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <Card>
       <Link
@@ -39,7 +38,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           </Col>
         </ProjectDetails>
       </Link>
-      <LinkCol>
+      <LinkRow>
         <LinkTab
           aria-label={`${project.name} Github Repo`}
           href={project.url}
@@ -58,28 +57,32 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             <OpenInNewIcon />
           </LinkTab>
         )}
-      </LinkCol>
+      </LinkRow>
     </Card>
   )
 }
 
-export default ProjectCard
+export default SqProjectCard
 
 const Card = styled.article`
   position: relative;
-  width: 90%;
+  width: 20vw;
+  min-width: 250px;
+  height: 20vw;
+  min-height: 250px;
+
   box-shadow: ${(props) => props.theme.shadow};
   display: flex;
-  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+
   color: ${({ theme }) => theme.fontColor};
   border: 1px solid ${({ theme }) => theme.fontColor};
   box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.fontColor};
-  padding: 10px 0;
-  padding-left: 10px;
-  margin-bottom: 30px;
+  padding: 10px 10px;
+  margin: 20px 20px;
   cursor: pointer;
-  max-height: 90px;
   overflow: hidden;
 
   :hover,
@@ -96,7 +99,6 @@ const ProjectDetails = styled.a`
   justify-content: center;
   padding: 0;
   margin: 0;
-  max-height: 90px;
   overflow: hidden;
   color: ${({ theme }) => theme.fontColor};
   text-decoration: none;
@@ -132,11 +134,10 @@ const Title = styled.header`
   font-size: 1.5rem;
 `
 
-const LinkCol = styled.div`
+const LinkRow = styled.div`
   display: flex;
-  flex-direction: column;
-  height: 90px;
-  border-left: 1px solid ${({ theme }) => theme.fontColor};
+  width: 100%;
+  border-top: 1px solid ${({ theme }) => theme.fontColor};
 `
 
 const LinkTab = styled.a`
@@ -147,10 +148,10 @@ const LinkTab = styled.a`
   padding: 10px;
   transition: 0.2s;
   flex: 1;
-  border-top: 1px solid ${({ theme }) => theme.fontColor};
+  border-left: 1px solid ${({ theme }) => theme.fontColor};
 
   :first-of-type {
-    border-top: none;
+    border-left: none;
   }
 
   svg {
@@ -171,9 +172,7 @@ const Description = styled.summary`
   text-align: center;
   color: ${({ theme }) => theme.subtextColor};
   font-size: 0.9rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
   margin-bottom: 5px;
+  overflow-y: scroll;
+  padding: 0 10px;
 `
