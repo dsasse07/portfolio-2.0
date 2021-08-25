@@ -51,7 +51,7 @@ const NavButton = styled(Button)`
 `
 
 const MenuButton = styled(Button)`
-  width: 35vw;
+  width: 50%;
 
   ::before {
     content: '';
@@ -60,7 +60,7 @@ const MenuButton = styled(Button)`
     background: ${({ theme, selected }) =>
       selected ? theme.sigAngles : theme.hoverHighlightColor};
     top: 15px;
-    left: 20%;
+    left: 10%;
     width: 14px;
     height: 14px;
     clip-path: polygon(0 0, 0% 100%, 100% 50%);

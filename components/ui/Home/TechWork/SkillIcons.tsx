@@ -75,6 +75,6 @@ const IconContainer = styled.button<IconContainerStyleProps>`
         : theme.shadow + ' ' + theme.hoverHighlightColor};
     border: 1px solid
       ${({ selected, theme }) =>
-        selected ? '#e81e1e' : theme.hoverHighlightColor};
+        selected ? theme.dangerTextColor : theme.hoverHighlightColor};
   }
 `

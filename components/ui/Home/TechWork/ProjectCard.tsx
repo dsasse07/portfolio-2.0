@@ -102,6 +102,7 @@ const ProjectDetails = styled.a`
   color: ${({ theme }) => theme.fontColor};
   text-decoration: none;
   outline: none;
+  flex: 1 0 0;
 `
 
 const Col = styled.div`

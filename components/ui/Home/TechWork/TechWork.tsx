@@ -8,11 +8,11 @@ import { useAppSelector } from '../../../../redux/hooks'
 import ActiveFilters from './ActiveFilters'
 import LinkButton from '../../LinkButton'
 
-interface GitHubProps {
+interface TechWorkProps {
   profileInfo: GitHubResponseModel
 }
 
-const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
+const TechWork: React.FC<TechWorkProps> = ({ profileInfo }) => {
   const { weeks } = profileInfo.contributionsCollection.contributionCalendar
   const { projects, filters } = useAppSelector(({ projects }) => projects)
 
@@ -69,7 +69,7 @@ const GitHub: React.FC<GitHubProps> = ({ profileInfo }) => {
   )
 }
 
-export default GitHub
+export default TechWork
 
 const Container = styled.section`
   /* background: ${({ theme }) => theme.background}; */
