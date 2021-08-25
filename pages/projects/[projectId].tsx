@@ -7,6 +7,7 @@ import {
   PortfolioProjectsResponseModel,
 } from '../../data/networkRequests'
 import MarkDown from '../../components/ui/MarkDown'
+import styled from 'styled-components'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const projectsData: PortfolioProjectsResponseModel[] =
@@ -41,14 +42,25 @@ interface ProjectShowPageProps {
 }
 
 const ProjectShowPage: React.FC<ProjectShowPageProps> = ({ project }) => {
-  const component = <p>{project.name}</p>
   return (
-    <div>
-      Stuff and things
-      {component}
+    <Container>
       <MarkDown>{project.object.text}</MarkDown>
-    </div>
+    </Container>
   )
 }
 
 export default ProjectShowPage
+
+const Container = styled.section`
+  position: relative;
+  background: rgba(30, 29, 30, 0.75);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px;
+  min-height: 90vh;
+  margin: 10vh 0;
+  padding: 80px 0;
+`

@@ -64,15 +64,46 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
     },
     image({ node, className, children, src, alt, ...props }) {
       return (
-        // @ts-ignore
-        <Image src={src} alt={alt} className={className} {...props} />
+        <Image
+          // @ts-ignore
+          src={src}
+          // @ts-ignore
+          alt={alt}
+          className={className}
+          {...props}
+        />
+      )
+    },
+    a({ node, className, href, children, ...props }) {
+      return (
+        <a
+          //@ts-ignore
+          href={href}
+          //@ts-ignore
+          target={href[0] === '#' ? '_self' : '_blank'}
+          {...props}
+        >
+          {children}
+        </a>
+      )
+    },
+    h3({ node, className, children, ...props }) {
+      return (
+        <h3
+          //@ts-ignore
+          id={children[0].toLowerCase().replace(/ /g, '-')}
+          className={className}
+          {...props}
+        >
+          {children}
+        </h3>
       )
     },
   }
 
   return (
     <MarkDownContainer
-      linkTarget='_blank'
+      // linkTarget='_blank'
       remarkPlugins={[gfm]}
       components={CustomComponents}
     >
@@ -84,14 +115,45 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
 export default MarkDown
 
 const MarkDownContainer = styled(ReactMarkdown)`
+  overflow-x: hidden;
   display: flex;
-  margin: 0 auto;
+  align-items: center;
   flex-direction: column;
-  max-width: 70vw;
+  max-width: 90vw;
 
-  /* pre {
-    margin: 0 auto;
-    max-width: 800px;
+  h1 {
+    font-size: 4rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.5rem;
     width: 100%;
-  } */
+  }
+  h4 {
+    font-size: 1.2rem;
+    width: 100%;
+  }
+
+  p {
+    font-size: 1, 2rem;
+  }
+
+  ul {
+    width: 100%;
+  }
+
+  a {
+    color: ${({ theme }) => theme.sigAngles};
+    font-size: 1.1rem;
+  }
+
+  hr {
+    width: 100%;
+  }
+
+  img {
+    max-width: 80vw;
+  }
 `
