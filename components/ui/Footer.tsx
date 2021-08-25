@@ -19,9 +19,9 @@ const Footer: React.FC<FooterProps> = () => {
 export default Footer
 
 const Container = styled.footer`
-  background: white;
-  border-top: 1px solid #cccccc;
-  box-shadow: -2px 0 10px 0 #cccccc;
+  background: ${({ theme }) => theme.darkFontColor};
+  border-top: 1px solid ${({ theme }) => theme.fontColor};
+  box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.fontColor};
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -40,7 +40,7 @@ const EmailLink = styled.a`
   padding: 0;
   padding-top: 10px;
   text-decoration: none;
-  color: ${(props) => props.theme.logoName};
+  color: ${({ theme }) => theme.sigAngles};
 
   :hover {
     text-decoration: underline;
