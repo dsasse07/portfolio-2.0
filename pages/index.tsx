@@ -10,7 +10,7 @@ import {
 } from '../data/networkRequests'
 import { ArticleModel } from '../models/Article'
 import { GetStaticProps } from 'next'
-import GitHub from '../components/ui/Home/GitHub/GitHub'
+import TechWork from '../components/ui/Home/TechWork/TechWork'
 import { GitHubResponseModel } from '../models/GitHub'
 import styled from 'styled-components'
 import { useAppDispatch } from '../redux/hooks'
@@ -82,7 +82,7 @@ const Home: React.FC<HomeProps> = ({ articles, profileInfo, projects }) => {
 
       <Main>
         <About />
-        <GitHub profileInfo={profileInfo} />
+        <TechWork profileInfo={profileInfo} />
         {/* <Projects projects={projects} /> */}
         <Blogs articles={articles} />
         <Contact />

@@ -16,7 +16,6 @@ const SocialLink: React.FC<SocialLinkProps> = ({ social }) => {
   return (
     <LogoLink
       aria-label={ariaLabel}
-      background={background}
       href={href}
       target='_blank'
       rel='noreferrer'
@@ -29,27 +28,23 @@ const SocialLink: React.FC<SocialLinkProps> = ({ social }) => {
 
 export default SocialLink
 
-interface LogoLinkStyleProps {
-  background: string
-}
-const LogoLink = styled.a<LogoLinkStyleProps>`
+const LogoLink = styled.a`
   display: flex;
   border-radius: 50%;
-  background: ${({ background }) => background};
   width: 42px;
   height: 42px;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   transition: all 0.2s;
-  box-shadow: ${(props) => props.theme.shadow};
-
+  color: ${({ theme }) => theme.subtextColor};
   img {
     width: 80%;
   }
 
-  :hover {
-    transform: scale(1.2);
+  :hover,
+  :focus {
+    color: ${({ theme }) => theme.hoverHighlightColor};
   }
 
   span {

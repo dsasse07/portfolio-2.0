@@ -96,4 +96,11 @@ const ClearButton = styled.button`
   width: 65px;
   border-radius: 12px;
   margin-left: 15px;
+  cursor: pointer;
+  :hover,
+  :focus {
+    color: ${({ theme }) => theme.hoverHighlightColor};
+    border-color: ${({ theme }) => theme.hoverHighlightColor};
+    outline: none;
+  }
 `

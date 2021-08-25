@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { ArticleModel } from '../../../../models/Article'
-import BlogCard from './BlogCard2'
+import BlogCard from './BlogCard'
 import Link from 'next/link'
 import LinkButton from '../../LinkButton'
 
