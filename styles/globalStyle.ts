@@ -50,15 +50,8 @@ const GlobalStyle = createGlobalStyle`
 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-y: ${(props) => props.theme.scrollY};
   }
-
-  /* .glass {
-    background: rgba( 255, 255, 255, 0.15 );
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    backdrop-filter: blur( 11.0px );
-    -webkit-backdrop-filter: blur( 11.0px );
-    border-radius: 10px;
-  } */
 
 `
 

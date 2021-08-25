@@ -61,20 +61,11 @@ const NavBar: React.FC = () => {
     <>
       <NavContainer>
         {breakpoint.md ? (
-          <MenuButton
-            type='button'
-            onClick={() => setMenuOpen((menuOpen) => !menuOpen)}
-            tabIndex={0}
-          >
-            <MenuIcon />
-          </MenuButton>
+          <OverlayMenu>{navLinkComponents}</OverlayMenu>
         ) : (
           navLinkComponents
         )}
       </NavContainer>
-      {menuOpen && (
-        <OverlayMenu isOpen={menuOpen}>{navLinkComponents}</OverlayMenu>
-      )}
     </>
   )
 }

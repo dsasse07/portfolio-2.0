@@ -94,7 +94,6 @@ const Home: React.FC<HomeProps> = ({ articles, profileInfo, projects }) => {
 export default Home
 
 const Main = styled.main`
-  /* position: relative; */
   overflow-x: hidden;
   width: 100vw;
 `

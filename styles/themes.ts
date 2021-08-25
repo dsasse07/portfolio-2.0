@@ -39,6 +39,7 @@ export const lightTheme = {
   gitBackground: 'black',
   sliderLeft: '3px',
   togglerColor: 'var(--white)',
+  scrollY: 'auto',
 }
 
 export const darkTheme = {
@@ -74,4 +75,5 @@ export const darkTheme = {
   sliderLeft: '31px',
   togglerColor: 'var(--yellow)',
   subtextColor: 'var(--gray)',
+  scrollY: 'auto',
 }

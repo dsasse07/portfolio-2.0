@@ -1,32 +1,54 @@
 import React, { ReactNode } from 'react'
 import { useState, useEffect } from 'react'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
+import MenuIcon from '@material-ui/icons/Menu'
+import CloseIcon from '@material-ui/icons/Close'
+import { useAppDispatch, useAppSelector } from '../../redux/hooks'
+import { toggleMobileMenu } from '../../redux/themeSlice'
 
 interface OverlayMenuProps {
   children: ReactNode
-  isOpen: boolean
 }
-const OverlayMenu: React.FC<OverlayMenuProps> = ({ children, isOpen }) => {
-  const [visibility, setVisibility] = useState<string>('0')
+const OverlayMenu: React.FC<OverlayMenuProps> = ({ children }) => {
+  const menuOpen = useAppSelector(({ theme }) => theme.showMobileMenu)
+  const dispatch = useAppDispatch()
+  /* 
+  Create separate state for the rendering of the menu to show animations
+  prior to unmount
+  */
+  const [renderOverlay, setRenderOverlay] = useState<boolean>(false)
 
-  useEffect(() => {
+  const openMenu = () => {
+    dispatch(toggleMobileMenu())
     setTimeout(() => {
-      setVisibility('1')
+      setRenderOverlay(true)
     }, 0)
+  }
 
-    return () => {
-      setTimeout(() => {
-        setVisibility('0')
-      }, 0)
-    }
-  }, [])
+  const closeMenu = () => {
+    setRenderOverlay(false)
+    setTimeout(() => {
+      dispatch(toggleMobileMenu())
+    }, 300)
+  }
 
   return (
     <Container>
-      <Underlay isOpen={isOpen} visibility={visibility} />
-      <Menu aria-expanded={isOpen} isOpen={isOpen}>
-        {children}
-      </Menu>
+      <MenuButton
+        type='button'
+        onClick={menuOpen ? closeMenu : openMenu}
+        tabIndex={0}
+      >
+        {renderOverlay ? <CloseIcon /> : <MenuIcon />}
+      </MenuButton>
+      {menuOpen && (
+        <>
+          <Underlay isOpen={renderOverlay} onClick={closeMenu} />
+          <Menu aria-expanded={renderOverlay} isOpen={renderOverlay}>
+            {children}
+          </Menu>
+        </>
+      )}
     </Container>
   )
 }
@@ -46,11 +68,6 @@ interface MenuStyleProps {
   isOpen: boolean
 }
 
-const slideLeft = keyframes`
-  0%{transform: translateX(100vw);}
-  100%{transform: translateX(0);}
-`
-
 const Menu = styled.nav<MenuStyleProps>`
   position: absolute;
   display: flex;
@@ -65,17 +82,17 @@ const Menu = styled.nav<MenuStyleProps>`
   height: 100vh;
   padding-top: 15vh;
   z-index: 1;
-  animation: ${slideLeft};
-  animation-duration: 600ms;
-  animation-timing-function: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  transition: 500ms;
+  transform: ${({ isOpen }) =>
+    isOpen ? 'translateX(0)' : 'translateX(100vw)'};
 `
 
 interface UnderlayStyleProps {
   isOpen: boolean
-  visibility: string
 }
 
 const Underlay = styled.div<UnderlayStyleProps>`
+  visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
   position: absolute;
   top: 0;
   left: 0;
@@ -83,6 +100,35 @@ const Underlay = styled.div<UnderlayStyleProps>`
   width: 100vw;
   background: rgba(150, 150, 20, 0.6);
   z-index: 0;
-  transition: 1000ms;
-  opacity: ${({ visibility }) => visibility};
+  transition: 400ms;
+  opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
+`
+
+const MenuButton = styled.button`
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 35px;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+  outline: none;
+  background: transparent;
+  color: ${({ theme }) => theme.fontColor};
+  border: none;
+  z-index: 100;
+
+  :hover,
+  :focus {
+    border: 1px solid ${({ theme }) => theme.hoverHighlightColor};
+    box-shadow: ${({ theme }) =>
+      theme.shadow + ' ' + theme.hoverHighlightColor};
+    color: ${({ theme }) => theme.hoverHighlightColor};
+  }
+
+  svg {
+    font-size: 2rem;
+  }
 `
