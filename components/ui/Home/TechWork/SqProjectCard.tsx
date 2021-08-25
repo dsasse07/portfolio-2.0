@@ -13,25 +13,24 @@ interface ProjectCardProps {
 const SqProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
     <Card>
+      <LogoContainer>
+        <Image
+          layout='fill'
+          placeholder='blur'
+          blurDataURL={`data:image/svg+xml;base64,${createPlaceholder(
+            250,
+            250
+          )}`}
+          src={project.logo}
+          alt={`${project.name} logo`}
+        />
+      </LogoContainer>
       <Link
         href={`/projects/${project.route}`}
         key={project.databaseId}
         passHref
       >
         <ProjectDetails>
-          <LogoContainer>
-            <Image
-              placeholder='blur'
-              blurDataURL={`data:image/svg+xml;base64,${createPlaceholder(
-                100,
-                100
-              )}`}
-              width={100}
-              height={100}
-              src={project.logo}
-              alt={`${project.name} logo`}
-            />
-          </LogoContainer>
           <Col>
             <Title>{project.name}</Title>
             <Description>{project.description}</Description>
@@ -67,10 +66,9 @@ export default SqProjectCard
 const Card = styled.article`
   position: relative;
   width: 20vw;
-  min-width: 250px;
+  min-width: 300px;
   height: 20vw;
-  min-height: 250px;
-
+  min-height: 300px;
   box-shadow: ${(props) => props.theme.shadow};
   display: flex;
   flex-direction: column;
@@ -104,6 +102,7 @@ const ProjectDetails = styled.a`
   text-decoration: none;
   outline: none;
   flex: 1 0 0;
+  z-index: 1;
 `
 
 const Col = styled.div`
@@ -114,14 +113,19 @@ const Col = styled.div`
   align-items: center;
   height: 100%;
   padding: 0 15px;
+  background: rgba(30, 29, 30, 0.75);
 `
 
 const LogoContainer = styled.div`
-  width: 90px;
-  height: 90px;
+  position: absolute;
+  top: 10px;
+  left: auto;
+  width: 70%;
+  height: 70%;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 0;
 `
 
 const Title = styled.header`
@@ -129,15 +133,16 @@ const Title = styled.header`
   width: 100%;
   text-align: center;
   margin: 0;
-  margin-bottom: 5px;
+  margin-bottom: 25px;
   padding: 0;
-  font-size: 1.5rem;
+  font-size: 2rem;
 `
 
 const LinkRow = styled.div`
   display: flex;
   width: 100%;
   border-top: 1px solid ${({ theme }) => theme.fontColor};
+  z-index: 1;
 `
 
 const LinkTab = styled.a`
@@ -170,8 +175,8 @@ const LinkTab = styled.a`
 
 const Description = styled.summary`
   text-align: center;
-  color: ${({ theme }) => theme.subtextColor};
-  font-size: 0.9rem;
+  color: ${({ theme }) => theme.fontColor};
+  font-size: 1.1rem;
   margin-bottom: 5px;
   overflow-y: scroll;
   padding: 0 10px;

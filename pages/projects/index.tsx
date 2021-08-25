@@ -88,7 +88,11 @@ const ProjectsIndex: React.FC<ProjectsIndexProps> = ({
         {projectComponents.length ? (
           <ProjectsSubSection>{projectComponents}</ProjectsSubSection>
         ) : (
-          <NoMatchesText>No projects match the selected filters.</NoMatchesText>
+          <ProjectsSubSection>
+            <NoMatchesText>
+              No projects match the selected filters.
+            </NoMatchesText>
+          </ProjectsSubSection>
         )}
       </SubSectionContainer>
     </Container>
