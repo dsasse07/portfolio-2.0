@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests'
-import { icons } from '../../../../assets/icons/icons'
-import Tooltip from '../../Tooltip'
+import { icons } from '../../../assets/icons/icons'
+import Tooltip from '../Tooltip'
 import Image from 'next/image'
-import { useAppDispatch, useAppSelector } from '../../../../redux/hooks'
-import { toggleSkillFilter } from '../../../../redux/projectsSlice'
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
+import { toggleSkillFilter } from '../../../redux/projectsSlice'
 
 interface SkillIconsProps {}
 const SkillIcons: React.FC<SkillIconsProps> = () => {
@@ -39,7 +38,6 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  /* border: 2px solid blue; */
   width: 90%;
 `
 

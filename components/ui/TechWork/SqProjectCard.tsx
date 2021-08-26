@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import Image from 'next/image'
-import { createPlaceholder } from '../../../../utils/createPlaceholder'
-import { PortfolioProjectsResponseModel } from '../../../../data/networkRequests'
+import { createPlaceholder } from '../../../utils/createPlaceholder'
+import { PortfolioProjectsResponseModel } from '../../../data/networkRequests'
 import Link from 'next/link'
 
 interface ProjectCardProps {

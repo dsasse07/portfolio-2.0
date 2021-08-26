@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { GitHubResponseModel } from '../../../../models/GitHub'
+import { GitHubResponseModel } from '../../../models/GitHub'
 import GitHubGarden from './GitHubGarden'
 import ProjectCard from './ProjectCard'
 import SkillIcons from './SkillIcons'
-import { useAppSelector } from '../../../../redux/hooks'
+import { useAppSelector } from '../../../redux/hooks'
 import ActiveFilters from './ActiveFilters'
-import LinkButton from '../../LinkButton'
+import LinkButton from '../LinkButton'
 
 interface TechWorkProps {
   profileInfo: GitHubResponseModel

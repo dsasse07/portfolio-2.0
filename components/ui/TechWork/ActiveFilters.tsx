@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useAppDispatch, useAppSelector } from '../../../../redux/hooks'
-import { icons } from '../../../../assets/icons/icons'
-import Tooltip from '../../Tooltip'
+import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
+import { icons } from '../../../assets/icons/icons'
+import Tooltip from '../Tooltip'
 import Image from 'next/image'
-import { clearSkillFilters } from '../../../../redux/projectsSlice'
+import { clearSkillFilters } from '../../../redux/projectsSlice'
 
 const ActiveFilters: React.FC = () => {
   const { filters } = useAppSelector(({ projects }) => projects)
