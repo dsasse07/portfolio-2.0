@@ -34,10 +34,6 @@ const Container = styled.section`
   min-height: 70vh;
   margin-bottom: 30vh;
   margin-top: 10vw;
-
-  .flex-item {
-    margin: 1rem;
-  }
 `
 
 const PhotoContainer = styled.div`
@@ -73,22 +69,4 @@ const Greeting = styled.h2`
   text-align: center;
   font-size: 2.5rem;
   padding: 5px;
-`
-
-const AboutMe = styled.h2`
-  font-weight: normal;
-  text-align: center;
-  font-size: 1.17rem;
-
-  :nth-of-type(2) {
-    margin-top: 0;
-  }
-`
-
-const ButtonBar = styled.div`
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  margin-top: 18px;
 `
