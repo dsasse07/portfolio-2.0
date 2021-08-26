@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { useBreakpoint } from '../../../utils/useBreakpointProvider'
+import { removeFocus } from '../../../utils/removeFocus'
 
 interface NavLinkProps {
   href: string
@@ -15,9 +16,19 @@ const NavLink: React.FC<NavLinkProps> = ({ href, buttonText, selected }) => {
   return (
     <Link href={href} passHref>
       {breakpoint.md ? (
-        <MenuButton selected={selected}>{buttonText}</MenuButton>
+        <MenuLinkButton
+          selected={selected}
+          onClick={(e) => removeFocus(e.target)}
+        >
+          {buttonText}
+        </MenuLinkButton>
       ) : (
-        <NavButton selected={selected}>{buttonText}</NavButton>
+        <NavLinkButton
+          selected={selected}
+          onClick={(e) => removeFocus(e.target)}
+        >
+          {buttonText}
+        </NavLinkButton>
       )}
     </Link>
   )
@@ -40,7 +51,7 @@ const Button = styled.a<ButtonStyleProps>`
   outline: none;
 `
 
-const NavButton = styled(Button)`
+const NavLinkButton = styled(Button)`
   border-bottom: 3px solid transparent;
   border-bottom-color: ${({ theme, selected }) =>
     selected && theme.activeColor};
@@ -51,8 +62,8 @@ const NavButton = styled(Button)`
   }
 `
 
-const MenuButton = styled(Button)`
-  width: 50%;
+const MenuLinkButton = styled(Button)`
+  width: 150px;
 
   ::before {
     content: '';

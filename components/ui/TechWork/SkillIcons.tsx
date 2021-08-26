@@ -5,6 +5,7 @@ import Tooltip from '../Tooltip'
 import Image from 'next/image'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'
 import { toggleSkillFilter } from '../../../redux/projectsSlice'
+import { removeFocus } from '../../../utils/removeFocus'
 
 interface SkillIconsProps {}
 const SkillIcons: React.FC<SkillIconsProps> = () => {
@@ -22,7 +23,10 @@ const SkillIcons: React.FC<SkillIconsProps> = () => {
         <Tooltip content={skill.text} fontSize={'1rem'} key={skill.text}>
           <IconContainer
             selected={filters[skill.matchText]}
-            onClick={() => handleToggleSkill(skill.matchText)}
+            onClick={(e) => {
+              handleToggleSkill(skill.matchText)
+              removeFocus(e.target)
+            }}
           >
             <Image src={skill.icon} alt={skill.text} placeholder='blur' />
           </IconContainer>

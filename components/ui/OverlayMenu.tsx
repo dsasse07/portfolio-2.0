@@ -5,6 +5,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import CloseIcon from '@material-ui/icons/Close'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { showMobileMenu } from '../../redux/themeSlice'
+import { removeFocus } from '../../utils/removeFocus'
 
 interface OverlayMenuProps {
   children: ReactNode
@@ -25,11 +26,12 @@ const OverlayMenu: React.FC<OverlayMenuProps> = ({ children }) => {
     }
   }, [])
 
-  const openMenu = () => {
+  const openMenu = (el: any) => {
     dispatch(showMobileMenu(true))
     setTimeout(() => {
       setRenderOverlay(true)
     }, 0)
+    removeFocus(el)
 
     document.body.ontouchmove = (e) => {
       e.preventDefault()
@@ -37,11 +39,12 @@ const OverlayMenu: React.FC<OverlayMenuProps> = ({ children }) => {
     }
   }
 
-  const closeMenu = () => {
+  const closeMenu = (el: any) => {
     setRenderOverlay(false)
     setTimeout(() => {
       dispatch(showMobileMenu(false))
     }, 300)
+    removeFocus(el)
 
     document.body.ontouchmove = (e) => {}
   }
@@ -50,8 +53,11 @@ const OverlayMenu: React.FC<OverlayMenuProps> = ({ children }) => {
     <Container isOpen={menuOpen}>
       <MenuButton
         type='button'
-        onClick={menuOpen ? closeMenu : openMenu}
+        onClick={
+          menuOpen ? (e) => closeMenu(e.target) : (e) => openMenu(e.target)
+        }
         tabIndex={0}
+        isOpen={menuOpen}
       >
         {renderOverlay ? <CloseIcon /> : <MenuIcon />}
       </MenuButton>
@@ -95,7 +101,7 @@ const Menu = styled.nav<MenuStyleProps>`
   background: ${({ theme }) => theme.background};
   border-left: 1px solid ${({ theme }) => theme.fontColor};
   width: 60vw;
-  max-width: 500px;
+  max-width: 450px;
   height: 100vh;
   padding-top: 15vh;
   z-index: 1;
@@ -118,7 +124,10 @@ const Underlay = styled.div<UnderlayStyleProps>`
   transition: 200ms;
 `
 
-const MenuButton = styled.button`
+interface MenuButtonStyleProps {
+  isOpen: boolean
+}
+const MenuButton = styled.button<MenuButtonStyleProps>`
   position: absolute;
   display: flex;
   justify-content: center;
@@ -130,7 +139,8 @@ const MenuButton = styled.button`
   cursor: pointer;
   outline: none;
   background: transparent;
-  color: ${({ theme }) => theme.fontColor};
+  color: ${({ theme, isOpen }) =>
+    isOpen ? theme.highlightColor : theme.fontColor};
   border: none;
   z-index: 100;
 
