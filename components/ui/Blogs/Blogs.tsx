@@ -49,6 +49,7 @@ const SectionHeader = styled.header`
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 `
 
 const SectionFooter = styled(SectionHeader)``
@@ -58,9 +59,7 @@ const SectionTitle = styled.h2`
   width: 100%;
   margin: 0;
   margin-bottom: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
 `
 
 const SubSectionContainer = styled.section`
@@ -77,4 +76,5 @@ const SectionSubtitle = styled.p`
   justify-content: center;
   margin-top: -10px;
   color: ${({ theme }) => theme.subtextColor};
+  text-align: center;
 `
