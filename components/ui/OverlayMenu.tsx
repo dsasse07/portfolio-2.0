@@ -92,9 +92,8 @@ const Menu = styled.nav<MenuStyleProps>`
   height: 100vh;
   padding-top: 15vh;
   z-index: 1;
-  transition: 300ms;
-  transform: ${({ isOpen }) =>
-    isOpen ? 'translateX(0)' : 'translateX(100vw)'};
+  transition: 200ms;
+  transform: ${({ isOpen }) => !isOpen && 'translateX(60vw)'};
 `
 
 interface UnderlayStyleProps {
@@ -110,7 +109,7 @@ const Underlay = styled.div<UnderlayStyleProps>`
   background: ${({ isOpen }) =>
     isOpen ? 'rgba(150, 150, 20, 0.6)' : 'rgba(150, 150, 20, 0)'};
   z-index: 0;
-  transition: 100ms;
+  transition: 200ms;
 `
 
 const MenuButton = styled.button`
