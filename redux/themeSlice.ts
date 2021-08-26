@@ -10,7 +10,6 @@ interface themeState {
 
 // Define the initial state using that type
 const initialState: themeState = {
-  // isDark: false,
   showMobileMenu: false,
   theme: theme,
 }
