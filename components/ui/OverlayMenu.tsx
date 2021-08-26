@@ -93,8 +93,10 @@ const Menu = styled.nav<MenuStyleProps>`
   padding-top: 15vh;
   z-index: 1;
   transition: 200ms;
-  transform: ${({ isOpen }) => !isOpen && 'translateX(65vw)'};
-  -webkit-transform: ${({ isOpen }) => !isOpen && 'translateX(65vw)'};
+  transform: ${({ isOpen }) =>
+    !isOpen ? 'translateX(0)' : 'translateX(65vw)'};
+  -webkit-transform: ${({ isOpen }) =>
+    !isOpen ? 'translateX(0)' : 'translateX(65vw)'};
 `
 
 interface UnderlayStyleProps {
