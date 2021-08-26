@@ -47,7 +47,7 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         typeof node.children[0].value === 'string' &&
         !inline &&
         // @ts-ignore
-        node.children[0].value.match(/^{% gist/)
+        node.children[0].value.match(/{% gist|{%gist/)
       ) {
         const gistAnchor = node.children[1]
         // @ts-ignore
