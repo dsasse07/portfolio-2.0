@@ -102,7 +102,6 @@ interface UnderlayStyleProps {
 }
 
 const Underlay = styled.div<UnderlayStyleProps>`
-  visibility: ${({ isOpen }) => (isOpen ? 'visible' : 'hidden')};
   position: absolute;
   top: 0;
   left: 0;
@@ -111,7 +110,7 @@ const Underlay = styled.div<UnderlayStyleProps>`
   background: ${({ isOpen }) =>
     isOpen ? 'rgba(150, 150, 20, 0.6)' : 'rgba(150, 150, 20, 0)'};
   z-index: 0;
-  transition: 300ms;
+  transition: 100ms;
 `
 
 const MenuButton = styled.button`
