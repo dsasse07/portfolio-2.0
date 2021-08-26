@@ -20,6 +20,5 @@ export const theme = {
     THIRD_QUARTILE: '#2ead43',
     FOURTH_QUARTILE: '#39D353',
   },
-
   scrollY: 'auto',
 }

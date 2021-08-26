@@ -36,7 +36,6 @@ const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     overflow-y: ${(props) => props.theme.scrollY};
   }
-
 `
 
 export default GlobalStyle
