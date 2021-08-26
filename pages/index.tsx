@@ -94,5 +94,5 @@ export default Home
 
 const Main = styled.main`
   overflow-x: hidden;
-  width: 100vw;
+  /* width: 95vw; */
 `
