@@ -108,13 +108,12 @@ const Container = styled.section`
   flex-wrap: wrap;
   padding: 10px;
   min-height: 90vh;
-  margin: 15vh 0;
+  margin: 20px 0;
   padding: 80px 0;
 `
 
 const SectionHeader = styled.header`
   position: relative;
-  width: 100%;
   display: flex;
 `
 const SectionTitle = styled.h2`
@@ -128,8 +127,8 @@ const SubSectionContainer = styled.section`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
-  margin: 10px;
+  flex: 1 0 0;
+  /* margin: 10px; */
 `
 
 const ProjectsSubSection = styled(SubSectionContainer)`

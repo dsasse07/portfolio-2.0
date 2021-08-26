@@ -40,9 +40,9 @@ const Container = styled.section`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
+  padding: 10px;
   min-height: 70vh;
-  margin: 15vh 0;
+  margin: 20px 0;
   padding: 80px 0;
 `
 const SectionHeader = styled.header`
@@ -56,8 +56,8 @@ const SectionFooter = styled(SectionHeader)``
 
 const SectionTitle = styled.h2`
   font-size: 4rem;
-  width: 100%;
-  margin: 0;
+  /* width: 100%; */
+  margin: 10px;
   margin-bottom: 50px;
   text-align: center;
 `
