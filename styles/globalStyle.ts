@@ -29,12 +29,12 @@ const GlobalStyle = createGlobalStyle`
       sans-serif;
     
     margin: 0;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     transition: all 0.2s;
     
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-y: ${(props) => props.theme.scrollY};
+    /* overflow-y: ${(props) => props.theme.scrollY}; */
   }
 
 `
