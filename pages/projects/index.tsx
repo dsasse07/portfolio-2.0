@@ -108,7 +108,7 @@ const Container = styled.section`
   flex-wrap: wrap;
   padding: 10px;
   min-height: 90vh;
-  margin: 10vh 0;
+  margin: 15vh 0;
   padding: 80px 0;
 `
 
