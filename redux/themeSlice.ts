@@ -25,7 +25,6 @@ export const themeSlice = createSlice({
     },
     showMobileMenu: (state, action: PayloadAction<boolean>) => {
       state.showMobileMenu = action.payload
-      state.theme.scrollY = action.payload ? 'hidden' : 'auto'
     },
   },
 })

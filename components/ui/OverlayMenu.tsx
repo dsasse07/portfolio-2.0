@@ -10,6 +10,7 @@ import {
   enableBodyScroll,
   clearAllBodyScrollLocks,
 } from 'body-scroll-lock'
+import type { BodyScrollOptions } from 'body-scroll-lock'
 
 interface OverlayMenuProps {
   children: ReactNode
@@ -18,6 +19,10 @@ const OverlayMenu: React.FC<OverlayMenuProps> = ({ children }) => {
   const menuOpen = useAppSelector(({ theme }) => theme.showMobileMenu)
   const dispatch = useAppDispatch()
   const targetRef = useRef(null)
+  const BSLoptions: BodyScrollOptions = {
+    reserveScrollBarGap: true,
+  }
+
   /* 
   Create separate state for the rendering of the menu to show animations
   prior to unmount
@@ -37,7 +42,7 @@ const OverlayMenu: React.FC<OverlayMenuProps> = ({ children }) => {
     setTimeout(() => {
       setRenderOverlay(true)
       //@ts-ignore
-      disableBodyScroll(targetRef.current)
+      disableBodyScroll(targetRef.current, BSLoptions)
     }, 0)
   }
 
