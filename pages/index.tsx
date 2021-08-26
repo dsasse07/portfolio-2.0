@@ -58,7 +58,7 @@ const Home: React.FC<HomeProps> = ({ articles, profileInfo, projects }) => {
         <meta name='author' content='Danny Sasse' />
         {/*<!-- Twitter Card -->*/}
         <meta name='twitter:card' content='summary' />
-        <meta name='twitter:image' content='https://i.imgur.com/ELfCxI1.jpg' />
+        <meta name='twitter:image' content='https://i.imgur.com/kaB97MW.jpg' />
         <meta name='twitter:image:alt' content='profile picture' />
         <meta
           property='twitter:title'
@@ -70,13 +70,13 @@ const Home: React.FC<HomeProps> = ({ articles, profileInfo, projects }) => {
         />
         <meta property='twitter:site' content='@dannysasse' />
         {/* Facebook preview */}
-        <meta property='og:image' content='https://i.imgur.com/ELfCxI1.jpg' />
+        <meta property='og:image' content='https://i.imgur.com/kaB97MW.jpg' />
         <meta property='og:title' content='Danny Sasse | Software Engineer' />
         <meta
           property='og:description'
           content='Software Engineering Portfolio'
         />
-        <meta property='og:url' content='https://dannysasse.netlify.app/' />
+        <meta property='og:url' content='https://sasse.vercel.app/' />
         <meta property='og:type' content='website' />
       </Head>
 
