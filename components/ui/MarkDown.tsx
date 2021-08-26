@@ -15,7 +15,6 @@ import styled from 'styled-components'
 import gfm from 'remark-gfm'
 //@ts-ignore
 import ReactEmbedGist from 'react-embed-gist'
-import Image from 'next/image'
 
 interface MarkdownProps {
   children: string
@@ -62,9 +61,9 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         )
       }
     },
-    image({ node, className, children, src, alt, ...props }) {
+    img({ node, className, children, src, alt, ...props }) {
       return (
-        <Image
+        <img
           // @ts-ignore
           src={src}
           // @ts-ignore
@@ -87,6 +86,30 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         </a>
       )
     },
+    h1({ node, className, children, ...props }) {
+      return (
+        <h1
+          //@ts-ignore
+          id={children[0].toLowerCase().replace(/ /g, '-')}
+          className={className}
+          {...props}
+        >
+          {children}
+        </h1>
+      )
+    },
+    h2({ node, className, children, ...props }) {
+      return (
+        <h2
+          //@ts-ignore
+          id={children[0].toLowerCase().replace(/ /g, '-')}
+          className={className}
+          {...props}
+        >
+          {children}
+        </h2>
+      )
+    },
     h3({ node, className, children, ...props }) {
       return (
         <h3
@@ -99,14 +122,34 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         </h3>
       )
     },
+    h4({ node, className, children, ...props }) {
+      return (
+        <h4
+          //@ts-ignore
+          id={children[0].toLowerCase().replace(/ /g, '-')}
+          className={className}
+          {...props}
+        >
+          {children}
+        </h4>
+      )
+    },
+    h5({ node, className, children, ...props }) {
+      return (
+        <h5
+          //@ts-ignore
+          id={children[0].toLowerCase().replace(/ /g, '-')}
+          className={className}
+          {...props}
+        >
+          {children}
+        </h5>
+      )
+    },
   }
 
   return (
-    <MarkDownContainer
-      // linkTarget='_blank'
-      remarkPlugins={[gfm]}
-      components={CustomComponents}
-    >
+    <MarkDownContainer remarkPlugins={[gfm]} components={CustomComponents}>
       {children}
     </MarkDownContainer>
   )
@@ -115,16 +158,18 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
 export default MarkDown
 
 const MarkDownContainer = styled(ReactMarkdown)`
+  position: relative;
   overflow-x: hidden;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   flex-direction: column;
-  max-width: 90vw;
-
+  padding: 0 5vw;
   h1 {
-    font-size: 4rem;
+    text-align: center;
+    font-size: 3.5rem;
   }
   h2 {
+    text-align: center;
     font-size: 2rem;
   }
   h3 {
@@ -135,13 +180,20 @@ const MarkDownContainer = styled(ReactMarkdown)`
     font-size: 1.2rem;
     width: 100%;
   }
+  h5 {
+    font-size: 1.1rem;
+    width: 100%;
+  }
 
   p {
-    font-size: 1, 2rem;
+    position: relative;
+    text-align: center;
+    font-size: 1rem;
+    img {
+    }
   }
 
   ul {
-    width: 100%;
   }
 
   a {
@@ -154,6 +206,6 @@ const MarkDownContainer = styled(ReactMarkdown)`
   }
 
   img {
-    max-width: 80vw;
+    max-width: 70%;
   }
 `
