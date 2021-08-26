@@ -92,7 +92,7 @@ const Menu = styled.nav<MenuStyleProps>`
   height: 100vh;
   padding-top: 15vh;
   z-index: 1;
-  transition: 500ms;
+  transition: 300ms;
   transform: ${({ isOpen }) =>
     isOpen ? 'translateX(0)' : 'translateX(100vw)'};
 `
