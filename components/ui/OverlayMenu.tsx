@@ -1,10 +1,15 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useRef } from 'react'
 import { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import MenuIcon from '@material-ui/icons/Menu'
 import CloseIcon from '@material-ui/icons/Close'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { showMobileMenu } from '../../redux/themeSlice'
+import {
+  disableBodyScroll,
+  enableBodyScroll,
+  clearAllBodyScrollLocks,
+} from 'body-scroll-lock'
 
 interface OverlayMenuProps {
   children: ReactNode
@@ -12,6 +17,7 @@ interface OverlayMenuProps {
 const OverlayMenu: React.FC<OverlayMenuProps> = ({ children }) => {
   const menuOpen = useAppSelector(({ theme }) => theme.showMobileMenu)
   const dispatch = useAppDispatch()
+  const targetRef = useRef(null)
   /* 
   Create separate state for the rendering of the menu to show animations
   prior to unmount
@@ -21,6 +27,7 @@ const OverlayMenu: React.FC<OverlayMenuProps> = ({ children }) => {
   // Reset mobile menu status on unexpedted unmount (ex: resize)
   useEffect(() => {
     return () => {
+      clearAllBodyScrollLocks()
       dispatch(showMobileMenu(false))
     }
   }, [])
@@ -29,11 +36,15 @@ const OverlayMenu: React.FC<OverlayMenuProps> = ({ children }) => {
     dispatch(showMobileMenu(true))
     setTimeout(() => {
       setRenderOverlay(true)
+      //@ts-ignore
+      disableBodyScroll(targetRef.current)
     }, 0)
   }
 
   const closeMenu = () => {
     setRenderOverlay(false)
+    //@ts-ignore
+    enableBodyScroll(targetRef.current)
     setTimeout(() => {
       dispatch(showMobileMenu(false))
     }, 300)
@@ -51,7 +62,11 @@ const OverlayMenu: React.FC<OverlayMenuProps> = ({ children }) => {
       {menuOpen && (
         <>
           <Underlay isOpen={renderOverlay} onClick={closeMenu} />
-          <Menu aria-expanded={renderOverlay} isOpen={renderOverlay}>
+          <Menu
+            aria-expanded={renderOverlay}
+            isOpen={renderOverlay}
+            ref={targetRef}
+          >
             {children}
           </Menu>
         </>
