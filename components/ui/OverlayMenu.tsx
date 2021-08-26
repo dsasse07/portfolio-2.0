@@ -108,10 +108,10 @@ const Underlay = styled.div<UnderlayStyleProps>`
   left: 0;
   height: 100vh;
   width: 100vw;
-  background: rgba(150, 150, 20, 0.6);
+  background: ${({ isOpen }) =>
+    isOpen ? 'rgba(150, 150, 20, 0.6)' : 'rgba(150, 150, 20, 0)'};
   z-index: 0;
-  transition: 400ms;
-  opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
+  transition: 300ms;
 `
 
 const MenuButton = styled.button`
