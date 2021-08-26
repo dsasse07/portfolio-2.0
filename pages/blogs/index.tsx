@@ -1,5 +1,6 @@
 import { GetStaticProps } from 'next'
 import React from 'react'
+import Blogs from '../../components/ui/Home/Blogs/Blogs'
 import { fetchMyArticles } from '../../data/networkRequests'
 import { ArticleModel } from '../../models/Article'
 
@@ -19,18 +20,7 @@ interface BlogsIndexProps {
 }
 
 const BlogsIndex: React.FC<BlogsIndexProps> = ({ articles }) => {
-  return (
-    <div>
-      <h2>All Blogs Listed Here</h2>
-      <ul>
-        {articles.map((a) => (
-          <li key={a.id}>
-            {a.id} - {a.title}
-          </li>
-        ))}
-      </ul>
-    </div>
-  )
+  return <Blogs articles={articles} />
 }
 
 export default BlogsIndex

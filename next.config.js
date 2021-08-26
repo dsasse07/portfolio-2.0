@@ -6,6 +6,7 @@ module.exports = {
       'res.cloudinary.com',
       'raw.githubusercontent.com',
       'github.com',
+      'dev-to-uploads.s3.amazonaws.com',
     ],
   },
 }

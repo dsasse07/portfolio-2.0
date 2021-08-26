@@ -6,6 +6,10 @@ import { ArticleModel } from '../../models/Article'
 import { useQuery } from 'react-query'
 import { useRouter } from 'next/router'
 import MarkDown from '../../components/ui/MarkDown'
+import styled from 'styled-components'
+import Image from 'next/image'
+import { createPlaceholder } from '../../utils/createPlaceholder'
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const articlesData: ArticleModel[] = await fetchMyArticles()
@@ -38,29 +42,92 @@ interface BlogShowPageProps {
 }
 
 const BlogShowPage: React.FC<BlogShowPageProps> = ({ article }) => {
-  const router = useRouter()
-  if (router.isFallback) return <div>Loading...</div>
+  const {
+    title,
+    cover_image,
+    url,
+    published_timestamp,
+    body_markdown,
+    reading_time_minutes,
+    tags,
+  } = article
 
-  const { data } = useQuery(
-    ['blog', `${article.id}`],
-    () => fetchOneArticle(`${article.id}`),
-    { initialData: article }
-  )
-  const { id, title, cover_image, url, description, body_markdown, body_html } =
-    data
+  const tagComponents = tags.map((tag) => {
+    return <Tag key={tag}>{tag}</Tag>
+  })
 
   return (
-    <div>
-      <p>{id}</p>
-      <p>{title}</p>
-      <p>{cover_image}</p>
-      <p>{url}</p>
-      <p>{description}</p>
-      {/* <div dangerouslySetInnerHTML={{ __html: body_html }}> */}
+    <Container>
+      <Image
+        placeholder='blur'
+        blurDataURL={`data:image/svg+xml;base64,${createPlaceholder(500, 200)}`}
+        width={500}
+        height={200}
+        src={cover_image}
+        alt={title + ' cover image'}
+      />
+      <Title>{title}</Title>
+      <Tags>{tagComponents}</Tags>
+      <p>
+        {`Published: ${new Date(published_timestamp).toDateString()} `}
+        <ReadTime>{`(~ ${reading_time_minutes} min)`}</ReadTime>
+      </p>
+      <ExternalLink href={url} target='_blank' rel='noreferrer'>
+        Read on Dev.to
+        {<ArrowForwardIcon />}
+      </ExternalLink>
       <MarkDown>{body_markdown}</MarkDown>
-      {/* </div> */}
-    </div>
+    </Container>
   )
 }
 
 export default BlogShowPage
+
+const Container = styled.section`
+  background: rgba(30, 29, 30, 0.75);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  margin: 20px 0;
+  padding: 50px 6vw;
+`
+
+const Title = styled.h1`
+  font-size: 3rem;
+  margin-bottom: 20px;
+  text-align: center;
+`
+
+const Tag = styled.p`
+  border-bottom: 2px solid ${({ theme }) => theme.hoverHighlightColor};
+  padding: 5px;
+  margin: 0 5px;
+  font-size: 1.2rem;
+`
+
+const Tags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+`
+
+const ExternalLink = styled.a`
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: ${({ theme }) => theme.sigAngles};
+  display: flex;
+  align-items: center;
+  margin-bottom: 70px;
+
+  :hover {
+    text-decoration: underline;
+  }
+`
+
+const ReadTime = styled.span`
+  color: ${({ theme }) => theme.hoverHighlightColor};
+`

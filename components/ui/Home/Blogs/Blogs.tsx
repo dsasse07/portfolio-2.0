@@ -1,20 +1,20 @@
 import styled from 'styled-components'
 import { ArticleModel } from '../../../../models/Article'
 import BlogCard from './BlogCard'
-import Link from 'next/link'
 import LinkButton from '../../LinkButton'
 
 interface BlogProps {
   articles: ArticleModel[]
+  limit?: number
 }
 
-const Blogs: React.FC<BlogProps> = ({ articles }) => {
+const Blogs: React.FC<BlogProps> = ({ articles, limit = -1 }) => {
   const blogCards = articles.map((article) => {
     return <BlogCard article={article} key={article.id} />
   })
 
   return (
-    <Container id='blogs'>
+    <Container>
       <SectionHeader>
         <SectionTitle>Tech Writing</SectionTitle>
         <SectionSubtitle>
@@ -22,10 +22,12 @@ const Blogs: React.FC<BlogProps> = ({ articles }) => {
           scroll for more
         </SectionSubtitle>
       </SectionHeader>
-      <SubSectionContainer>{blogCards.slice(0, 5)}</SubSectionContainer>
-      <SectionFooter>
-        <LinkButton href='/blogs' text='See More!' />
-      </SectionFooter>
+      <SubSectionContainer>{blogCards.slice(0, limit)}</SubSectionContainer>
+      {limit !== -1 && (
+        <SectionFooter>
+          <LinkButton href='/blogs' text='See More!' />
+        </SectionFooter>
+      )}
     </Container>
   )
 }
@@ -33,7 +35,6 @@ const Blogs: React.FC<BlogProps> = ({ articles }) => {
 export default Blogs
 
 const Container = styled.section`
-  /* background: ${({ theme }) => theme.background}; */
   background: rgba(30, 29, 30, 0.75);
   display: flex;
   flex-wrap: wrap;
@@ -43,10 +44,6 @@ const Container = styled.section`
   min-height: 70vh;
   margin: 15vh 0;
   padding: 80px 0;
-
-  .flex-item {
-    margin: 1rem;
-  }
 `
 const SectionHeader = styled.header`
   position: relative;

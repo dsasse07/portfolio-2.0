@@ -10,4 +10,5 @@ export interface ArticleModel {
   body_markdown: string
   viewCount?: string
   reactionCount?: string
+  reading_time_minutes: number
 }

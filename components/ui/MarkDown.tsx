@@ -15,6 +15,7 @@ import styled from 'styled-components'
 import gfm from 'remark-gfm'
 //@ts-ignore
 import ReactEmbedGist from 'react-embed-gist'
+import Image from 'next/image'
 
 interface MarkdownProps {
   children: string
@@ -53,6 +54,22 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         const gistUrl = gistAnchor.children[0].value
         const gistId = gistUrl.match(/dsasse07\/\w*/)[0]
         return <ReactEmbedGist gist={gistId} />
+      } else if (
+        //@ts-ignore
+        node.children[0].tagName === 'img'
+      ) {
+        const image: any = node.children[0]
+        return (
+          <ImageContainer>
+            {/*@ts-ignore*/}
+            <Image
+              src={image.properties.src}
+              alt={image.properties.alt}
+              width='600'
+              height='300'
+            />
+          </ImageContainer>
+        )
       } else {
         return (
           <p className={className} {...props}>
@@ -61,18 +78,18 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         )
       }
     },
-    img({ node, className, children, src, alt, ...props }) {
-      return (
-        <img
-          // @ts-ignore
-          src={src}
-          // @ts-ignore
-          alt={alt}
-          className={className}
-          {...props}
-        />
-      )
-    },
+    // img({ node, className, children, src, alt, ...props }) {
+    //   return (
+    //     <img
+    //       // @ts-ignore
+    //       src={src}
+    //       // @ts-ignore
+    //       alt={alt}
+    //       className={className}
+    //       {...props}
+    //     />
+    //   )
+    // },
     a({ node, className, href, children, ...props }) {
       return (
         <a
@@ -159,14 +176,12 @@ export default MarkDown
 
 const MarkDownContainer = styled(ReactMarkdown)`
   position: relative;
-  overflow-x: hidden;
   display: flex;
-  /* align-items: center; */
   flex-direction: column;
-  padding: 0 5vw;
+  width: 100%;
   h1 {
     text-align: center;
-    font-size: 3.5rem;
+    font-size: 3rem;
   }
   h2 {
     text-align: center;
@@ -174,26 +189,27 @@ const MarkDownContainer = styled(ReactMarkdown)`
   }
   h3 {
     font-size: 1.5rem;
-    width: 100%;
   }
   h4 {
     font-size: 1.2rem;
-    width: 100%;
   }
   h5 {
     font-size: 1.1rem;
-    width: 100%;
   }
 
   p {
     position: relative;
-    text-align: center;
+    text-align: left;
     font-size: 1rem;
-    img {
-    }
   }
 
-  ul {
+  pre {
+    overflow-x: scroll;
+  }
+
+  code {
+    color: ${({ theme }) => theme.hoverHighlightColor};
+    font-size: 0.9rem;
   }
 
   a {
@@ -208,4 +224,9 @@ const MarkDownContainer = styled(ReactMarkdown)`
   img {
     max-width: 70%;
   }
+`
+
+const ImageContainer = styled.div`
+  display: flex;
+  justify-content: center;
 `
