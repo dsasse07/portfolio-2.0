@@ -52,6 +52,7 @@ const Card = styled.a`
   overflow: hidden;
   cursor: pointer;
   text-decoration: none;
+  margin: 20px;
 
   :hover,
   :focus {

@@ -8,6 +8,7 @@ interface LinkButtonProps {
   textColor?: string
   height?: number
   width?: number
+  external?: boolean
 }
 
 const LinkButton: React.FC<LinkButtonProps> = ({
@@ -16,14 +17,30 @@ const LinkButton: React.FC<LinkButtonProps> = ({
   height = 40,
   width = 150,
   textColor = null,
+  external = false,
 }) => {
   return (
-    <Link href={href} passHref>
-      <Button height={height} width={width} textColor={textColor}>
-        <Slider height={height} width={width} />
-        {text}
-      </Button>
-    </Link>
+    <>
+      {external ? (
+        <Button
+          href={href}
+          target='_blank'
+          height={height}
+          width={width}
+          textColor={textColor}
+        >
+          <Slider height={height} width={width} />
+          {text}
+        </Button>
+      ) : (
+        <Link href={href} passHref>
+          <Button height={height} width={width} textColor={textColor}>
+            <Slider height={height} width={width} />
+            {text}
+          </Button>
+        </Link>
+      )}
+    </>
   )
 }
 

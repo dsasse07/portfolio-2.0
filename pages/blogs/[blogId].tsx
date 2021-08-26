@@ -111,6 +111,7 @@ const Tag = styled.p`
 const Tags = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 15px;
 `
 

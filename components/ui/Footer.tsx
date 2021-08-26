@@ -9,9 +9,9 @@ const Footer: React.FC<FooterProps> = () => {
     <Container>
       <Text>Built with</Text>
       <Text>Typescript + Next.JS + GraphQL + custom Styled Components</Text>
-      <Link href='https://github.com/dsasse07/portfolio' passHref>
-        <EmailLink>View Source Code</EmailLink>
-      </Link>
+      <LinkText href='https://github.com/dsasse07/portfolio' target='_blank'>
+        View Source Code
+      </LinkText>
     </Container>
   )
 }
@@ -35,7 +35,7 @@ const Text = styled.p`
   text-align: center;
 `
 
-const EmailLink = styled.a`
+const LinkText = styled.a`
   margin: 0;
   padding: 0;
   padding-top: 10px;

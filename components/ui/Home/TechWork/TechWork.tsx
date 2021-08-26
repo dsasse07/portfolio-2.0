@@ -33,7 +33,7 @@ const TechWork: React.FC<TechWorkProps> = ({ profileInfo }) => {
   return (
     <Container>
       <SectionHeader>
-        <SectionTitle>My Work</SectionTitle>
+        <SectionTitle>Technical Work</SectionTitle>
       </SectionHeader>
       <Row>
         <SubSectionContainer>

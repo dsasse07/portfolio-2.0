@@ -18,6 +18,7 @@ const Contact: React.FC<ContactProps> = () => {
         <LinkButton
           href='https://docs.google.com/document/d/1GNOVe6IyuEkw07ej1BxIF6iFBkWTXv-9sNRw-P-2pUI/edit?usp=sharing'
           text='SEE MY RESUME'
+          external={true}
         >
           SEE MY RESUME
         </LinkButton>

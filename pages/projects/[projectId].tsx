@@ -62,5 +62,5 @@ const Container = styled.section`
   padding: 10px;
   min-height: 90vh;
   margin: 10vh 0;
-  padding: 80px 0;
+  padding: 50px 6vw;
 `
