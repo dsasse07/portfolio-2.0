@@ -113,7 +113,7 @@ const SubSectionContainer = styled.section`
 `
 
 const SubSectionHeader = styled(SectionHeader)`
-  width: 90%;
+  width: 100%;
 `
 
 const SubSectionTitle = styled.h3`

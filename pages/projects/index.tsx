@@ -128,7 +128,6 @@ const SubSectionContainer = styled.section`
   flex-direction: column;
   align-items: center;
   flex: 1 0 0;
-  /* margin: 10px; */
 `
 
 const ProjectsSubSection = styled(SubSectionContainer)`
@@ -138,7 +137,7 @@ const ProjectsSubSection = styled(SubSectionContainer)`
 `
 
 const SubSectionHeader = styled(SectionHeader)`
-  width: 90%;
+  width: 100%;
 `
 
 const SubSectionTitle = styled.h3`
