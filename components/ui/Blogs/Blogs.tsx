@@ -16,7 +16,7 @@ const Blogs: React.FC<BlogProps> = ({ articles, limit = -1 }) => {
   return (
     <Container>
       <SectionHeader>
-        <SectionTitle>Tech Writing</SectionTitle>
+        <SectionTitle>Technical Writing</SectionTitle>
         <SectionSubtitle>
           A selection of my most recent technical blog posts. Click to read or
           scroll for more
@@ -35,7 +35,7 @@ const Blogs: React.FC<BlogProps> = ({ articles, limit = -1 }) => {
 export default Blogs
 
 const Container = styled.section`
-  background: rgba(30, 29, 30, 0.75);
+  background: ${({ theme }) => theme.translucentBackground};
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

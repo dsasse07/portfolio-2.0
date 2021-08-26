@@ -44,7 +44,7 @@ const LogoLink = styled.a`
 
   :hover,
   :focus {
-    color: ${({ theme }) => theme.hoverHighlightColor};
+    color: ${({ theme }) => theme.highlightColor};
   }
 
   span {

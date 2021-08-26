@@ -99,8 +99,8 @@ const ClearButton = styled.button`
   cursor: pointer;
   :hover,
   :focus {
-    color: ${({ theme }) => theme.hoverHighlightColor};
-    border-color: ${({ theme }) => theme.hoverHighlightColor};
+    color: ${({ theme }) => theme.highlightColor};
+    border-color: ${({ theme }) => theme.highlightColor};
     outline: none;
   }
 `

@@ -3,8 +3,8 @@ import OpenInNewIcon from '@material-ui/icons/OpenInNew'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import Image from 'next/image'
 import { createPlaceholder } from '../../../utils/createPlaceholder'
-import { PortfolioProjectsResponseModel } from '../../../data/networkRequests'
 import Link from 'next/link'
+import { PortfolioProjectsResponseModel } from '../../../models/Project'
 
 interface ProjectCardProps {
   project: PortfolioProjectsResponseModel
@@ -85,8 +85,8 @@ const Card = styled.article`
 
   :hover,
   :focus-within {
-    box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.sigAngles};
-    border: 1px solid ${({ theme }) => theme.sigAngles};
+    box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.activeColor};
+    border: 1px solid ${({ theme }) => theme.activeColor};
   }
 `
 
@@ -113,7 +113,7 @@ const Col = styled.div`
   align-items: center;
   height: 100%;
   padding: 0 15px;
-  background: rgba(30, 29, 30, 0.75);
+  background: ${({ theme }) => theme.translucentBackground};
 `
 
 const LogoContainer = styled.div`
@@ -168,7 +168,7 @@ const LinkTab = styled.a`
   :focus {
     background: ${({ theme }) => theme.fontColor};
     svg {
-      color: ${({ theme }) => theme.darkFontColor};
+      color: ${({ theme }) => theme.background};
     }
   }
 `

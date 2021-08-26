@@ -4,10 +4,10 @@ import { ParsedUrlQuery } from 'querystring'
 import {
   fetchPortfolioProjects,
   fetchProject,
-  PortfolioProjectsResponseModel,
 } from '../../data/networkRequests'
 import MarkDown from '../../components/ui/MarkDown'
 import styled from 'styled-components'
+import { PortfolioProjectsResponseModel } from '../../models/Project'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const projectsData: PortfolioProjectsResponseModel[] =
@@ -53,7 +53,7 @@ export default ProjectShowPage
 
 const Container = styled.section`
   position: relative;
-  background: rgba(30, 29, 30, 0.75);
+  background: ${({ theme }) => theme.translucentBackground};
   display: flex;
   align-items: center;
   flex-direction: column;

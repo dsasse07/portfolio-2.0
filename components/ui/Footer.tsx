@@ -40,7 +40,7 @@ const LinkText = styled.a`
   padding: 0;
   padding-top: 10px;
   text-decoration: none;
-  color: ${({ theme }) => theme.sigAngles};
+  color: ${({ theme }) => theme.activeColor};
 
   :hover {
     text-decoration: underline;

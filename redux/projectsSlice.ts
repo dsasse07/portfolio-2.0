@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { PortfolioProjectsResponseModel } from '../data/networkRequests'
+import { PortfolioProjectsResponseModel } from '../models/Project'
 
 // Define a type for the slice state
 interface projectsState {

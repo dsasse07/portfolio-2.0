@@ -2,7 +2,7 @@ export const printConsoleWelcome = (): void => {
   console.clear()
   const headerStyles = [
     'color: black',
-    'background: #a8efdd',
+    'background: #40c115',
     'font-size: 30px',
     'padding: 10px',
     'margin: 10px 0 10px 0',
@@ -17,5 +17,12 @@ export const printConsoleWelcome = (): void => {
   )
   console.log('%cTwitter: https://twitter.com/dannysasse', messageStyles)
   console.log('%cGithub: https://github.com/dsasse07', messageStyles)
-  console.log('%cHave a wonderful day!', messageStyles)
+
+  const goodbyeStyles = [
+    'color: #ffec1c',
+    'background: #1e1d1e',
+    'font-size: 13px',
+    'padding: 4px 10px',
+  ].join(';')
+  console.log('%cHave a wonderful day!', goodbyeStyles)
 }

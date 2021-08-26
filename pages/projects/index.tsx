@@ -1,11 +1,7 @@
 import { GetStaticProps } from 'next'
 import React, { useEffect } from 'react'
 import GitHubGarden from '../../components/ui/TechWork/GitHubGarden'
-import {
-  fetchGitHub,
-  fetchPortfolioProjects,
-  PortfolioProjectsResponseModel,
-} from '../../data/networkRequests'
+import { fetchGitHub, fetchPortfolioProjects } from '../../data/networkRequests'
 import { GitHubResponseModel } from '../../models/GitHub'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { setProjects } from '../../redux/projectsSlice'
@@ -13,6 +9,7 @@ import styled from 'styled-components'
 import ActiveFilters from '../../components/ui/TechWork/ActiveFilters'
 import SkillIcons from '../../components/ui/TechWork/SkillIcons'
 import SqProjectCard from '../../components/ui/TechWork/SqProjectCard'
+import { PortfolioProjectsResponseModel } from '../../models/Project'
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { user } = await fetchGitHub()
@@ -103,7 +100,7 @@ export default ProjectsIndex
 
 const Container = styled.section`
   position: relative;
-  background: rgba(30, 29, 30, 0.75);
+  background: ${({ theme }) => theme.translucentBackground};
   display: flex;
   align-items: center;
   flex-direction: column;

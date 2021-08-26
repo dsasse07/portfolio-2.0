@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
-import { lightTheme } from './themes'
+import { theme } from './themes'
 // import AugustinaWoff from './fonts/Agustina.woff'
 
 /**
@@ -7,35 +7,19 @@ import { lightTheme } from './themes'
  * to create the type interface for the Theme
  */
 declare module 'styled-components' {
-  type Theme = typeof lightTheme
+  type Theme = typeof theme
   export interface DefaultTheme extends Theme {}
 }
 
 const GlobalStyle = createGlobalStyle`
   :root{
     --white: #fcfcfc;
-    --lt_green: #40c115;
-    --lt_gray: #2D2D2D;
-    --dk_gray: #1e1d1e;
     --gray: #c0c0c0;
-    --golden: #ffec1c;
+    --lt_green: #40c115;
     --danger: #e81e1e;
-
-    --palegreen:#A8EFDD;
-    --darkblue:#1E357D;
-    --yellow: #ffde3d;
-    --twitterBlue: #1CA3F1;
-    --slate: #2f3538;
-    --burntred: #2C0F0D;
-    --burntyellow: #e09900;
-    --pink: #FC3795;
-    --dk_green: #797D62;
-    --salmon: #D9AE94;
-    --banana: #F1DCA7;
-    --yellow_red: #FFCB69;
-    --red_orange: #D08C60;
-    --brown: #997B66;
+    --golden: #ffec1c;
   }
+  
   body {
     background: ${(props) => props.theme.background};
     color: ${(props) => props.theme.fontColor};

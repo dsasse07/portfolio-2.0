@@ -17,7 +17,6 @@ import typescript from './typescript.png'
 import sql from './sql.png'
 import rest from './rest.png'
 import graphql from './graphql.png'
-// frontend, backend, fullstack
 
 export interface SkillIcons {
   [key: string]: {

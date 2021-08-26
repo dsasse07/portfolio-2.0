@@ -132,10 +132,9 @@ const MenuButton = styled.button`
 
   :hover,
   :focus {
-    border: 1px solid ${({ theme }) => theme.hoverHighlightColor};
-    box-shadow: ${({ theme }) =>
-      theme.shadow + ' ' + theme.hoverHighlightColor};
-    color: ${({ theme }) => theme.hoverHighlightColor};
+    border: 1px solid ${({ theme }) => theme.highlightColor};
+    box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.highlightColor};
+    color: ${({ theme }) => theme.highlightColor};
   }
 
   svg {

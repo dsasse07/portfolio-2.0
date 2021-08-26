@@ -46,7 +46,7 @@ const SignatureContainer = styled.a`
     opacity: 0;
     top: 38px;
     left: 60px;
-    border-top: 2px solid ${({ theme }) => theme.hoverHighlightColor};
+    border-top: 2px solid ${({ theme }) => theme.highlightColor};
   }
 
   :hover,
@@ -55,14 +55,14 @@ const SignatureContainer = styled.a`
       width: 140px;
       height: 10px;
       opacity: 1;
-      border-top: 2px solid ${({ theme }) => theme.hoverHighlightColor};
+      border-top: 2px solid ${({ theme }) => theme.highlightColor};
       /* border-radius: 50%; */
     }
   }
 `
 
 const AngleBracket = styled.span`
-  color: ${({ theme }) => theme.sigAngles};
+  color: ${({ theme }) => theme.activeColor};
 `
 const Name = styled.span`
   font-family: 'Agustina Regular';
@@ -70,5 +70,5 @@ const Name = styled.span`
   font-variant-ligatures: no-common-ligatures;
   -webkit-font-variant-ligatures: no-common-ligatures;
   padding: 0 10px;
-  color: ${({ theme }) => theme.sigColor};
+  color: ${({ theme }) => theme.fontColor};
 `

@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import profilePhoto from '../../../assets/headshots/formalProfile400.jpg'
+import profilePhoto from '../../assets/headshots/formalProfile400.jpg'
 import Image from 'next/image'
-import { useAppSelector } from '../../redux/hooks'
 
 interface AboutProps {}
 
@@ -60,7 +59,7 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  color: ${({ theme }) => theme.sigColor};
+  color: ${({ theme }) => theme.fontColor};
   padding: 1rem;
   padding-top: 0;
   font-family: 'Helvetica Neue';
@@ -92,22 +91,4 @@ const ButtonBar = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 18px;
-`
-
-const Button = styled.a`
-  padding: 8px;
-  background: ${(props) => props.theme.itemBackground};
-  border: 1px solid ${(props) => props.theme.resumeBorder};
-  box-shadow: ${(props) => props.theme.shadow};
-  outline: none;
-  transition: 0.2s;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${(props) => props.theme.resumeColor};
-  font-weight: bold;
-  font-size: 0.9rem;
-
-  :hover {
-    transform: scale(1.1);
-  }
 `

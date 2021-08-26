@@ -72,10 +72,9 @@ const TechWork: React.FC<TechWorkProps> = ({ profileInfo }) => {
 export default TechWork
 
 const Container = styled.section`
-  /* background: ${({ theme }) => theme.background}; */
-  position: relative;
-  background: rgba(30, 29, 30, 0.75);
+  background: ${({ theme }) => theme.translucentBackground};
   display: flex;
+  position: relative;
   align-items: flex-start;
   flex-wrap: wrap;
   padding: 10px;

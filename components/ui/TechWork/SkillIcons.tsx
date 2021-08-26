@@ -57,12 +57,12 @@ const IconContainer = styled.button<IconContainerStyleProps>`
   max-height: 100px;
   padding: 10px;
   border: 1px solid
-    ${({ selected, theme }) => (selected ? theme.sigAngles : theme.fontColor)};
+    ${({ selected, theme }) => (selected ? theme.activeColor : theme.fontColor)};
   border-radius: 50%;
   background: #403130;
   cursor: pointer;
   box-shadow: ${({ selected, theme }) =>
-    selected && theme.shadow + ' ' + theme.sigAngles};
+    selected && theme.shadow + ' ' + theme.activeColor};
   outline: none;
 
   :hover,
@@ -70,9 +70,9 @@ const IconContainer = styled.button<IconContainerStyleProps>`
     box-shadow: ${({ selected, theme }) =>
       selected
         ? theme.shadow + ' ' + theme.dangerTextColor
-        : theme.shadow + ' ' + theme.hoverHighlightColor};
+        : theme.shadow + ' ' + theme.highlightColor};
     border: 1px solid
       ${({ selected, theme }) =>
-        selected ? theme.dangerTextColor : theme.hoverHighlightColor};
+        selected ? theme.dangerTextColor : theme.highlightColor};
   }
 `

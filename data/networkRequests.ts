@@ -1,4 +1,7 @@
 import { gql, GraphQLClient } from 'graphql-request'
+import { PortfolioProjectsResponseModel } from '../models/Project'
+import { formatRepoName } from '../utils/formatRepoName'
+import { parseRepoReadme } from '../utils/parseRepoReadme'
 
 // Fetch all of my blog posts from Dev.to REST API
 
@@ -59,27 +62,17 @@ export const fetchGitHub = async () => {
   return data
 }
 
-export interface PortfolioProjectsResponseModel {
-  databaseId: number
-  name: string
-  url: string
-  route: string
-  updatedAt: string
-  description: string
-  repositoryTopics: {
-    nodes: {
-      topic: {
-        name: string
-      }
-    }[]
-  }
-  object: {
-    text: string
-  }
-  deployUrl?: string
-  logo: string
-  demoVideo?: string
-}
+/* 
+  Get all projects tagged with "portfolio-project" by user
+  using Github GraphQL API
+
+  Returns repo info and scans README for additional data:
+  - logo = URL regex match after ![__ Logo] in Readme
+  - demoVideo = URL regex match after [Demo Video] in Readme
+  - deployUrl = URL regex match after [__ Url] in Readme
+
+  Repo name is formatted to removed dashes and capitalize first letters
+*/
 
 export const fetchPortfolioProjects = async () => {
   const endpoint = 'https://api.github.com/graphql'
@@ -127,28 +120,30 @@ export const fetchPortfolioProjects = async () => {
   } = await client.request(query, variables)
   // Format Repo Name and Match Portfolio Data from Readme.md file
   const updatedNodes = nodes.map((node: PortfolioProjectsResponseModel) => {
+    // Save repo name for route url before formatting
     const route = node.name
-    node.name = node.name
-      .replace(/-/g, ' ')
-      .split(' ')
-      .map((word) => word[0].toUpperCase() + word.slice(1))
-      .join(' ')
-
+    node.name = formatRepoName(node.name)
     // @ts-ignore
-    const [logo = '', demoVideo = '', deployUrl = ''] = node.object.text.match(
-      // Matches urls after [... Logo], [... Video], [Deploy Url]
-      /(?<=Logo\]\()(https:\/\/[\w\.\/\?\=\-\*]+)|(?<=Video\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Url\]\()(https:\/\/[\w\.\/\?\=\-]+)/g
+    const [logo = '', demoVideo = '', deployUrl = ''] = parseRepoReadme(
+      node.object.text
     )
     return { ...node, route, logo, demoVideo, deployUrl }
   })
 
+  // Default sorting of projects will be most recent first
   return updatedNodes.sort(
     (a: PortfolioProjectsResponseModel, b: PortfolioProjectsResponseModel) => {
       //@ts-ignore
-      return new Date(a.updatedAt) - new Date(b.updatedAt)
+      return new Date(b.updatedAt) - new Date(a.updatedAt)
     }
   )
 }
+
+/*
+  Gets specific GitHub project by repo name & username
+
+  Returns same info as above
+*/
 
 export const fetchProject = async (name: string) => {
   const endpoint = 'https://api.github.com/graphql'
@@ -184,17 +179,16 @@ export const fetchProject = async (name: string) => {
     name: name,
     owner: 'dsasse07',
   }
+
   const { repository } = await client.request(query, variables)
+  // Save repo name for route url before formatting
   const route = repository.name
-  repository.name = repository.name
-    .replace(/-/g, ' ')
-    .split(' ')
-    .map((word: string) => word[0].toUpperCase() + word.slice(1))
-    .join(' ')
-  const [logo = '', demoVideo = '', deployUrl = ''] =
-    repository.object.text.match(
-      // Matches urls after [... Logo], [... Video], [Deploy Url]
-      /(?<=Logo\]\()(https:\/\/[\w\.\/\?\=\-\*]+)|(?<=Video\]\()(https:\/\/[\w\.\/\?\=\-]+)|(?<=Url\]\()(https:\/\/[\w\.\/\?\=\-]+)/g
-    )
+  repository.name = formatRepoName(repository.name)
+
+  // @ts-ignore
+  const [logo = '', demoVideo = '', deployUrl = ''] = parseRepoReadme(
+    repository.object.text
+  )
+
   return { ...repository, route, logo, demoVideo, deployUrl }
 }

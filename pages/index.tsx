@@ -6,7 +6,6 @@ import {
   fetchGitHub,
   fetchMyArticles,
   fetchPortfolioProjects,
-  PortfolioProjectsResponseModel,
 } from '../data/networkRequests'
 import { ArticleModel } from '../models/Article'
 import { GetStaticProps } from 'next'
@@ -16,6 +15,7 @@ import styled from 'styled-components'
 import { useAppDispatch } from '../redux/hooks'
 import { setProjects } from '../redux/projectsSlice'
 import { useEffect } from 'react'
+import { PortfolioProjectsResponseModel } from '../models/Project'
 
 export const getStaticProps: GetStaticProps = async () => {
   const articles = await fetchMyArticles()

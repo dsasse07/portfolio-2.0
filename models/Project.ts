@@ -1,19 +1,8 @@
-export interface ProjectModel {
-  id: string
-  title: string
-  logo: string
-  description: string
-  repoLink: string
-  url: string | null
-  demoVideo: string
-  embedId: string
-  technologies: string[]
-}
-
 export interface PortfolioProjectsResponseModel {
   databaseId: number
   name: string
   url: string
+  route: string
   updatedAt: string
   description: string
   repositoryTopics: {
@@ -26,7 +15,7 @@ export interface PortfolioProjectsResponseModel {
   object: {
     text: string
   }
-  deployUrl?: string
   logo: string
+  deployUrl?: string
   demoVideo?: string
 }

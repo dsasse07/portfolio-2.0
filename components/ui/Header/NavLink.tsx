@@ -42,11 +42,12 @@ const Button = styled.a<ButtonStyleProps>`
 
 const NavButton = styled(Button)`
   border-bottom: 3px solid transparent;
-  border-bottom-color: ${({ theme, selected }) => selected && theme.sigAngles};
+  border-bottom-color: ${({ theme, selected }) =>
+    selected && theme.activeColor};
 
   :hover,
   :focus {
-    border-bottom-color: ${({ theme }) => theme.hoverHighlightColor};
+    border-bottom-color: ${({ theme }) => theme.highlightColor};
   }
 `
 
@@ -58,7 +59,7 @@ const MenuButton = styled(Button)`
     position: absolute;
     display: ${({ selected }) => (selected ? 'block' : 'none')};
     background: ${({ theme, selected }) =>
-      selected ? theme.sigAngles : theme.hoverHighlightColor};
+      selected ? theme.activeColor : theme.highlightColor};
     top: 15px;
     left: 10%;
     width: 14px;

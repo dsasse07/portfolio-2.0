@@ -30,7 +30,7 @@ const Contact: React.FC<ContactProps> = () => {
 export default Contact
 
 const Container = styled.div`
-  background: rgba(30, 29, 30, 0.75);
+  background: ${({ theme }) => theme.translucentBackground};
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -70,7 +70,7 @@ const DescriptionText = styled.p`
 const LinkText = styled.a`
   text-decoration: none;
   font-size: 1.5rem;
-  color: ${(props) => props.theme.sigAngles};
+  color: ${(props) => props.theme.activeColor};
   margin: 10px 0;
 
   :hover {

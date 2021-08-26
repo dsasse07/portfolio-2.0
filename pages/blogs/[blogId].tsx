@@ -82,7 +82,7 @@ const BlogShowPage: React.FC<BlogShowPageProps> = ({ article }) => {
 export default BlogShowPage
 
 const Container = styled.section`
-  background: rgba(30, 29, 30, 0.75);
+  background: ${({ theme }) => theme.translucentBackground};
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -100,7 +100,7 @@ const Title = styled.h1`
 `
 
 const Tag = styled.p`
-  border-bottom: 2px solid ${({ theme }) => theme.hoverHighlightColor};
+  border-bottom: 2px solid ${({ theme }) => theme.highlightColor};
   padding: 5px;
   margin: 0 5px;
   font-size: 1.2rem;
@@ -117,7 +117,7 @@ const ExternalLink = styled.a`
   margin: 0;
   padding: 0;
   text-decoration: none;
-  color: ${({ theme }) => theme.sigAngles};
+  color: ${({ theme }) => theme.activeColor};
   display: flex;
   align-items: center;
   margin-bottom: 70px;
@@ -128,5 +128,5 @@ const ExternalLink = styled.a`
 `
 
 const ReadTime = styled.span`
-  color: ${({ theme }) => theme.hoverHighlightColor};
+  color: ${({ theme }) => theme.highlightColor};
 `

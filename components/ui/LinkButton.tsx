@@ -55,12 +55,13 @@ const Button = styled.a<ButtonStyleProps>`
   position: relative;
   cursor: pointer;
   font-size: 1rem;
-  color: ${({ theme, textColor }) => (textColor ? textColor : theme.sigAngles)};
+  color: ${({ theme, textColor }) =>
+    textColor ? textColor : theme.activeColor};
   display: flex;
   justify-content: center;
   align-items: center;
   flex: initial;
-  border: 1px solid ${({ theme }) => theme.sigAngles};
+  border: 1px solid ${({ theme }) => theme.activeColor};
   height: ${({ height }) => height + 'px'};
   width: ${({ width }) => width + 'px'};
   text-decoration: none;
@@ -73,8 +74,8 @@ const Button = styled.a<ButtonStyleProps>`
     div {
       left: 0;
     }
-    color: ${({ theme }) => theme.darkFontColor};
-    border: 1px solid ${({ theme }) => theme.hoverHighlightColor};
+    color: ${({ theme }) => theme.background};
+    border: 1px solid ${({ theme }) => theme.highlightColor};
   }
 `
 
@@ -87,8 +88,8 @@ const Slider = styled.div<SliderStyleProps>`
   top: 0;
   left: -110%;
   transition: 0.4s;
-  color: ${({ theme }) => theme.hoverHighlightColor};
-  background: ${({ theme }) => theme.hoverHighlightColor};
+  color: ${({ theme }) => theme.highlightColor};
+  background: ${({ theme }) => theme.highlightColor};
   height: ${({ height }) => height + 'px'};
   width: ${({ width }) => width + 'px'};
   z-index: -1;

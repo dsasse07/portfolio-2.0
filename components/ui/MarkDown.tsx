@@ -191,12 +191,12 @@ const MarkDownContainer = styled(ReactMarkdown)`
   }
 
   code {
-    color: ${({ theme }) => theme.hoverHighlightColor};
+    color: ${({ theme }) => theme.highlightColor};
     font-size: 0.9rem;
   }
 
   a {
-    color: ${({ theme }) => theme.sigAngles};
+    color: ${({ theme }) => theme.activeColor};
     font-size: 1.1rem;
   }
 

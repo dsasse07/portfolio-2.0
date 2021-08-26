@@ -56,8 +56,8 @@ const Card = styled.a`
   :hover,
   :focus {
     outline: none;
-    box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.sigAngles};
-    border: 1px solid ${({ theme }) => theme.sigAngles};
+    box-shadow: ${({ theme }) => theme.shadow + ' ' + theme.activeColor};
+    border: 1px solid ${({ theme }) => theme.activeColor};
 
     #textLayer {
       background: ${({ theme }) =>
@@ -84,7 +84,6 @@ const TextLayer = styled.header`
   :hover {
     background: ${({ theme }) =>
       'radial-gradient(circle, rgba(32,96,11,0.9) 0%, rgba(32,96,11, 0.7) 100% )'};
-    /* color: ${({ theme }) => theme.darkFontColor}; */
   }
 `
 
