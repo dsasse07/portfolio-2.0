@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 import React, { useEffect } from 'react'
-import GitHubGarden from '../../components/ui/Home/TechWork/GitHubGarden'
+import GitHubGarden from '../../components/ui/TechWork/GitHubGarden'
 import {
   fetchGitHub,
   fetchPortfolioProjects,
@@ -10,9 +10,9 @@ import { GitHubResponseModel } from '../../models/GitHub'
 import { useAppDispatch, useAppSelector } from '../../redux/hooks'
 import { setProjects } from '../../redux/projectsSlice'
 import styled from 'styled-components'
-import ActiveFilters from '../../components/ui/Home/TechWork/ActiveFilters'
-import SkillIcons from '../../components/ui/Home/TechWork/SkillIcons'
-import SqProjectCard from '../../components/ui/Home/TechWork/SqProjectCard'
+import ActiveFilters from '../../components/ui/TechWork/ActiveFilters'
+import SkillIcons from '../../components/ui/TechWork/SkillIcons'
+import SqProjectCard from '../../components/ui/TechWork/SqProjectCard'
 
 export const getStaticProps: GetStaticProps = async (context) => {
   const { user } = await fetchGitHub()
@@ -24,7 +24,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
       profileInfo: user,
       projectsData: projectsData,
     },
-    revalidate: 1800,
+    revalidate: 60,
   }
 }
 

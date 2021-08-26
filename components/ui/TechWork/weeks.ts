@@ -1,4 +1,4 @@
-import { Week } from '../../../../models/GitHub'
+import { Week } from '../../../models/GitHub'
 export const weeks: Week[] = [
   {
     firstDay: '2020-07-19',

@@ -19,7 +19,6 @@
     "react-embed-gist": "^1.0.11",
     "react-markdown": "^6.0.2",
     "react-player": "^2.9.0",
-    "react-query": "^3.19.0",
     "react-redux": "^7.2.4",
     "react-syntax-highlighter": "^15.4.4",
     "remark-gfm": "^1.0.0",

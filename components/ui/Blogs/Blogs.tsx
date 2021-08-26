@@ -1,7 +1,7 @@
 import styled from 'styled-components'
-import { ArticleModel } from '../../../../models/Article'
+import { ArticleModel } from '../../../models/Article'
 import BlogCard from './BlogCard'
-import LinkButton from '../../LinkButton'
+import LinkButton from '../LinkButton'
 
 interface BlogProps {
   articles: ArticleModel[]

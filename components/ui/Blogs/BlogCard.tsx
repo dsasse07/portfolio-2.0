@@ -1,8 +1,7 @@
 import styled from 'styled-components'
-import { forwardRef } from 'react'
 import Image from 'next/image'
-import { ArticleModel } from '../../../../models/Article'
-import { createPlaceholder } from '../../../../utils/createPlaceholder'
+import { ArticleModel } from '../../../models/Article'
+import { createPlaceholder } from '../../../utils/createPlaceholder'
 import Link from 'next/link'
 
 interface BlogCardProps {

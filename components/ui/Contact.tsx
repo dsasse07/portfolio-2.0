@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import LinkButton from '../LinkButton'
-import SocialLinks from '../SocialLinks/SocialLinks'
+import LinkButton from './LinkButton'
+import SocialLinks from './SocialLinks/SocialLinks'
 
 interface ContactProps {}
 

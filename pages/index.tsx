@@ -1,7 +1,7 @@
 import Head from 'next/head'
-import About from '../components/ui/Home/About'
-import Blogs from '../components/ui/Home/Blogs/Blogs'
-import Contact from '../components/ui/Home/Contact'
+import About from '../components/ui/About'
+import Blogs from '../components/ui/Blogs/Blogs'
+import Contact from '../components/ui/Contact'
 import {
   fetchGitHub,
   fetchMyArticles,
@@ -10,7 +10,7 @@ import {
 } from '../data/networkRequests'
 import { ArticleModel } from '../models/Article'
 import { GetStaticProps } from 'next'
-import TechWork from '../components/ui/Home/TechWork/TechWork'
+import TechWork from '../components/ui/TechWork/TechWork'
 import { GitHubResponseModel } from '../models/GitHub'
 import styled from 'styled-components'
 import { useAppDispatch } from '../redux/hooks'
@@ -29,14 +29,14 @@ export const getStaticProps: GetStaticProps = async () => {
       profileInfo: user,
       projects: projectsData,
     },
-    revalidate: 3600,
+    revalidate: 60,
   }
 }
 
 interface HomeProps {
-  articles: ArticleModel[]
   profileInfo: GitHubResponseModel
   projects: PortfolioProjectsResponseModel[]
+  articles: ArticleModel[]
 }
 
 const Home: React.FC<HomeProps> = ({ articles, profileInfo, projects }) => {

@@ -1,6 +1,6 @@
 import { GetStaticProps } from 'next'
 import React from 'react'
-import Blogs from '../../components/ui/Home/Blogs/Blogs'
+import Blogs from '../../components/ui/Blogs/Blogs'
 import { fetchMyArticles } from '../../data/networkRequests'
 import { ArticleModel } from '../../models/Article'
 
@@ -11,7 +11,7 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       articles,
     },
-    revalidate: 3600,
+    revalidate: 60,
   }
 }
 

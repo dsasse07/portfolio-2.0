@@ -1,15 +1,11 @@
 import styled from 'styled-components'
 import profilePhoto from '../../../assets/headshots/formalProfile400.jpg'
 import Image from 'next/image'
-import SocialLinks from '../SocialLinks/SocialLinks'
-import { useAppSelector } from '../../../redux/hooks'
-import themeSlice from '../../../redux/themeSlice'
+import { useAppSelector } from '../../redux/hooks'
 
 interface AboutProps {}
 
 const About: React.FC<AboutProps> = () => {
-  const theme = useAppSelector(({ theme }) => theme.theme)
-
   return (
     <Container>
       <PhotoContainer className='flex-item'>

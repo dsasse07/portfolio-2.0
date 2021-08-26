@@ -62,12 +62,7 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         return (
           <ImageContainer>
             {/*@ts-ignore*/}
-            <img
-              src={image.properties.src}
-              alt={image.properties.alt}
-              // width='600'
-              // height='300'
-            />
+            <img src={image.properties.src} alt={image.properties.alt} />
           </ImageContainer>
         )
       } else {

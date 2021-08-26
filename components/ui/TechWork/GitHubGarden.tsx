@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Week } from '../../../../models/GitHub'
+import { Week } from '../../../models/GitHub'
 // import { weeks } from './weeks'
-import Tooltip from '../../Tooltip'
-import { useBreakpoint } from '../../../../utils/useBreakpointProvider'
-import { useAppSelector } from '../../../../redux/hooks'
+import Tooltip from '../Tooltip'
+import { useBreakpoint } from '../../../utils/useBreakpointProvider'
+import { useAppSelector } from '../../../redux/hooks'
 
 interface GitHubGardenProps {
   weeks: Week[]

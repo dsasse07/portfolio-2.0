@@ -3,8 +3,6 @@ import React from 'react'
 import { fetchMyArticles, fetchOneArticle } from '../../data/networkRequests'
 import { ParsedUrlQuery } from 'querystring'
 import { ArticleModel } from '../../models/Article'
-import { useQuery } from 'react-query'
-import { useRouter } from 'next/router'
 import MarkDown from '../../components/ui/MarkDown'
 import styled from 'styled-components'
 import Image from 'next/image'
@@ -33,7 +31,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       article,
     },
-    revalidate: 1800,
+    revalidate: 60,
   }
 }
 
