@@ -84,7 +84,7 @@ const Menu = styled.nav<MenuStyleProps>`
   flex-direction: column;
   align-items: center;
   top: 0;
-  right: 0;
+  right: ${({ isOpen }) => (isOpen ? '0' : '-65vw')};
   background: ${({ theme }) => theme.background};
   border-left: 1px solid ${({ theme }) => theme.fontColor};
   width: 60vw;
@@ -93,10 +93,6 @@ const Menu = styled.nav<MenuStyleProps>`
   padding-top: 15vh;
   z-index: 1;
   transition: 200ms;
-  transform: ${({ isOpen }) =>
-    !isOpen ? 'translateX(0)' : 'translateX(65vw)'};
-  -webkit-transform: ${({ isOpen }) =>
-    !isOpen ? 'translateX(0)' : 'translateX(65vw)'};
 `
 
 interface UnderlayStyleProps {
