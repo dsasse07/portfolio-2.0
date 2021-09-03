@@ -12,7 +12,7 @@ const Blogs: React.FC<BlogProps> = ({ articles, limit = -1 }) => {
   const blogCards = articles.map((article) => {
     return <BlogCard article={article} key={article.id} />
   })
-
+  console.log(blogCards.length)
   return (
     <Container>
       <SectionHeader>
@@ -22,7 +22,9 @@ const Blogs: React.FC<BlogProps> = ({ articles, limit = -1 }) => {
           scroll for more
         </SectionSubtitle>
       </SectionHeader>
-      <SubSectionContainer>{blogCards.slice(0, limit)}</SubSectionContainer>
+      <SubSectionContainer>
+        {limit === -1 ? blogCards : blogCards.slice(0, limit)}
+      </SubSectionContainer>
       {limit !== -1 && (
         <SectionFooter>
           <LinkButton href='/blogs' text='See More!' />
