@@ -2,6 +2,7 @@ import tree from '../assets/banners/pexels-tobi.jpg'
 
 export const theme = {
   banner: tree,
+
   background: '#1e1d1e',
   translucentBackground: 'rgba(30, 29, 30, 0.75)',
   headerOpacity: '0',
@@ -20,5 +21,6 @@ export const theme = {
     THIRD_QUARTILE: '#2ead43',
     FOURTH_QUARTILE: '#39D353',
   },
+
   scrollY: 'auto',
 }
