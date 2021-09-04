@@ -11,8 +11,8 @@ const About: React.FC<AboutProps> = () => {
         <Image placeholder='blur' src={profilePhoto} alt='Danny Sasse' />
       </PhotoContainer>
       <TextContainer>
-        <Greeting>Hi, I'm Danny</Greeting>
-        {/* <Greeting>Software Engineer.</Greeting> */}
+        <Greeting>Hi, I'm Danny!</Greeting>
+        <Greeting>- Software Engineer -</Greeting>
       </TextContainer>
     </Container>
   )

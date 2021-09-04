@@ -12,7 +12,7 @@ const Blogs: React.FC<BlogProps> = ({ articles, limit = -1 }) => {
   const blogCards = articles.map((article) => {
     return <BlogCard article={article} key={article.id} />
   })
-  console.log(blogCards.length)
+
   return (
     <Container>
       <SectionHeader>
