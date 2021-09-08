@@ -52,6 +52,9 @@ const GitHubGarden: React.FC<GitHubGardenProps> = ({ weeks }) => {
         </Tooltip>
       )
     })
+    while (days.length < 7) {
+      days.push(<DayRect color='transparent' />)
+    }
     return <WeekColumn key={weeks[weekNumber].firstDay}>{days}</WeekColumn>
   }
 
@@ -111,7 +114,9 @@ const GitHubGarden: React.FC<GitHubGardenProps> = ({ weeks }) => {
   const monthComponents = monthArr.map((mon, i) => {
     return (
       <Month key={i}>
-        <MonthLabel>{i !== 0 ? monthStrings[mon.monthNum] : ''}</MonthLabel>
+        <MonthLabel>
+          {mon.arr.length > 2 ? monthStrings[mon.monthNum] : ''}
+        </MonthLabel>
         <WeeksContainer>{mon.arr}</WeeksContainer>
       </Month>
     )
@@ -131,7 +136,7 @@ const GitHubGarden: React.FC<GitHubGardenProps> = ({ weeks }) => {
         </DayLabels>
         {monthComponents.slice(12 - displayMonths)}
       </GardenPlot>
-      <Key>
+      <Legend>
         <KeyLabel>Less</KeyLabel>
         <DayRect color={theme.gitHubColors.NONE} />
         <DayRect color={theme.gitHubColors.FIRST_QUARTILE} />
@@ -139,7 +144,7 @@ const GitHubGarden: React.FC<GitHubGardenProps> = ({ weeks }) => {
         <DayRect color={theme.gitHubColors.THIRD_QUARTILE} />
         <DayRect color={theme.gitHubColors.FOURTH_QUARTILE} />
         <KeyLabel>More</KeyLabel>
-      </Key>
+      </Legend>
     </div>
   )
 }
@@ -149,6 +154,7 @@ export default GitHubGarden
 const GardenPlot = styled.div`
   display: flex;
   justify-content: center;
+  align-items: flex-end;
 `
 
 const Month = styled.div`
@@ -179,11 +185,14 @@ const DayLabels = styled.div`
 `
 
 const DayLabel = styled(MonthLabel)`
-  :first-of-type {
-    padding-top: 17px;
+  padding-right: 4px;
+  text-align: end;
+  :last-of-type {
+    padding-bottom: 3px;
   }
   :nth-child(odd) {
     color: transparent;
+    font-size: 11.5px;
   }
 `
 
@@ -199,7 +208,7 @@ const DayRect = styled.div<DayRectStyleProps>`
   border-radius: 2px;
 `
 
-const Key = styled.div`
+const Legend = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
