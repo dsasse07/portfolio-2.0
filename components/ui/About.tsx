@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components'
-import profilePhoto from '../../assets/headshots/casualProfile600.png'
+import profilePhoto from '../../assets/headshots/DannyTravefy.png'
 import Image from 'next/image'
 
 interface AboutProps {}
