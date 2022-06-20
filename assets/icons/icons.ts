@@ -17,6 +17,11 @@ import typescript from './typescript.png'
 import sql from './sql.png'
 import rest from './rest.png'
 import graphql from './graphql.png'
+import ember from './ember.svg'
+import net from './net.svg'
+import swift from './swift.png'
+import kotlin from './kotlin.svg'
+import reactNative from './react-native.png'
 
 export interface SkillIcons {
   [key: string]: {
@@ -121,5 +126,30 @@ export const icons: SkillIcons = {
     icon: sql,
     text: 'SQL',
     matchText: 'sql',
+  },
+  ember: {
+    icon: ember,
+    text: 'Ember',
+    matchText: 'ember',
+  },
+  net: {
+    icon: net,
+    text: '.NET',
+    matchText: 'net',
+  },
+  swift: {
+    icon: swift,
+    text: 'Swift',
+    matchText: 'swift',
+  },
+  kotlin: {
+    icon: kotlin,
+    text: 'Kotlin',
+    matchText: 'kotlin',
+  },
+  reactNative: {
+    icon: reactNative,
+    text: 'React Native',
+    matchText: 'react-native',
   },
 }

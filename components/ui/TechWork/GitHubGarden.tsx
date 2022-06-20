@@ -113,7 +113,7 @@ const GitHubGarden: React.FC<GitHubGardenProps> = ({ weeks }) => {
 
   const monthComponents = monthArr.map((mon, i) => {
     return (
-      <Month key={i}>
+      <Month key={mon.monthNum}>
         <MonthLabel>
           {mon.arr.length > 2 ? monthStrings[mon.monthNum] : ''}
         </MonthLabel>
