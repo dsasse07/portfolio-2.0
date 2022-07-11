@@ -123,18 +123,16 @@ export const fetchPortfolioProjects = async () => {
     // Save repo name for route url before formatting
     const route = node.name
     node.name = formatRepoName(node.name)
-    // @ts-ignore
-    const [logo = '', demoVideo = '', deployUrl = ''] = parseRepoReadme(
-      node.object.text
-    )
+
+    const regexMatches = parseRepoReadme(node.object.text)
+    const [logo = '', demoVideo = '', deployUrl = ''] = regexMatches ?? []
     return { ...node, route, logo, demoVideo, deployUrl }
   })
 
   // Default sorting of projects will be most recent first
   return updatedNodes.sort(
     (a: PortfolioProjectsResponseModel, b: PortfolioProjectsResponseModel) => {
-      //@ts-ignore
-      return new Date(b.updatedAt) - new Date(a.updatedAt)
+      return (new Date(b.updatedAt) as any) - (new Date(a.updatedAt) as any)
     }
   )
 }

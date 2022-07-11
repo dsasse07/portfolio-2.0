@@ -53,8 +53,8 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         // @ts-ignore
         const gistUrl = gistAnchor.children[0].value
         const gistId = gistUrl.match(/dsasse07\/\w*/)[0]
-        // return <ReactEmbedGist gist={gistId} />
-        return <h1>Gist: {gistId}</h1>
+        return <ReactEmbedGist gist={gistId} />
+        // return <h1>Gist: {gistId}</h1>
       } else if (
         //@ts-ignore
         node.children[0].tagName === 'img'
