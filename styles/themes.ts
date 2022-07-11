@@ -1,7 +1,7 @@
-import tree from '../assets/banners/pexels-tobi.jpg'
+// import tree from '../public/assets/banners/pexels-tobi.jpg'
 
 export const theme = {
-  banner: tree,
+  banner: '/assets/banners/pexels-tobi.jpg',
 
   background: '#1e1d1e',
   translucentBackground: 'rgba(30, 29, 30, 0.75)',

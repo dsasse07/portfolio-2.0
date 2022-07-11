@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { icons } from '../../../assets/icons/icons'
+import { icons } from '../../../public/assets/icons/icons'
 import Tooltip from '../Tooltip'
 import Image from 'next/image'
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks'

@@ -23,7 +23,7 @@ const ThemeApplicator: React.FC<ThemeApplicator> = ({ children }) => {
           <BannerOverlay />
           <Image
             layout='fill'
-            placeholder='blur'
+            // placeholder='blur'
             src={theme.banner}
             alt='Woodland Background'
             objectFit='cover'

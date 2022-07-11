@@ -53,14 +53,20 @@ const GitHubGarden: React.FC<GitHubGardenProps> = ({ weeks }) => {
       )
     })
     while (days.length < 7) {
-      days.push(<DayRect color='transparent' />)
+      days.push(<DayRect key={Math.random()} color='transparent' />)
     }
-    return <WeekColumn key={weeks[weekNumber].firstDay}>{days}</WeekColumn>
+
+    return (
+      <WeekColumn key={`week-of~${weeks[weekNumber].firstDay}`}>
+        {days}
+      </WeekColumn>
+    )
   }
 
   const mapMonths = (weeks: Week[]) => {
-    let months: { monthNum: number; arr: JSX.Element[] }[] = [
+    let months: { id: string; monthNum: number; arr: JSX.Element[] }[] = [
       {
+        id: `month-of-${weeks[0].contributionDays[0].date}`,
         monthNum: findMonth(weeks[0].contributionDays[0].date),
         arr: [buildWeek(weeks, 0)],
       },
@@ -73,6 +79,7 @@ const GitHubGarden: React.FC<GitHubGardenProps> = ({ weeks }) => {
         months[months.length - 1].arr.push(buildWeek(weeks, i))
       } else {
         months.push({
+          id: `month-of-${weeks[i].contributionDays[0].date}`,
           monthNum: findMonth(weeks[i].contributionDays[0].date),
           arr: [],
         })
@@ -112,8 +119,9 @@ const GitHubGarden: React.FC<GitHubGardenProps> = ({ weeks }) => {
   ])
 
   const monthComponents = monthArr.map((mon, i) => {
+    console.log(mon.id)
     return (
-      <Month key={mon.monthNum}>
+      <Month key={mon.id}>
         <MonthLabel>
           {mon.arr.length > 2 ? monthStrings[mon.monthNum] : ''}
         </MonthLabel>
