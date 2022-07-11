@@ -22,6 +22,7 @@ import net from './net.svg'
 import swift from './swift.png'
 import kotlin from './kotlin.svg'
 import reactNative from './react-native.png'
+import { StaticImageData } from 'next/image'
 
 export interface SkillIcons {
   [key: string]: {

@@ -1,9 +1,13 @@
 import {
   NormalComponents,
+  ReactMarkdownProps,
   SpecialComponents,
 } from 'react-markdown/src/ast-to-react'
 import ReactMarkdown from 'react-markdown'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import {
+  Prism as SyntaxHighlighter,
+  SyntaxHighlighterProps,
+} from 'react-syntax-highlighter'
 import {
   darcula,
   materialLight,
@@ -13,39 +17,58 @@ import React from 'react'
 import { useBreakpoint } from '../../utils/useBreakpointProvider'
 import styled from 'styled-components'
 import gfm from 'remark-gfm'
-//@ts-ignore
 import ReactEmbedGist from 'react-embed-gist'
-import Image from 'next/image'
+import dynamic from 'next/dynamic'
 
 interface MarkdownProps {
   children: string
 }
 
+export const DynamicReactEmbedGist = dynamic(() => import('react-embed-gist'), {
+  ssr: false,
+})
+
 const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
   const breakpoint = useBreakpoint()
 
   const CustomComponents: Partial<NormalComponents & SpecialComponents> = {
-    code({ node, inline, className, children, ...props }) {
+    code({
+      node,
+      /*inline,*/ className,
+      children,
+      ...props
+    }: React.ClassAttributes<HTMLElement> &
+      React.HTMLAttributes<HTMLElement> &
+      ReactMarkdownProps) {
       const match = /language-(\w+)/.exec(className || '')
-      return !inline && match ? (
-        <SyntaxHighlighter
-          style={breakpoint.dark ? darcula : materialLight}
-          language={match[1]}
-          PreTag='div'
-          children={String(children).replace(/\n$/, '')}
-          {...props}
-        />
-      ) : (
+      if (match !== null) {
+        return (
+          <SyntaxHighlighter
+            style={breakpoint.dark ? darcula : materialLight}
+            language={match[1]}
+            PreTag='div'
+            children={String(props).replace(/\n$/, '')}
+            {...(props as SyntaxHighlighterProps)}
+          />
+        )
+      }
+      return (
         <code className={className} {...props}>
           {children}
         </code>
       )
     },
-    p({ node, inline, className, children, ...props }) {
+    p({
+      node,
+      /*inline,*/ className,
+      children,
+      ...props
+    }: React.ClassAttributes<HTMLParagraphElement> &
+      React.HTMLAttributes<HTMLParagraphElement> &
+      ReactMarkdownProps) {
       if (
         // @ts-ignore
         typeof node.children[0].value === 'string' &&
-        !inline &&
         // @ts-ignore
         node.children[0].value.match(/{% gist|{%gist/)
       ) {
@@ -53,7 +76,8 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         // @ts-ignore
         const gistUrl = gistAnchor.children[0].value
         const gistId = gistUrl.match(/dsasse07\/\w*/)[0]
-        return <ReactEmbedGist gist={gistId} />
+
+        return <DynamicReactEmbedGist gist={gistId} />
         // return <h1>Gist: {gistId}</h1>
       } else if (
         //@ts-ignore
@@ -87,7 +111,14 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         </a>
       )
     },
-    h1({ node, className, children, ...props }) {
+    h1({
+      node,
+      className,
+      children,
+      ...props
+    }: React.ClassAttributes<HTMLHeadingElement> &
+      React.HTMLAttributes<HTMLHeadingElement> &
+      ReactMarkdownProps) {
       return (
         <h1
           //@ts-ignore
@@ -99,7 +130,14 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         </h1>
       )
     },
-    h2({ node, className, children, ...props }) {
+    h2({
+      node,
+      className,
+      children,
+      ...props
+    }: React.ClassAttributes<HTMLHeadingElement> &
+      React.HTMLAttributes<HTMLHeadingElement> &
+      ReactMarkdownProps) {
       return (
         <h2
           //@ts-ignore
@@ -111,7 +149,14 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         </h2>
       )
     },
-    h3({ node, className, children, ...props }) {
+    h3({
+      node,
+      className,
+      children,
+      ...props
+    }: React.ClassAttributes<HTMLHeadingElement> &
+      React.HTMLAttributes<HTMLHeadingElement> &
+      ReactMarkdownProps) {
       return (
         <h3
           //@ts-ignore
@@ -123,7 +168,14 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         </h3>
       )
     },
-    h4({ node, className, children, ...props }) {
+    h4({
+      node,
+      className,
+      children,
+      ...props
+    }: React.ClassAttributes<HTMLHeadingElement> &
+      React.HTMLAttributes<HTMLHeadingElement> &
+      ReactMarkdownProps) {
       return (
         <h4
           //@ts-ignore
@@ -135,7 +187,14 @@ const MarkDown: React.FC<MarkdownProps> = ({ children }) => {
         </h4>
       )
     },
-    h5({ node, className, children, ...props }) {
+    h5({
+      node,
+      className,
+      children,
+      ...props
+    }: React.ClassAttributes<HTMLHeadingElement> &
+      React.HTMLAttributes<HTMLHeadingElement> &
+      ReactMarkdownProps) {
       return (
         <h5
           //@ts-ignore
