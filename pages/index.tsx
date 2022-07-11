@@ -78,14 +78,6 @@ const Home: React.FC<HomeProps> = ({ articles, profileInfo, projects }) => {
         />
         <meta property='og:url' content='https://sasse.vercel.app/' />
         <meta property='og:type' content='website' />
-        <link rel='icon' href='/favicon.ico' />
-        <link rel='manifest' href='/manifest.json' />
-        {/* Signature Font */}
-        <link rel='preconnect' href='https://fonts.gstatic.com' />
-        <link
-          href='https://fonts.googleapis.com/css2?family=Comfortaa&display=swap'
-          rel='stylesheet'
-        />
       </Head>
 
       <Main>
